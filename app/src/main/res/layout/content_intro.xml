@@ -8,4 +8,39 @@
     tools:context=".IntroModActivity"
     tools:showIn="@layout/activity_intro">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:fontFamily="monospace"
+        android:text="Introduction"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="13dp"
+        android:drawableBottom="?attr/actionModeCloseDrawable" />
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="950dp"
+        android:layout_height="586dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:columnWidth="150dp"
+        android:gravity="center"
+        android:horizontalSpacing="62dp"
+        android:numColumns="4"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="40dp" />
+
 </RelativeLayout>
