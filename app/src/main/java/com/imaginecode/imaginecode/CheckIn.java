@@ -1,16 +1,14 @@
 package com.imaginecode.imaginecode;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Property;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CheckIn extends AppCompatActivity {
@@ -30,6 +28,16 @@ public class CheckIn extends AppCompatActivity {
         setContentView(R.layout.activity_check_in);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button add_user = findViewById(R.id.add_user);
+
+        add_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CheckIn.this, AddStudent.class);
+                startActivity(intent);
+            }
+        });
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
 

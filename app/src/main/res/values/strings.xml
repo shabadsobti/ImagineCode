@@ -3,4 +3,5 @@
     <string name="title_activity_modules">ModulesActivity</string>
     <string name="title_activity_levels">LevelsActivity</string>
     <string name="title_activity_check_in">CheckIn</string>
+    <string name="title_activity_add_student">AddStudent</string>
 </resources>
