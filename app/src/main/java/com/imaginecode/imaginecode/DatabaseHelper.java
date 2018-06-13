@@ -2,8 +2,12 @@ package com.imaginecode.imaginecode;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -72,7 +76,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -93,8 +96,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-
     public long createStudent(Student student){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -103,6 +104,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long student_id = db.insert(TABLE_STUDENTS, null, values);
 
         return student_id;
+    }
+
+    public ArrayList<Student> getAllStudents(){
+
+        ArrayList<Student> studentList = new ArrayList<Student>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_STUDENTS
+                + " ORDER BY " + KEY_STUDENT_ID + " DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        //if TABLE has rows
+        if (cursor.moveToFirst()) {
+            //Loop through the table rows
+            do {
+                Student student = new Student();
+                student.id = cursor.getInt(0);
+                student.first_name = cursor.getString(1);
+                student.last_name = cursor.getString(2);
+
+
+                //Add movie details to list
+                studentList.add(student);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return studentList;
+
 
 
     }

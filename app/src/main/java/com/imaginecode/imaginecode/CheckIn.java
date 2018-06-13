@@ -17,13 +17,9 @@ public class CheckIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        ArrayList<Student> students = new ArrayList<Student>();
-        Student a = new Student("Shabad", "Sobti", "/url");
-        Student b = new Student("Shlok", "Sobti", "/url");
-        Student c = new Student("Shlok", "Sobti", "/url");
-        students.add(a);
-        students.add(b);
-        students.add(c);
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+
+        ArrayList<Student> students = db.getAllStudents();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_in);
@@ -48,6 +44,26 @@ public class CheckIn extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+
+        ArrayList<Student> students = db.getAllStudents();
+
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+
+        ArrayAdapter<Student> adapter = new AdapterStudent(this, 0, students);
+
+        gridview.setAdapter(adapter);
+
+
+
+
+    }
+
+
 
 
     @Override

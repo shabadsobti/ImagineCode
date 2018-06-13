@@ -33,7 +33,7 @@ public class AddStudent extends AppCompatActivity {
                 String first_name = fname.getText().toString();
                 String last_name = lname.getText().toString();
                 myDb = new DatabaseHelper(getApplicationContext());
-                Student a = new Student("Shabad", "Sobti", "/url");
+                Student a = new Student(first_name, last_name, "/url");
                 myDb.createStudent(a);
                 myDb.close();
                 Intent intent = new Intent();
