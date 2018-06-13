@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // STUDENT_MODULES Table - column names
     private static final String KEY_MODULE_ID = "id";
     private static final String KEY_STUDENT_FOREIGN = "student_id";
-    private static final String KEY_MODULE = "student_id";
+    private static final String KEY_MODULE = "module";
 
     // STUDENT_PROGRESS Table - column names
     private static final String KEY_FOREIGN_MODULE_ID = "student_module_id";
@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Students table create statement
     private static final String CREATE_TABLE_STUDENTS = "CREATE TABLE "
             + TABLE_STUDENTS + "(" + KEY_STUDENT_ID + " INTEGER PRIMARY KEY," + KEY_FNAME
-            + " TEXT," + KEY_LNAME + " TEXT," + ")";
+            + " TEXT," + KEY_LNAME + " TEXT" + ")";
 
 
     // Tag table create statement
@@ -62,7 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // todo_tag table create statement
     private static final String CREATE_TABLE_STUDENT_PROGRESS = "CREATE TABLE "
             + TABLE_STUDENT_PROGRESS + "(" + KEY_FOREIGN_MODULE_ID + " INTEGER,"
-            + KEY_LEVEL + " INTEGER," + KEY_STARS + " INTEGER," + ")";
+            + KEY_LEVEL + " INTEGER," + KEY_STARS + " INTEGER" + ")";
 
 
 

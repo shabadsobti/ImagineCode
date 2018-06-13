@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class CheckIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CheckIn.this, AddStudent.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 

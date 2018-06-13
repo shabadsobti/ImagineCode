@@ -6,8 +6,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class AddStudent extends AppCompatActivity {
+
+    DatabaseHelper myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,14 +21,35 @@ public class AddStudent extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final EditText fname = findViewById(R.id.first_name);
+        final EditText lname = findViewById(R.id.last_name);
+        Button avatar = findViewById(R.id.avatar);
+        Button add_user = findViewById(R.id.add_user);
+
+        add_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String first_name = fname.getText().toString();
+                String last_name = lname.getText().toString();
+                myDb = new DatabaseHelper(getApplicationContext());
+                Student a = new Student("Shabad", "Sobti", "/url");
+
+                myDb.createStudent(a);
+
+                myDb.close();
+
+
+
+
+
+
+
+
             }
         });
+
+
+
     }
 
 }
