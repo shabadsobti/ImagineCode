@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -46,6 +47,25 @@ public class CheckIn extends AppCompatActivity {
         gridview.setAdapter(adapter);
 
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is IntentId
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Student Added", Toast.LENGTH_LONG).show();
+            }
+
+            if (resultCode == RESULT_CANCELED)
+
+                //When result is cancelled display toast
+                Toast.makeText(this, "Activity cancelled.", Toast.LENGTH_SHORT).show();
+
+
+        }
     }
 
 }

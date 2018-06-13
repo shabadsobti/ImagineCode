@@ -1,5 +1,6 @@
 package com.imaginecode.imaginecode;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,17 +34,11 @@ public class AddStudent extends AppCompatActivity {
                 String last_name = lname.getText().toString();
                 myDb = new DatabaseHelper(getApplicationContext());
                 Student a = new Student("Shabad", "Sobti", "/url");
-
                 myDb.createStudent(a);
-
                 myDb.close();
-
-
-
-
-
-
-
+                Intent intent = new Intent();
+                setResult(RESULT_OK,intent);//Set result OK
+                finish();//finish activity
 
             }
         });
