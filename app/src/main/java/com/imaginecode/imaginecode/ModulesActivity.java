@@ -29,14 +29,17 @@ public class ModulesActivity extends AppCompatActivity {
         });
 
         solar_button = (Button) findViewById(R.id.solar_mod_button);
-        solar_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(ModulesActivity.this,
-                        IntroModActivity.class);
-                startActivity(myIntent);
-            }
-        });
+        solar_button.setAlpha(0.5f);
+        solar_button.setClickable(false);
+
+//        solar_button.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                Intent myIntent = new Intent(ModulesActivity.this,
+////                        IntroModActivity.class);
+////                startActivity(myIntent);
+////            }
+////        });
     }
 
 }
