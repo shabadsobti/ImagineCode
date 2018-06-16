@@ -19,8 +19,6 @@ public class AddStudent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         final EditText fname = findViewById(R.id.first_name);
         final EditText lname = findViewById(R.id.last_name);

@@ -2,10 +2,7 @@ package com.imaginecode.imaginecode;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -32,7 +29,7 @@ public class IntroModActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(IntroModActivity.this,
-                        ModulesActivity.class);
+                        BlocklyLessonActivity.class);
                 startActivity(myIntent);
             }
         });

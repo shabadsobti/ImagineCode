@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+  left: 30;
+
+}
+</style>
+<body>
+
+<p>
+<button onclick="forward()">Forward</button>
+<button onclick="back()">Back</button>
+<button onclick="up()">Up</button>
+<button onclick="down()">Down</button>
+</p>
+
+<div id ="container">
+<div id ="animate"></div>
+</div>
+
+<script>
+
+document.getElementById('animate').style.left = 0 + 'px';
+document.getElementById('animate').style.top = 100 + 'px';
+
+var rect1 = document.getElementById('animate').getBoundingClientRect();
+
+
+function moveRight() {
+    var val = (parseInt(document.getElementById('animate').style.left, 10) || 0) + 50;
+    document.getElementById('animate').style.left = val + 'px';
+}
+
+function back() {
+    var val = (parseInt(document.getElementById('animate').style.left, 10) || 0) - 50;
+    document.getElementById('animate').style.left = val + 'px';
+}
+
+
+function up() {
+    var val = (parseInt(document.getElementById('animate').style.top, 10) || 0) - 50;
+    document.getElementById('animate').style.top = val + 'px';
+}
+
+function down() {
+    var val = (parseInt(document.getElementById('animate').style.top, 10) || 0) + 50;
+    document.getElementById('animate').style.top = val + 'px';
+}
+
+</script>
+
+</body>
+</html>
