@@ -113,6 +113,30 @@ Blockly.JavaScript['right'] = function(block) {
   return code;
 };
 
+Blockly.JavaScript['move_right'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'moveRight();\n';
+  return code;
+};
+
+Blockly.JavaScript['move_left'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'moveLeft();\n';
+  return code;
+};
+
+Blockly.JavaScript['move_up'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'moveUp();\n';
+  return code;
+};
+
+Blockly.JavaScript['move_down'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'moveDown();\n';
+  return code;
+};
+
 Blockly.JavaScript['turtle_repeat_internal'] = Blockly.JavaScript['controls_repeat'];
 
 

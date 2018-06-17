@@ -42,18 +42,18 @@ function moveRight() {
     document.getElementById('animate').style.left = val + 'px';
 }
 
-function back() {
+function moveLeft() {
     var val = (parseInt(document.getElementById('animate').style.left, 10) || 0) - 50;
     document.getElementById('animate').style.left = val + 'px';
 }
 
 
-function up() {
+function moveUp() {
     var val = (parseInt(document.getElementById('animate').style.top, 10) || 0) - 50;
     document.getElementById('animate').style.top = val + 'px';
 }
 
-function down() {
+function moveDown() {
     var val = (parseInt(document.getElementById('animate').style.top, 10) || 0) + 50;
     document.getElementById('animate').style.top = val + 'px';
 }
