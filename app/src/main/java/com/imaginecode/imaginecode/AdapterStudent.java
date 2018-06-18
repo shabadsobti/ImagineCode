@@ -78,7 +78,7 @@ public class AdapterStudent extends ArrayAdapter<Student> {
             }
             catch (Exception e){
 
-                student_button.setBackground(new BitmapDrawable(view.getResources(), BitmapFactory.decodeResource(mContext.getResources(), R.drawable.ic_person_black_24dp)));
+                student_button.setBackgroundResource(R.drawable.ic_person_black_24dp);
 
             }
         }
