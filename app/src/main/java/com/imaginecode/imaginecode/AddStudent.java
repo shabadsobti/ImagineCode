@@ -63,23 +63,8 @@ public class AddStudent extends AppCompatActivity {
 
         mImage = (ImageView) findViewById(R.id.avatarImg);
 
-        try {
-            ContextWrapper cw = new ContextWrapper(getApplicationContext());
-            // path to /data/data/yourapp/app_data/imageDir
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            // Create imageDir
 
 
-
-            File f=new File(directory, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-
-            mImage.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
 
 
         img.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +88,17 @@ public class AddStudent extends AppCompatActivity {
                 String first_name = fname.getText().toString();
                 String last_name = lname.getText().toString();
                 ImageView avatar =  findViewById(R.id.avatarImg);
-                Bitmap thumbnail = ((BitmapDrawable) avatar.getDrawable()).getBitmap();
+                Bitmap thumbnail;
+
+                try{
+                     thumbnail = ((BitmapDrawable) avatar.getDrawable()).getBitmap();
+
+                }
+                catch (Exception e){
+                    thumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.ic_person_black_24dp);
+                }
+
+
                 Random rand = new Random();
 
                 // Generate random integers in range 0 to 999
@@ -132,14 +127,12 @@ public class AddStudent extends AppCompatActivity {
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_PIC_REQUEST) {
+        if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
 
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             mImage.setImageBitmap(thumbnail);
-
-
-
         }
+
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage, String unique_string){

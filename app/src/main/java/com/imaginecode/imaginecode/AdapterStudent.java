@@ -73,9 +73,14 @@ public class AdapterStudent extends ArrayAdapter<Student> {
 
             File f=new File(directory, student.avatar);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            try {
+                student_button.setBackground(new BitmapDrawable(view.getResources(), getRoundedCornerBitmap(b.createScaledBitmap(b, 160, 160, true))));
+            }
+            catch (Exception e){
 
-            student_button.setBackground(new BitmapDrawable(view.getResources(), getRoundedCornerBitmap(b.createScaledBitmap(b, 160, 160, true))));
+                student_button.setBackground(new BitmapDrawable(view.getResources(), BitmapFactory.decodeResource(mContext.getResources(), R.drawable.ic_person_black_24dp)));
 
+            }
         }
         catch (FileNotFoundException e)
         {
