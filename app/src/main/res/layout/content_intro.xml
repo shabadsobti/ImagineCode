@@ -12,9 +12,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/back"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
         android:fontFamily="monospace"
         android:text="Introduction"
         android:textSize="25sp"
@@ -33,7 +32,7 @@
     <GridView
         android:id="@+id/gridview"
         android:layout_width="950dp"
-        android:layout_height="586dp"
+        android:layout_height="538dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:columnWidth="150dp"
@@ -42,5 +41,27 @@
         android:numColumns="4"
         android:stretchMode="spacingWidthUniform"
         android:verticalSpacing="40dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17dp"
+        app:srcCompat="@drawable/star_lvlcomp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="65dp"
+        android:fontFamily="monospace"
+        android:text="7"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

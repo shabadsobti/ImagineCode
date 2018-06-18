@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/lesson_num"
         android:layout_width="74dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_gravity="top|center"
-        android:background="@android:color/holo_blue_light"
+        android:background="@drawable/rounded_cell"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingTop="4dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         tools:text="1" />
 
     <FrameLayout
         android:layout_width="74dp"
-        android:layout_height="24dp"
-        android:background="@android:color/holo_blue_light">
+        android:layout_height="24dp">
 
         <ImageView
             android:id="@+id/imageview_1"

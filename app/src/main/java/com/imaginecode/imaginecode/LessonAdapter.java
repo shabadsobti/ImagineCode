@@ -65,7 +65,10 @@ public class LessonAdapter extends BaseAdapter {
             star2.setImageResource(R.drawable.star_lvlcomp);
             star3.setImageResource(R.drawable.star_lvlcomp);
         }
-
+        if (!lesson.getUnlocked()){
+            convertView.setAlpha(0.5f);
+            convertView.setClickable(false);
+        }
         return convertView;
     }
 }

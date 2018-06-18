@@ -15,18 +15,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/blockly_toolbox_ui"
         android:layout_marginTop="130dp"
-        blockly:drawGrid = "false" />
+        blockly:drawGrid="false"/>
 
-
-    <!--<fragment android:name="com.google.blockly.android.CategorySelectorFragment"-->
-        <!--android:id="@id/blockly_categories"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--blockly:labelRotation="start"-->
-        <!--blockly:scrollOrientation="vertical"-->
-        <!--tools:ignore="MissingPrefix"/>-->
     <fragment
         android:id="@+id/blockly_toolbox_ui"
         android:name="com.google.blockly.android.FlyoutFragment"
