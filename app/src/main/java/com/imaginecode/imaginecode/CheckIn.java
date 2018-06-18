@@ -56,12 +56,7 @@ public class CheckIn extends AppCompatActivity {
 
         gridview.setAdapter(adapter);
 
-
-
-
     }
-
-
 
 
     @Override
@@ -77,7 +72,6 @@ public class CheckIn extends AppCompatActivity {
 
                 //When result is cancelled display toast
                 Toast.makeText(this, "Activity cancelled.", Toast.LENGTH_SHORT).show();
-
 
         }
     }

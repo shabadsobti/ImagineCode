@@ -38,6 +38,7 @@
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp"
 
+
         android:background="@drawable/student_shape"
 
         android:textColor="@android:color/white"

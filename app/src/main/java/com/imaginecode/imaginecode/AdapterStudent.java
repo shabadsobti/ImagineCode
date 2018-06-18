@@ -3,6 +3,7 @@ package com.imaginecode.imaginecode;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -57,19 +58,23 @@ public class AdapterStudent extends ArrayAdapter<Student> {
         String student_initials = first_name + "" + last_name;
         Button student_button = view.findViewById(R.id.student_button);
 
+        student_button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ModulesActivity.class);
+                mContext.startActivity(intent);
+
+            }
+        });
 
 
 
-//        TextView initials = (TextView) view.findViewById(R.id.initials);
-//        initials.setText(student_initials);
         student_button.setText(student_initials);
         try {
             ContextWrapper cw = new ContextWrapper(mContext);
             // path to /data/data/yourapp/app_data/imageDir
             File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
             // Create imageDir
-
-
 
             File f=new File(directory, student.avatar);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -79,6 +84,7 @@ public class AdapterStudent extends ArrayAdapter<Student> {
             catch (Exception e){
 
                 student_button.setBackgroundResource(R.drawable.ic_person_black_24dp);
+
 
             }
         }
