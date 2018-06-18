@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "ImagineCode";
@@ -35,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_STUDENT_ID = "id";
     private static final String KEY_FNAME = "first_name";
     private static final String KEY_LNAME = "last_name";
+    private static final String KEY_AVATAR = "avatar";
 
     // STUDENT_MODULES Table - column names
     private static final String KEY_MODULE_ID = "id";
@@ -53,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Students table create statement
     private static final String CREATE_TABLE_STUDENTS = "CREATE TABLE "
             + TABLE_STUDENTS + "(" + KEY_STUDENT_ID + " INTEGER PRIMARY KEY," + KEY_FNAME
-            + " TEXT," + KEY_LNAME + " TEXT" + ")";
+            + " TEXT," + KEY_LNAME + " TEXT," + KEY_AVATAR + " TEXT" + ")";
 
 
     // Tag table create statement
@@ -101,6 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_FNAME, student.first_name);
         values.put(KEY_LNAME, student.last_name);
+        values.put(KEY_AVATAR, student.avatar);
         long student_id = db.insert(TABLE_STUDENTS, null, values);
 
         return student_id;
@@ -125,6 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 student.id = cursor.getInt(0);
                 student.first_name = cursor.getString(1);
                 student.last_name = cursor.getString(2);
+                student.avatar = cursor.getString(3);
 
 
                 //Add movie details to list

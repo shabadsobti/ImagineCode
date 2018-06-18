@@ -1,12 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="5dp" >
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="5dp"-->
+    <!--android:gravity="center">-->
 
-<TextView
-    android:id="@+id/first_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+<!--<ImageView-->
+    <!--android:id="@+id/student_img"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--&gt;-->
+<!--</ImageView>-->
+
+<!--<TextView-->
+    <!--android:id="@+id/initials"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:gravity="center"-->
+    <!--android:background="@drawable/student_shape"/>-->
+
+<!--</LinearLayout>-->
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingBottom="50dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/student_button"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:bottomRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp"
+
+        android:background="@drawable/student_shape"
+
+        android:textColor="@android:color/white"
+        android:textSize="50sp" />
 
 </LinearLayout>
+
+
+
