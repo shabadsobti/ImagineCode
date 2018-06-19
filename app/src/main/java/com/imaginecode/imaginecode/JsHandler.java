@@ -10,6 +10,8 @@ import android.webkit.WebView;
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
 
+import org.xwalk.core.XWalkView;
+
 /**
  * Class to handle all calls from JS & from Java too
  **/
@@ -17,10 +19,10 @@ public class JsHandler {
 
     Activity activity;
     String TAG = "JsHandler";
-    WebView webView;
+    XWalkView webView;
 
 
-    public JsHandler(Activity _contxt,WebView _webView) {
+    public JsHandler(Activity _contxt,XWalkView _webView) {
         activity = _contxt;
         webView = _webView;
     }

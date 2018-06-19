@@ -23,9 +23,11 @@
         <!--android:textIsSelectable="true"-->
         <!--/>-->
 
-    <WebView
-        android:id = "@+id/webview"
+    <org.xwalk.core.XWalkView
+        android:id="@+id/xWalkView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="300dp"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+    </org.xwalk.core.XWalkView>
 
 </LinearLayout>

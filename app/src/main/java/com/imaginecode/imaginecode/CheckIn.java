@@ -29,8 +29,8 @@ public class CheckIn extends AppCompatActivity {
         add_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CheckIn.this, AddStudent.class);
-                startActivityForResult(intent, 1);
+                Intent intent = new Intent(CheckIn.this, BlocklyLessonActivity.class);
+                startActivity(intent);
             }
         });
 

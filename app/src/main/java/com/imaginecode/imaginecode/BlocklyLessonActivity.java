@@ -35,6 +35,8 @@ import com.google.blockly.android.AbstractBlocklyActivity;
 import com.google.blockly.android.codegen.CodeGenerationRequest;
 import com.google.blockly.model.DefaultBlocks;
 
+import org.xwalk.core.XWalkView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -95,26 +97,23 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        XWalkView mXWalkView = (XWalkView) findViewById(R.id.xWalkView);
+        mXWalkView.addJavascriptInterface(new JsHandler(this, mXWalkView), "NativeInterface");
+        mXWalkView.load("http://google.com", null);
 
         mHandler = new Handler();
-        initWebView();
+
     }
 
     @Override
     protected View onCreateContentView(int parentId) {
         View root = getLayoutInflater().inflate(R.layout.activity_blockly, null);
-        //mGeneratedTextView = (TextView) root.findViewById(R.id.generated_code);
-        //updateTextMinWidth();
 
-        //mNoCodeText = mGeneratedTextView.getText().toString(); // Capture initial value.
 
         return root;
     }
 
-//    @Override
-////    protected int getActionBarMenuResId() {
-////        return R.menu.split_actionbar;
-////    }
+
 
     @NonNull
     @Override
@@ -154,24 +153,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
      * Estimate the pixel size of the longest line of text, and set that to the TextView's minimum
      * width.
      */
-//    private void updateTextMinWidth() {
-//        String text = mGeneratedTextView.getText().toString();
-//        int maxline = 0;
-//        int start = 0;
-//        int index = text.indexOf('\n', start);
-//        while (index > 0) {
-//            maxline = Math.max(maxline, index - start);
-//            start = index + 1;
-//            index = text.indexOf('\n', start);
-//        }
-//        int remainder = text.length() - start;
-//        if (remainder > 0) {
-//            maxline = Math.max(maxline, remainder);
-//        }
-//
-//        float density = getResources().getDisplayMetrics().density;
-//        mGeneratedTextView.setMinWidth((int) (maxline * 13 * density));
-//    }
+
 
     /**
      * Optional override of the save path, since this demo Activity has multiple Blockly
@@ -195,62 +177,5 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         return AUTOSAVE_FILENAME;
     }
 
-    private void initWebView(){
-
-        webView = (WebView)findViewById(R.id.webview);
-        //Tell the WebView to enable javascript execution.
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setBackgroundColor(Color.parseColor("#808080"));
-
-        //Set whether the DOM storage API is enabled.
-        webView.getSettings().setDomStorageEnabled(true);
-
-        //setBuiltInZoomControls = false, removes +/- controls on screen
-        webView.getSettings().setBuiltInZoomControls(false);
-
-
-        webView.getSettings().setAllowFileAccess(true);
-
-        webView.getSettings().setAppCacheMaxSize(1024 * 8);
-        webView.getSettings().setAppCacheEnabled(true);
-
-        _jsHandler = new JsHandler(this, webView);
-        webView.addJavascriptInterface(_jsHandler, "JsHandler");
-
-        webView.getSettings().setUseWideViewPort(false);
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                // TODO Auto-generated method stub
-                super.onPageStarted(view, url, favicon);
-                //Toast.makeText(TableContentsWithDisplay.this, "url "+url, Toast.LENGTH_SHORT).show();
-
-            }
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                //Toast.makeText(TableContentsWithDisplay.this, "Width " + view.getWidth() +" *** " + "Height " + view.getHeight(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onReceivedSslError(WebView view,
-                                           SslErrorHandler handler, SslError error) {
-                // TODO Auto-generated method stub
-                super.onReceivedSslError(view, handler, error);
-                //Toast.makeText(TableContentsWithDisplay.this, "error "+error, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        // these settings speed up page load into the webview
-
-        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webView.requestFocus(View.FOCUS_DOWN);
-        // load the main.html file that kept in assets folder
-        webView.loadUrl("file:///android_asset/game.html");
-
-    }
 
 }

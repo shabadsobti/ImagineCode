@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation 'com.android.support:design:26.1.0'
@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.1'
     compile 'com.android.support:support-v4:26.0.1'
     compile 'com.google.blockly.android:blocklylib-vertical:0.9-beta.20171003'
+    implementation project(':crosswalk')
 }
