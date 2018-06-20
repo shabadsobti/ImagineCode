@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="404dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="212dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="First Name"
@@ -25,41 +25,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="404dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Last Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_name" />
 
-    <Button
-    android:id="@+id/avatar"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp"
-    android:layout_marginStart="468dp"
-    android:layout_marginTop="48dp"
-    android:text="Avatar"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/last_name" />
-
     <ImageView
         android:id="@+id/avatarImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginStart="424dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/updateImg"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="136dp"
         android:background="@color/colorAccent"
-        android:text="Change"
+        android:text="Avatar"
         app:layout_constraintStart_toEndOf="@+id/avatarImg"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,10 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="468dp"
-        android:layout_marginTop="80dp"
-        android:text="Button"
+        android:layout_marginTop="32dp"
+        android:text="Add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/last_name" />
 
 
 </android.support.constraint.ConstraintLayout>

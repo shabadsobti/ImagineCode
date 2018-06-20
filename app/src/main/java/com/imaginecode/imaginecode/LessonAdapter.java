@@ -51,7 +51,7 @@ public class LessonAdapter extends BaseAdapter {
         final ImageView star2 = (ImageView)convertView.findViewById(R.id.imageview_2);
         final ImageView star3 = (ImageView)convertView.findViewById(R.id.imageview_3);
 
-        lesson_num.setText(lesson.getNumber());
+        lesson_num.setText(((lesson.getNumber().toString())));
 
         if(lesson.getStars() == 1){
             star1.setImageResource(R.drawable.star_lvlcomp);

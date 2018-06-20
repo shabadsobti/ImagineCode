@@ -43,7 +43,7 @@ public class AddStudent extends AppCompatActivity {
 
         final EditText fname = findViewById(R.id.first_name);
         final EditText lname = findViewById(R.id.last_name);
-        Button avatar = findViewById(R.id.avatar);
+
         Button add_user = findViewById(R.id.add_user);
 
         Button img = findViewById(R.id.updateImg);

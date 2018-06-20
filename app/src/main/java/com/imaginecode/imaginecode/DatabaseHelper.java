@@ -24,18 +24,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Table Names
     private static final String TABLE_STUDENTS = "Students";
+    private static final String TABLE_MODULE = "Modules";
+    private static final String TABLE_LESSON = "Lessons";
+
     private static final String TABLE_STUDENT_MODULES = "Students_Modules";
     private static final String TABLE_STUDENT_PROGRESS = "Student_Progress";
 
     // Common column names
-
-
 
     // Students Table - column names
     private static final String KEY_STUDENT_ID = "id";
     private static final String KEY_FNAME = "first_name";
     private static final String KEY_LNAME = "last_name";
     private static final String KEY_AVATAR = "avatar";
+
+    //Module Table - column Names
+    private static final String KEY_MODULE_NUMBER = "module_id";
+    private static final String KEY_MODULE_NAME = "module_name";
+
+    //Lesson Table - column Names
+    private static final String KEY_LESSON_NUMBER = "lesson_number";
+
+
+
 
     // STUDENT_MODULES Table - column names
     private static final String KEY_MODULE_ID = "id";
@@ -51,10 +62,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // Table Create Statements
-    // Students table create statement
+    // STUDENT TABLE
     private static final String CREATE_TABLE_STUDENTS = "CREATE TABLE "
             + TABLE_STUDENTS + "(" + KEY_STUDENT_ID + " INTEGER PRIMARY KEY," + KEY_FNAME
             + " TEXT," + KEY_LNAME + " TEXT," + KEY_AVATAR + " TEXT" + ")";
+
+
+    //MODULE TABLE
+
+    private static final String CREATE_TABLE_MODULES = "CREATE TABLE "
+            + TABLE_MODULE + "(" + KEY_MODULE_NUMBER + " INTEGER PRIMARY KEY," + KEY_MODULE_NAME
+            + " TEXT" + ")";
+
 
 
     // Tag table create statement
@@ -136,8 +155,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return studentList;
+    }
 
+    public int getLevelStars(int student_id, int module_id, int lesson_number){
 
+        String selectQuery = "SELECT * FROM " + TABLE_STUDENTS
+                + " ORDER BY " + KEY_STUDENT_ID + " DESC";
 
+        
+
+        return 0;
     }
 }
