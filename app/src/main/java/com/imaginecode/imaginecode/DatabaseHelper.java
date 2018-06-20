@@ -27,38 +27,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_MODULE = "Modules";
     private static final String TABLE_LESSON = "Lessons";
 
-    private static final String TABLE_STUDENT_MODULES = "Students_Modules";
-    private static final String TABLE_STUDENT_PROGRESS = "Student_Progress";
+    private static final String TABLE_STUDENT_MODULES_LESSONS = "Students_Modules_Lessons";
+
 
     // Common column names
 
     // Students Table - column names
-    private static final String KEY_STUDENT_ID = "id";
+
     private static final String KEY_FNAME = "first_name";
     private static final String KEY_LNAME = "last_name";
     private static final String KEY_AVATAR = "avatar";
 
     //Module Table - column Names
-    private static final String KEY_MODULE_NUMBER = "module_id";
+
     private static final String KEY_MODULE_NAME = "module_name";
 
     //Lesson Table - column Names
-    private static final String KEY_LESSON_NUMBER = "lesson_number";
 
 
 
-
-    // STUDENT_MODULES Table - column names
-    private static final String KEY_MODULE_ID = "id";
-    private static final String KEY_STUDENT_FOREIGN = "student_id";
-    private static final String KEY_MODULE = "module";
-
-    // STUDENT_PROGRESS Table - column names
-    private static final String KEY_FOREIGN_MODULE_ID = "student_module_id";
-    private static final String KEY_LEVEL = "level";
+    // STUDENT_MODULES_LESSONS  - column names
     private static final String KEY_STARS = "stars";
 
 
+    // COMMON Column Names
+    private static final String KEY_STUDENT_ID = "id";
+    private static final String KEY_MODULE_ID = "id";
+    private static final String KEY_LESSON_ID= "lesson_id";
 
 
     // Table Create Statements
@@ -70,28 +65,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //MODULE TABLE
     private static final String CREATE_TABLE_MODULES = "CREATE TABLE "
-            + TABLE_MODULE + "(" + KEY_MODULE_NUMBER + " INTEGER PRIMARY KEY," + KEY_MODULE_NAME
+            + TABLE_MODULE + "(" + KEY_MODULE_ID + " INTEGER PRIMARY KEY," + KEY_MODULE_NAME
             + " TEXT" + ")";
 
 
     //LESSON TABLE
     private static final String CREATE_TABLE_LESSONS = "CREATE TABLE "
-            + TABLE_LESSON + "(" + KEY_LESSON_NUMBER + " INTEGER PRIMARY KEY" + ")";
+            + TABLE_LESSON + "(" + KEY_LESSON_ID + " INTEGER PRIMARY KEY" + ")";
 
 
 
+    // STUDENT_MODULE_LESSON TABLE
+    private static final String CREATE_TABLE_STUDENT_MODULE_LESSON = "CREATE TABLE "
+            + TABLE_STUDENT_MODULES_LESSONS + "(" + KEY_STUDENT_ID + " INTEGER, " + KEY_MODULE_ID + "INTEGER, " + KEY_LESSON_ID + "INTEGER," + KEY_STARS + "INTEGER" + ")";
 
-    // Tag table create statement
-    private static final String CREATE_TABLE_STUDENT_MODULES = "CREATE TABLE " + TABLE_STUDENT_MODULES
-            + "(" + KEY_MODULE_ID + " INTEGER PRIMARY KEY," + KEY_STUDENT_FOREIGN + " INTEGER,"
-            + KEY_MODULE + " INTEGER" + ")";
-
-
-
-    // todo_tag table create statement
-    private static final String CREATE_TABLE_STUDENT_PROGRESS = "CREATE TABLE "
-            + TABLE_STUDENT_PROGRESS + "(" + KEY_FOREIGN_MODULE_ID + " INTEGER,"
-            + KEY_LEVEL + " INTEGER," + KEY_STARS + " INTEGER" + ")";
 
 
 
@@ -106,17 +93,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // creating required tables
         db.execSQL(CREATE_TABLE_STUDENTS);
-        db.execSQL(CREATE_TABLE_STUDENT_MODULES);
-        db.execSQL(CREATE_TABLE_STUDENT_PROGRESS);
+        db.execSQL(CREATE_TABLE_MODULES);
+        db.execSQL(CREATE_TABLE_LESSONS);
+        db.execSQL(CREATE_TABLE_STUDENT_MODULE_LESSON);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_MODULES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_PROGRESS);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MODULE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LESSON);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_MODULES_LESSONS);
         // create new tables
         onCreate(db);
     }
@@ -162,13 +150,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return studentList;
     }
 
-    public int getLevelStars(int student_id, int module_id, int lesson_number){
 
-        String selectQuery = "SELECT * FROM " + TABLE_STUDENTS
-                + " ORDER BY " + KEY_STUDENT_ID + " DESC";
-
-        
-
-        return 0;
-    }
 }
