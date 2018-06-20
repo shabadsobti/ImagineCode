@@ -69,10 +69,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //MODULE TABLE
-
     private static final String CREATE_TABLE_MODULES = "CREATE TABLE "
             + TABLE_MODULE + "(" + KEY_MODULE_NUMBER + " INTEGER PRIMARY KEY," + KEY_MODULE_NAME
             + " TEXT" + ")";
+
+
+    //LESSON TABLE
+    private static final String CREATE_TABLE_LESSONS = "CREATE TABLE "
+            + TABLE_LESSON + "(" + KEY_LESSON_NUMBER + " INTEGER PRIMARY KEY" + ")";
+
 
 
 
