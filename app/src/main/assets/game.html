@@ -15,7 +15,7 @@ html, body {
 
 <script>
 //a few globals
-var dimensions = 5;
+var dimensions = 20;
 var pixels;
 var cells;
 var start;
@@ -196,7 +196,19 @@ var onKeyPress = function(e) {
   if(e.keyCode > 36 && e.keyCode < 41)
     move(start[0] + ((e.keyCode - 38) % 2), start[1] + ((e.keyCode - 39) % 2));
 };
-
+function moveLeft(){
+    move(start[0] - 1, start[1] );
+}
+function moveRight(){
+    move(start[0] + 1, start[1] );
+}
+function moveUp(){
+    move(start[0], start[1]+1 );
+}
+function moveDown(){
+    move(start[0], start[1]-1 );
+		return "gucci";
+}
 //move around the maze with finger or mouse
 var onHover = function(e) {
   //touch
