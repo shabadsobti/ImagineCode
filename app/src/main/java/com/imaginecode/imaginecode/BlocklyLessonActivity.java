@@ -208,6 +208,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         //setBuiltInZoomControls = false, removes +/- controls on screen
         webView.getSettings().setBuiltInZoomControls(false);
 
+        webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 
         webView.getSettings().setAllowFileAccess(true);
 
@@ -216,6 +218,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
         _jsHandler = new JsHandler(this, webView);
         webView.addJavascriptInterface(_jsHandler, "JsHandler");
+
+
 
         webView.getSettings().setUseWideViewPort(false);
         webView.setWebChromeClient(new WebChromeClient());
@@ -249,7 +253,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.requestFocus(View.FOCUS_DOWN);
         // load the main.html file that kept in assets folder
-        webView.loadUrl("file:///android_asset/game.html");
+        webView.loadUrl("file:///android_asset/game/index.html");
 
     }
 
