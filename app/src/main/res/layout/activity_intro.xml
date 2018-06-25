@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/lesson_bg"
+    android:background="#1abc9c"
     tools:context=".IntroModActivity">
 
     <include layout="@layout/content_intro" />

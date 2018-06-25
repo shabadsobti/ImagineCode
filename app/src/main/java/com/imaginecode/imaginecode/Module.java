@@ -3,7 +3,7 @@ package com.imaginecode.imaginecode;
 import java.util.ArrayList;
 
 public class Module {
-    private Integer module_id;
+    public Integer module_id;
     private String module_name;
 
 
@@ -12,9 +12,15 @@ public class Module {
 
     }
 
+    public String getName(){
+        return module_name;
+    }
+
     public void setID(int number) {
         this.module_id= number;
     }
+
+
 
 
 

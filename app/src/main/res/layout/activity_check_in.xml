@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/levels_background"
+    android:background="#27ae60"
     tools:context="com.imaginecode.imaginecode.CheckIn">
 
     <android.support.design.widget.AppBarLayout

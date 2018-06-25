@@ -27,8 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_STUDENTS = "Students";
     private static final String TABLE_MODULE = "Modules";
     private static final String TABLE_LESSON = "Lessons";
-    private static final String TABLE_STUDENT_MODULE = "Students_Module";
-    private static final String TABLE_STUDENT_MODULES_LESSONS = "Students_Modules_Lessons";
+
+    private static final String TABLE_STUDENT_LESSONS = "Students_Lessons";
 
 
     // Common column names
@@ -46,14 +46,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Lesson Table - column Names
     private static final String KEY_LESSON_INSTUCTIONS= "lesson_instructions";
-    private static final String KEY_LESSON_NUMBER= "lesson_numbejr";
+    private static final String KEY_LESSON_NUMBER= "lesson_number";
+
 
 
 
 
     // STUDENT_MODULES_LESSONS  - column names
     private static final String KEY_STARS = "stars";
-    private static final String KEY_MODULE_UNLOCKED = "module_unlocked";
+
 
 
     // COMMON Column Names
@@ -77,22 +78,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //LESSON TABLE
     private static final String CREATE_TABLE_LESSONS = "CREATE TABLE "
-            + TABLE_LESSON + "(" + KEY_LESSON_ID + " INTEGER PRIMARY KEY, " +  KEY_LESSON_NUMBER + " INTEGER, " + KEY_LESSON_INSTUCTIONS + " TEXT" + ")";
+            + TABLE_LESSON + "(" + KEY_LESSON_ID + " INTEGER PRIMARY KEY, " +  KEY_LESSON_NUMBER + " INTEGER, " + KEY_MODULE_ID + " INTEGER, " + KEY_LESSON_INSTUCTIONS + " TEXT" + ")";
 
-
-
-
-    // STUDENT_MODULE
-    private static final String CREATE_TABLE_STUDENT_MODULE = "CREATE TABLE "
-            + TABLE_STUDENT_MODULE + "(" + KEY_STUDENT_ID + " INTEGER ," + KEY_MODULE_ID
-            + " INTEGER" + ")";
 
 
 
 
     // STUDENT_LESSON TABLE
-    private static final String CREATE_TABLE_STUDENT_MODULE_LESSON = "CREATE TABLE "
-            + TABLE_STUDENT_MODULES_LESSONS + "(" + KEY_STUDENT_ID + " INTEGER, " + KEY_LESSON_ID + "INTEGER," + KEY_STARS + "INTEGER" + ")";
+    private static final String CREATE_TABLE_STUDENT_LESSON = "CREATE TABLE "
+            + TABLE_STUDENT_LESSONS + "(" + KEY_STUDENT_ID + " INTEGER, " + KEY_LESSON_ID + " INTEGER, " + KEY_STARS + " INTEGER" + ")";
 
 
 
@@ -109,8 +103,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_STUDENTS);
         db.execSQL(CREATE_TABLE_MODULES);
         db.execSQL(CREATE_TABLE_LESSONS);
-        db.execSQL(CREATE_TABLE_STUDENT_MODULE);
-        db.execSQL(CREATE_TABLE_STUDENT_MODULE_LESSON);
+
+        db.execSQL(CREATE_TABLE_STUDENT_LESSON);
 
 
         ContentValues initialValues = new ContentValues();
@@ -125,7 +119,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_MODULE, null, second);
 
 
+        ContentValues third = new ContentValues();
+        third.put(KEY_LESSON_NUMBER, 1);
+        third.put(KEY_MODULE_ID, 1);
+        third.put(KEY_LESSON_INSTUCTIONS, "Conditional Statements");
+        db.insert(TABLE_LESSON, null, third);
+
+
+        ContentValues fourth = new ContentValues();
+        fourth.put(KEY_LESSON_NUMBER, 2);
+        fourth.put(KEY_MODULE_ID, 1);
+        fourth.put(KEY_LESSON_INSTUCTIONS, "If Statements");
+        db.insert(TABLE_LESSON, null, fourth);
+
+
+
+        ContentValues fifth = new ContentValues();
+        fifth.put(KEY_STUDENT_ID, 1);
+        fifth.put(KEY_LESSON_ID, 1);
+        fifth.put(KEY_STARS, "2");
+        db.insert(TABLE_STUDENT_LESSONS, null, fifth);
+
+
     }
+
 
 
 
@@ -136,7 +153,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MODULE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LESSON);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_MODULES_LESSONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_LESSONS);
         // create new tables
         onCreate(db);
     }
@@ -207,6 +224,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return moduleList;
     }
 
+
+    public ArrayList<LessonClass> getLessons(int student_id, int module_id){
+
+        ArrayList<LessonClass> lessonList = new ArrayList<LessonClass>();
+
+        String selectQuery = "SELECT lesson_id, lesson_number, lesson_instructions FROM Lessons WHERE module_id = " + module_id + " ORDER BY lesson_number ASC";
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        //if TABLE has rows
+        if (cursor.moveToFirst()) {
+            //Loop through the table rows
+            do {
+                // public LessonClass(int lesson_id, int number, int stars, String instructions){
+                LessonClass lesson = new LessonClass(cursor.getInt(0), cursor.getInt(1), 0, cursor.getString(2));
+
+                lessonList.add(lesson);
+            } while (cursor.moveToNext());
+        }
+
+
+        String secondQuery = "SELECT Lessons.lesson_id, Lessons.lesson_number, Lessons.module_id, Students_Lessons.student_id, Students_Lessons.stars FROM Lessons INNER JOIN Students_Lessons ON Lessons.lesson_id = Students_Lessons.lesson_id WHERE student_id = " + student_id + " AND module_id = " + module_id;
+        SQLiteDatabase db1 = this.getReadableDatabase();
+        Cursor cursor1 = db1.rawQuery(secondQuery, null);
+        if (cursor1.moveToFirst()) {
+            //Loop through the table rows
+            do {
+                for(int n = 0; n < lessonList.size(); n++){
+                    if (lessonList.get(n).lesson_id == cursor1.getInt(0)){
+                        lessonList.get(n).setStars(cursor1.getInt(4));
+
+                    }
+                }
+
+
+            } while (cursor1.moveToNext());
+        }
+
+
+
+
+
+        db.close();
+
+
+
+        return lessonList;
+    }
 
 
 

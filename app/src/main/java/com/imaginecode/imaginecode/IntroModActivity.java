@@ -19,8 +19,14 @@ public class IntroModActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        DatabaseHelper db = new DatabaseHelper(this);
+
         GridView gridView = (GridView)findViewById(R.id.gridview);
-        lessons = LessonClass.generateInitialLessons();
+        Intent intent = getIntent();
+        Integer module_id = intent.getIntExtra("Module_ID", 1);
+        Integer student_id = intent.getIntExtra("student_ID", 1);
+
+        lessons = db.getLessons(student_id, module_id);
         LessonAdapter lessonsAdapter = new LessonAdapter(this, lessons);
         gridView.setAdapter(lessonsAdapter);
 

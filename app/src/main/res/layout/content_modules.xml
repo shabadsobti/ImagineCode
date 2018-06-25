@@ -1,60 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ModulesActivity"
-    tools:showIn="@layout/activity_modules">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Button
-        android:id="@+id/button4"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="13dp"
-        android:drawableBottom="?attr/actionModeCloseDrawable" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:text="Modules"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="40sp" />
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"/>
 
-    <Button
-        android:id="@+id/intro_button"
-        style="@android:style/Holo.SegmentedButton"
-        android:layout_width="457dp"
-        android:layout_height="548dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="44dp"
-        android:fontFamily="monospace"
-        android:text="Introduction to Blockly"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/solar_mod_button"
-        style="@android:style/Holo.Light.SegmentedButton"
-        android:layout_width="457dp"
-        android:layout_height="548dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/intro_button"
-        android:layout_marginEnd="44dp"
-        android:fontFamily="monospace"
-        android:text="Solar Project"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="30sp" />
-
-</RelativeLayout>
+</LinearLayout>

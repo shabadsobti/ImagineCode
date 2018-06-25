@@ -48,7 +48,7 @@ public class AdapterStudent extends ArrayAdapter<Student> {
     //called when rendering the list
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the property we are displaying
-        Student student = studentsList.get(position);
+        final Student student = studentsList.get(position);
 
         //get the inflater and inflate the XML layout for each item
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -62,6 +62,7 @@ public class AdapterStudent extends ArrayAdapter<Student> {
 
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ModulesActivity.class);
+                intent.putExtra("student_ID", student.id);
                 mContext.startActivity(intent);
 
             }
