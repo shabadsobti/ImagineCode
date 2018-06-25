@@ -8,12 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+
         android:windowSoftInputMode="stateHidden|adjustPan">
         <activity
             android:name=".CheckIn"
             android:label="@string/title_activity_check_in"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,11 +25,11 @@
         <activity
             android:name=".IntroModActivity"
             android:label="@string/title_activity_levels"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ModulesActivity"
             android:label="@string/title_activity_modules"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -40,7 +40,11 @@
             android:name=".AddStudent"
             android:label="@string/title_activity_add_student"
             android:theme="@style/AppTheme" />
-        <activity android:name=".BlocklyLessonActivity"></activity>
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".BlocklyLessonActivity">
+
+        </activity>
     </application>
 
 </manifest>
