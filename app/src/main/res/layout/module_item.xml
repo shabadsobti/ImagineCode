@@ -64,7 +64,7 @@
 
     <Button
         android:id="@+id/module_play"
-        android:layout_width="95dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/cv_one_login"
         android:layout_centerHorizontal="true"
@@ -74,9 +74,9 @@
         android:elevation="6dp"
         android:drawableLeft="@drawable/ic_baseline_play_arrow"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingRight="1dp"
         android:text="PLAY"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textColor="@color/white"/>
 </LinearLayout>
 </RelativeLayout>

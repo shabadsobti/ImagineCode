@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1abc9c"
+    android:background="@drawable/modules"
     tools:context=".IntroModActivity">
+
+    <include layout="@layout/toolbar" />
 
     <include layout="@layout/content_intro" />
 

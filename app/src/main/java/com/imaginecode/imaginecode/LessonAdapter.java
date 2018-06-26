@@ -1,12 +1,16 @@
 package com.imaginecode.imaginecode;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,10 +40,21 @@ public class LessonAdapter extends BaseAdapter {
         return null;
     }
 
+
+
+
+
+
+
+
+
     // 5
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final LessonClass lesson = lessons.get(position);
+
+
+
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -69,6 +84,26 @@ public class LessonAdapter extends BaseAdapter {
 //            convertView.setAlpha(0.5f);
 //            convertView.setClickable(false);
 //        }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), BlocklyLessonActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
         return convertView;
     }
+
+
+    private View.OnClickListener mMyButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int position = (Integer) v.getTag();
+            Toast.makeText(v.getContext(), "Row " + position + " was clicked!", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
+
 }
