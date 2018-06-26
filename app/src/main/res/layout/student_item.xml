@@ -41,7 +41,7 @@
 
         android:background="@drawable/student_shape"
 
-        android:textColor="@android:color/white"
+        android:textColor="#f1c40f"
         android:textSize="50sp" />
 
 </LinearLayout>

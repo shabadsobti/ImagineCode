@@ -11,10 +11,10 @@
     <GridView
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
-        android:layout_height="500dp"
-        android:layout_marginEnd="50dp"
+        android:layout_height="300dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="180dp"
         android:gravity="center"
         android:numColumns="3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,10 +26,16 @@
 
     <Button
         android:id="@+id/add_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
         android:text="Add User"
+        android:textSize="12sp"
+        android:textColor="#ecf0f1"
+        android:drawableLeft="@drawable/ic_baseline_person_add"
+        android:padding="10dp"
+        android:drawablePadding="4dp"
         android:gravity="center"
+        android:background="@drawable/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridview" />

@@ -64,13 +64,19 @@
 
     <Button
         android:id="@+id/module_play"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/cv_one_login"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="-30dp"
         android:background="@drawable/button"
-        android:elevation="15dp" />
+        android:elevation="6dp"
+        android:drawableLeft="@drawable/ic_baseline_play_arrow"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="PLAY"
+        android:textSize="12sp"
+        android:textColor="@color/white"/>
 </LinearLayout>
 </RelativeLayout>

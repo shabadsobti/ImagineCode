@@ -39,7 +39,7 @@
         <activity
             android:name=".AddStudent"
             android:label="@string/title_activity_add_student"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:theme="@style/AppTheme"
             android:name=".BlocklyLessonActivity">

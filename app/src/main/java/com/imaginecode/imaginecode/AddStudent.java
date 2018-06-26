@@ -17,6 +17,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,7 +41,23 @@ public class AddStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+//Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_add_student);
+
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
+        myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
+        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+
+        TextView toolbar_title = findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Add User");
 
         final EditText fname = findViewById(R.id.first_name);
         final EditText lname = findViewById(R.id.last_name);

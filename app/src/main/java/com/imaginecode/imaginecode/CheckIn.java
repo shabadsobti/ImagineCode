@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -22,7 +25,25 @@ public class CheckIn extends AppCompatActivity {
         ArrayList<Student> students = db.getAllStudents();
 
         super.onCreate(savedInstanceState);
+
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+//Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_check_in);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
+        myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
+        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+
+
+        TextView toolbar_title = findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Imagine Code");
+
+
 
         Button add_user = findViewById(R.id.add_user);
 
