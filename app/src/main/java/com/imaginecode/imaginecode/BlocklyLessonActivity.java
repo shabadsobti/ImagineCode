@@ -21,9 +21,12 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -94,7 +97,21 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+//Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         super.onCreate(savedInstanceState);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
+        myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
+        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+
+        TextView toolbar_title = findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Lesson 1");
 
         mHandler = new Handler();
         initWebView();
