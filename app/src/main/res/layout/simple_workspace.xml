@@ -54,7 +54,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
             android:padding="2dp"
-            android:src="@drawable/ic_play_arrow_white_24dp"/>
+            android:src="@drawable/ic_baseline_play_arrow_large"/>
 
         <ImageButton android:id="@+id/blockly_clear"
             android:layout_width="wrap_content"
@@ -62,23 +62,25 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
             android:padding="2dp"
-            android:backgroundTint="@color/nephritis"
-            android:src="@drawable/zoom_in"/>
+
+            android:src="@drawable/ic_baseline_clear_large"/>
 
         <ImageButton android:id="@+id/blockly_save"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
             android:padding="2dp"
+            android:visibility="invisible"
             android:src="@drawable/zoom_in"/>
 
         <ImageButton android:id="@+id/blockly_load"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
             android:padding="2dp"
+            android:visibility="invisible"
             android:src="@drawable/zoom_in"/>
 
 
@@ -101,10 +103,11 @@
 
         <ImageButton android:id="@+id/blockly_center_view_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
             android:padding="2dp"
+            android:visibility="invisible"
             android:src="@drawable/reset_view"/>
 
         <com.google.blockly.android.ui.TrashCanView

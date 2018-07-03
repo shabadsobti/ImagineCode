@@ -5,10 +5,18 @@ package com.imaginecode.imaginecode;
  */
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
+import android.view.View;
+import android.view.Window;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Class to handle all calls from JS & from Java too
@@ -43,6 +51,32 @@ public class JsHandler {
                 }
             });
     }
+
+
+    @JavascriptInterface
+    public void repeatLessonModal(int stars) {
+
+        final Dialog dialog = new Dialog(webView.getContext());
+        dialog.setContentView(R.layout.blockly_repeat_modal);
+
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText("Well Done, lets try again");
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
 
 
 }
