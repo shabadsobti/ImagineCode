@@ -26,12 +26,16 @@ public class JsHandler {
 
     Activity activity;
     String TAG = "JsHandler";
+    Integer lesson_id;
+    Integer student_id;
     WebView webView;
 
 
-    public JsHandler(Activity _contxt,WebView _webView) {
+    public JsHandler(Activity _contxt,WebView _webView, Integer lesson_id, Integer student_id) {
         activity = _contxt;
         webView = _webView;
+        this.lesson_id = lesson_id;
+        this.student_id = student_id;
     }
 
 

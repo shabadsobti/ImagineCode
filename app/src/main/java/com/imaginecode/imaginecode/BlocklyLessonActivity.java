@@ -108,6 +108,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
+        Integer lesson_id = intent.getIntExtra("Lesson_ID", 1);
         Integer lesson_number = intent.getIntExtra("Lesson_Number", 1);
         String lesson_instructions = intent.getStringExtra("Lesson_Instructions");
         Integer student_id = intent.getIntExtra("Student_ID", 1);
@@ -126,7 +127,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         toolbar_title.setText("Lesson " + lesson_number.toString());
 
         mHandler = new Handler();
-        initWebView();
+        initWebView(lesson_id, student_id);
     }
 
     @Override
@@ -224,7 +225,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         return AUTOSAVE_FILENAME;
     }
 
-    private void initWebView(){
+    private void initWebView(Integer lesson_id, Integer student_id){
 
         webView = (WebView)findViewById(R.id.webview);
         //Tell the WebView to enable javascript execution.
@@ -245,7 +246,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         webView.getSettings().setAppCacheMaxSize(1024 * 8);
         webView.getSettings().setAppCacheEnabled(true);
 
-        _jsHandler = new JsHandler(this, webView);
+        _jsHandler = new JsHandler(this, webView, lesson_id, student_id);
         webView.addJavascriptInterface(_jsHandler, "JsHandler");
 
 
