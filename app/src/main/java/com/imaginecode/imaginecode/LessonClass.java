@@ -30,6 +30,10 @@ public class LessonClass {
         return stars;
     }
 
+    public String getInstructions() {
+        return instructions;
+    }
+
     public void setStars(int stars) {
         this.stars = stars;
     }

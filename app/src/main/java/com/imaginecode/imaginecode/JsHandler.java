@@ -7,6 +7,7 @@ package com.imaginecode.imaginecode;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
@@ -60,7 +61,9 @@ public class JsHandler {
         dialog.setContentView(R.layout.blockly_repeat_modal);
 
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Well Done, lets try again");
+        TextView starText = (TextView) dialog.findViewById(R.id.starText);
+        starText.setText("" + stars);
+        text.setText("Well Done, lets try again!!");
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 

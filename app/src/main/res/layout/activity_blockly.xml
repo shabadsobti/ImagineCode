@@ -39,6 +39,7 @@
         android:layout_height="200dp"
         android:elevation="6dp"
         android:padding="6dp"
+        android:orientation="vertical"
         android:background="@drawable/instructions"
         android:layout_marginTop="15dp"
         android:layout_marginRight="3dp"
@@ -51,6 +52,16 @@
             android:textAlignment="center"
             android:textColor="#202a3a"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/instructions"
+            android:layout_width="match_parent"
+
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#202a3a"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

@@ -48,7 +48,7 @@ public class IntroModActivity extends AppCompatActivity {
         Integer student_id = intent.getIntExtra("student_ID", 1);
 
         lessons = db.getLessons(student_id, module_id);
-        LessonAdapter lessonsAdapter = new LessonAdapter(this, lessons);
+        LessonAdapter lessonsAdapter = new LessonAdapter(this, lessons, student_id);
 
         gridView.setAdapter(lessonsAdapter);
 

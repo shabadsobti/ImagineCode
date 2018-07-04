@@ -15,6 +15,7 @@
 
 package com.imaginecode.imaginecode;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.http.SslError;
@@ -106,12 +107,23 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        Integer lesson_number = intent.getIntExtra("Lesson_Number", 1);
+        String lesson_instructions = intent.getStringExtra("Lesson_Instructions");
+        Integer student_id = intent.getIntExtra("Student_ID", 1);
+        Log.d("Student_ID: ", student_id.toString());
+
+
+
+        TextView instructions = findViewById(R.id.instructions);
+        instructions.setText(lesson_instructions);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Lesson 1");
+        toolbar_title.setText("Lesson " + lesson_number.toString());
 
         mHandler = new Handler();
         initWebView();

@@ -122,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues third = new ContentValues();
         third.put(KEY_LESSON_NUMBER, 1);
         third.put(KEY_MODULE_ID, 1);
-        third.put(KEY_LESSON_INSTUCTIONS, "Conditional Statements");
+        third.put(KEY_LESSON_INSTUCTIONS, "Move the character right to catch the goblin.");
         db.insert(TABLE_LESSON, null, third);
 
 

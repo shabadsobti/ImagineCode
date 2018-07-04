@@ -18,10 +18,12 @@ public class LessonAdapter extends BaseAdapter {
 
     private final Context mContext;
     private final ArrayList<LessonClass>  lessons;
+    private final Integer student_id;
 
-    public LessonAdapter(Context context, ArrayList<LessonClass> lessons) {
+    public LessonAdapter(Context context, ArrayList<LessonClass> lessons, Integer student_id) {
         this.mContext = context;
         this.lessons = lessons;
+        this.student_id = student_id;
     }
 
     @Override
@@ -89,6 +91,10 @@ public class LessonAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), BlocklyLessonActivity.class);
+                intent.putExtra("Student_ID", student_id);
+                intent.putExtra("Lesson_ID", lesson.lesson_id);
+                intent.putExtra("Lesson_Number", lesson.getNumber());
+                intent.putExtra("Lesson_Instructions", lesson.getInstructions());
                 view.getContext().startActivity(intent);
             }
         });
