@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.webkit.JavascriptInterface;
@@ -81,6 +82,13 @@ public class JsHandler {
 
         dialog.show();
 
+    }
+
+    @JavascriptInterface
+    public void giveStars(int stars){
+        DatabaseHelper db = new DatabaseHelper(webView.getContext());
+        db.giveStars(student_id, lesson_id, stars);
+//        Log.d("STARS GIVEN", stars.toString());
     }
 
 

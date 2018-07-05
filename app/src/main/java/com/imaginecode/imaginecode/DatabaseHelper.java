@@ -277,6 +277,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public void giveStars(Integer student_id, Integer lesson_id, Integer stars){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        int current_stars = 0;
+
+        try {
+            String query = "SELECT stars FROM Students_Lessons WHERE student_id = " + student_id + " AND lesson_id = " + lesson_id;
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                current_stars = cursor.getInt(0);
+
+            }
+
+        }
+
+        catch (Exception e){
+            
+        }
+
+
+
+        if(stars >= current_stars && stars < 4){
+            String sql = "INSERT or replace INTO Students_Lessons (student_id, lesson_id, stars) VALUES(" + student_id + "," + lesson_id + "," + stars + ")";
+            db.execSQL(sql);
+
+        }
+
+        db.close();
+
+
+    }
+
+
 
 
 }
