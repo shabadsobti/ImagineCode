@@ -106,13 +106,16 @@ public class JsHandler {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
-//                intent.putExtra("Student_ID", student_id);
-//                intent.putExtra("Lesson_ID", db.getNextLesson(lesson_id, lesson_number));
-//                intent.putExtra("Lesson_Number", lesson_number + 1);
-//                intent.putExtra("Lesson_Instructions", lesson.getInstructions());
-//                view.getContext().startActivity(intent);
-                
+                Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
+                intent.putExtra("Student_ID", student_id);
+                Integer module_id = db.getModuleID(lesson_id);
+
+                Integer nextLessonID = db.getLessonID(module_id, lesson_number+1);
+                intent.putExtra("Lesson_ID", nextLessonID);
+                intent.putExtra("Lesson_Number", lesson_number + 1);
+                intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
+                webView.getContext().startActivity(intent);
+
             }
         });
 

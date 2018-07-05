@@ -326,7 +326,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
         return lesson_id;
-        
+    }
+
+
+    public String getLessonInstructions(Integer lesson_id){
+        String query = "SELECT lesson_instructions FROM Lessons WHERE lesson_id = " + lesson_id ;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String instructions = "";
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                instructions = cursor.getString(0);
+            }
+        }
+        catch (Exception e){
+
+        }
+        return instructions;
+
     }
 
 
