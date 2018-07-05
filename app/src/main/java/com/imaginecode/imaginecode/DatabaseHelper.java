@@ -134,12 +134,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-        ContentValues fifth = new ContentValues();
-        fifth.put(KEY_STUDENT_ID, 1);
-        fifth.put(KEY_LESSON_ID, 1);
-        fifth.put(KEY_STARS, "2");
-        db.insert(TABLE_STUDENT_LESSONS, null, fifth);
-
     }
 
     @Override
