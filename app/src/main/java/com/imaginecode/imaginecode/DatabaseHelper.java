@@ -302,13 +302,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         catch (Exception e){
 
-
         }
-
         return module_id;
-
     }
 
+
+    public Integer getLessonID(Integer module_id, Integer lesson_number){
+
+        String query = "SELECT lesson_id FROM Lessons WHERE module_id = " + module_id + " AND lesson_number = " + lesson_number;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int lesson_id = 1;
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                lesson_id = cursor.getInt(0);
+            }
+        }
+        catch (Exception e){
+
+        }
+        return lesson_id;
+        
+    }
 
 
 
