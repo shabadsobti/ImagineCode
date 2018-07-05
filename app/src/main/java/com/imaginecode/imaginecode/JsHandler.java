@@ -29,14 +29,17 @@ public class JsHandler {
     String TAG = "JsHandler";
     Integer lesson_id;
     Integer student_id;
+    Integer lesson_number;
     WebView webView;
 
 
-    public JsHandler(Activity _contxt,WebView _webView, Integer lesson_id, Integer student_id) {
+
+    public JsHandler(Activity _contxt,WebView _webView, Integer lesson_id, Integer student_id, Integer lesson_number, String lesson_instructions) {
         activity = _contxt;
         webView = _webView;
         this.lesson_id = lesson_id;
         this.student_id = student_id;
+        this.lesson_number = lesson_number;
     }
 
 
@@ -84,11 +87,47 @@ public class JsHandler {
 
     }
 
+
+    @JavascriptInterface
+    public void successModal(final int stars) {
+
+        final Dialog dialog = new Dialog(webView.getContext());
+        dialog.setContentView(R.layout.blockly_success_modal);
+
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        TextView starText = (TextView) dialog.findViewById(R.id.starText);
+        starText.setText("" + stars);
+        text.setText("Well Done, lets try again!!");
+        Button next = (Button) dialog.findViewById(R.id.nextLesson);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        final DatabaseHelper db = new DatabaseHelper(webView.getContext());
+
+        // if button is clicked, close the custom dialog
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
+//                intent.putExtra("Student_ID", student_id);
+//                intent.putExtra("Lesson_ID", db.getNextLesson(lesson_id, lesson_number));
+//                intent.putExtra("Lesson_Number", lesson_number + 1);
+//                intent.putExtra("Lesson_Instructions", lesson.getInstructions());
+//                view.getContext().startActivity(intent);
+                
+            }
+        });
+
+
+
+        dialog.show();
+
+    }
+
+
+
     @JavascriptInterface
     public void giveStars(int stars){
         DatabaseHelper db = new DatabaseHelper(webView.getContext());
         db.giveStars(student_id, lesson_id, stars);
-//        Log.d("STARS GIVEN", stars.toString());
     }
 
 

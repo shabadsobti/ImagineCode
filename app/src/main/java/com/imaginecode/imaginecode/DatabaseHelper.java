@@ -140,12 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         fifth.put(KEY_STARS, "2");
         db.insert(TABLE_STUDENT_LESSONS, null, fifth);
 
-
     }
-
-
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -257,30 +252,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 for(int n = 0; n < lessonList.size(); n++){
                     if (lessonList.get(n).lesson_id == cursor1.getInt(0)){
                         lessonList.get(n).setStars(cursor1.getInt(4));
-
                     }
                 }
-
-
             } while (cursor1.moveToNext());
         }
 
-
-
-
-
         db.close();
-
-
-
         return lessonList;
     }
 
 
     public void giveStars(Integer student_id, Integer lesson_id, Integer stars){
         SQLiteDatabase db = this.getWritableDatabase();
-
-
         int current_stars = 0;
 
         try {
@@ -290,25 +273,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             {
                 cursor.moveToFirst();
                 current_stars = cursor.getInt(0);
-
             }
-
         }
-
         catch (Exception e){
-            
+
         }
-
-
-
         if(stars >= current_stars && stars < 4){
             String sql = "INSERT or replace INTO Students_Lessons (student_id, lesson_id, stars) VALUES(" + student_id + "," + lesson_id + "," + stars + ")";
             db.execSQL(sql);
+        }
+        db.close();
+    }
+
+
+    public Integer getModuleID(Integer lesson_id){
+        String query = "SELECT module_id FROM Lessons WHERE lesson_id = " + lesson_id;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        int module_id = 1;
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                module_id = cursor.getInt(0);
+            }
+        }
+        catch (Exception e){
+
 
         }
 
-        db.close();
-
+        return module_id;
 
     }
 
