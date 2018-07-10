@@ -16,9 +16,6 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Logcat tag
-    private static final String TAG = "DatabaseHelper";
-
     // Database Version
     private static final int DATABASE_VERSION = 3;
 
@@ -30,11 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final Context myContext;
 
     private SQLiteDatabase myDataBase;
-
-
-
-
-
 
 
     public DatabaseHelper(Context context) {
