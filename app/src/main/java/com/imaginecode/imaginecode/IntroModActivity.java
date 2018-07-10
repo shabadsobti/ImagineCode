@@ -19,15 +19,12 @@ public class IntroModActivity extends AppCompatActivity {
 
     DatabaseHelper db = new DatabaseHelper(this);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_intro);
@@ -38,16 +35,12 @@ public class IntroModActivity extends AppCompatActivity {
         toolbar_title.setText("Levels");
 
 
-
         Intent intent = getIntent();
         Integer module_id = intent.getIntExtra("Module_ID", 1);
         Integer student_id = intent.getIntExtra("student_ID", 1);
 
         showGridTask task = new showGridTask();
         task.execute(student_id, module_id);
-
-
-
     }
 
     private class showGridTask extends AsyncTask<Integer, Void, LessonAdapter>{
@@ -56,8 +49,6 @@ public class IntroModActivity extends AppCompatActivity {
         protected LessonAdapter doInBackground(Integer... params) {
             ArrayList<LessonClass> lessons = db.getLessons(params[0], params[1]);
             return new LessonAdapter(getApplicationContext(), lessons, params[0]);
-
-            
         }
 
         @Override
@@ -65,11 +56,7 @@ public class IntroModActivity extends AppCompatActivity {
             GridView gridView = findViewById(R.id.gridview);
             gridView.setAdapter(result);
             Log.d("FINAL","success");
-
         }
-
-
-
 
     }
 
