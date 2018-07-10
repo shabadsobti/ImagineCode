@@ -57,12 +57,18 @@ public class ModulesActivity extends AppCompatActivity {
         Integer student_id = intent.getIntExtra("student_ID", 1);
 
         DatabaseHelper db = new DatabaseHelper(this);
-        Log.d("DV", db.getModules().get(0).getName());
+
 
         RecyclerView recyclerView = findViewById(R.id.rv);
-        ModuleAdapter recyclerAdapter = new ModuleAdapter(this, db.getModules(), student_id);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(recyclerAdapter);
+        try{
+            ModuleAdapter recyclerAdapter = new ModuleAdapter(this, db.getModules(), student_id);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            recyclerView.setAdapter(recyclerAdapter);
+        }
+        catch (Exception e){
+
+        }
+
 
     }
 

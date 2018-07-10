@@ -18,11 +18,12 @@ import java.util.ArrayList;
 
 public class IntroModActivity extends AppCompatActivity {
 
-    DatabaseHelper db = new DatabaseHelper(this);
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db =  new DatabaseHelper(getApplicationContext());
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

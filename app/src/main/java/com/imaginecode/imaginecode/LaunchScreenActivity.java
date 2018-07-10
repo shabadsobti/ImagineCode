@@ -25,19 +25,25 @@ public class LaunchScreenActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            intent = new Intent(LaunchScreenActivity.this, CheckIn.class);
+            intent = new Intent(getApplicationContext(), CheckIn.class);
         }
 
         @Override
         protected Object doInBackground(Object[] params) {
 
-            /*  Use this method to load background
-             * data that your app needs. */
+
 
             try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+                DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                if(!db.checkDataBase()){
+                    db.createDataBase();
+                }
+
+                Thread.sleep(1000);
+
+            } catch (Exception e) {
+
             }
 
             return null;

@@ -4,89 +4,33 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-
     // Logcat tag
-    private static final String LOG = "DatabaseHelper";
+    private static final String TAG = "DatabaseHelper";
 
     // Database Version
     private static final int DATABASE_VERSION = 3;
 
     // Database Name
-    private static final String DATABASE_NAME = "ImagineCode";
+    private static final String DATABASE_NAME = "imaginecode.db";
 
-    // Table Names
-    private static final String TABLE_STUDENTS = "Students";
-    private static final String TABLE_MODULE = "Modules";
-    private static final String TABLE_LESSON = "Lessons";
+    String DB_PATH = null;
 
-    private static final String TABLE_STUDENT_LESSONS = "Students_Lessons";
+    private final Context myContext;
 
+    private SQLiteDatabase myDataBase;
 
-    // Common column names
-
-    // Students Table - column names
-
-    private static final String KEY_FNAME = "first_name";
-    private static final String KEY_LNAME = "last_name";
-    private static final String KEY_AVATAR = "avatar";
-
-    //Module Table - column Names
-
-    private static final String KEY_MODULE_NAME = "module_name";
-    private static final String KEY_MODULE_OPEN = "module_open";
-
-    //Lesson Table - column Names
-    private static final String KEY_LESSON_INSTUCTIONS= "lesson_instructions";
-    private static final String KEY_LESSON_NUMBER= "lesson_number";
-
-
-
-
-
-    // STUDENT_MODULES_LESSONS  - column names
-    private static final String KEY_STARS = "stars";
-
-
-
-    // COMMON Column Names
-    private static final String KEY_STUDENT_ID = "student_id";
-    private static final String KEY_MODULE_ID = "module_id";
-    private static final String KEY_LESSON_ID= "lesson_id";
-
-
-    // Table Create Statements
-    // STUDENT TABLE
-    private static final String CREATE_TABLE_STUDENTS = "CREATE TABLE "
-            + TABLE_STUDENTS + "(" + KEY_STUDENT_ID + " INTEGER PRIMARY KEY," + KEY_FNAME
-            + " TEXT," + KEY_LNAME + " TEXT," + KEY_AVATAR + " TEXT" + ")";
-
-
-    //MODULE TABLE
-    private static final String CREATE_TABLE_MODULES = "CREATE TABLE "
-            + TABLE_MODULE + "(" + KEY_MODULE_ID + " INTEGER PRIMARY KEY, " + KEY_MODULE_NAME
-            + " TEXT, " + KEY_MODULE_OPEN + " INTEGER" + ")";
-
-
-    //LESSON TABLE
-    private static final String CREATE_TABLE_LESSONS = "CREATE TABLE "
-            + TABLE_LESSON + "(" + KEY_LESSON_ID + " INTEGER PRIMARY KEY, " +  KEY_LESSON_NUMBER + " INTEGER, " + KEY_MODULE_ID + " INTEGER, " + KEY_LESSON_INSTUCTIONS + " TEXT" + ")";
-
-
-
-
-
-    // STUDENT_LESSON TABLE
-    private static final String CREATE_TABLE_STUDENT_LESSON = "CREATE TABLE "
-            + TABLE_STUDENT_LESSONS + "(" + KEY_STUDENT_ID + " INTEGER, " + KEY_LESSON_ID + " INTEGER, " + KEY_STARS + " INTEGER" + ")";
 
 
 
@@ -95,43 +39,119 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.myContext = context;
+        DB_PATH= "/data/data/" + context.getPackageName()+"/"+"databases/";
+    }
+
+
+    /**
+     * Creates a empty database on the system and rewrites it with your own database.
+     * */
+    public void createDataBase() throws IOException{
+
+        boolean dbExist = checkDataBase();
+
+        if(dbExist){
+            //do nothing - database already exist
+        }else{
+
+            //By calling this method and empty database will be created into the default system path
+            //of your application so we are gonna be able to overwrite that database with our database.
+            this.getReadableDatabase();
+
+            try {
+                copyDataBase();
+
+            } catch (IOException e) {
+
+                throw new Error("Error copying database");
+
+            }
+        }
+
+    }
+
+
+    /**
+     * Check if the database already exist to avoid re-copying the file each time you open the application.
+     * @return true if it exists, false if it doesn't
+     */
+    public boolean checkDataBase(){
+
+        SQLiteDatabase checkDB = null;
+
+        try{
+            String myPath = DB_PATH + DATABASE_NAME;
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+
+        }catch(SQLiteException e){
+            //database does't exist yet.
+        }
+        return checkDB != null;
+
+    }
+
+
+    /**
+     * Copies your database from your local assets-folder to the just created empty database in the
+     * system folder, from where it can be accessed and handled.
+     * This is done by transfering bytestream.
+     * */
+    private void copyDataBase() throws IOException{
+
+        //Open your local db as the input stream
+        InputStream myInput = myContext.getAssets().open(DATABASE_NAME);
+
+        // Path to the just created empty db
+        String outFileName = DB_PATH + DATABASE_NAME;
+        Log.d("TAG", outFileName);
+
+        //Open the empty db as the output stream
+        OutputStream myOutput = new FileOutputStream(outFileName);
+
+        //transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[20000];
+        int length;
+        while ((length = myInput.read(buffer))>0){
+            myOutput.write(buffer, 0, length);
+        }
+
+        //Close the streams
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
+
+    }
+
+
+    public void openDataBase() throws SQLiteException{
+
+        //Open the database
+        String myPath = DB_PATH + DATABASE_NAME;
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+
     }
 
     @Override
+    public synchronized void close() {
+
+        if(myDataBase != null)
+            myDataBase.close();
+
+        super.close();
+
+    }
+
+
+
+
+
+
+
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
-        // creating required tables
-        db.execSQL(CREATE_TABLE_STUDENTS);
-        db.execSQL(CREATE_TABLE_MODULES);
-        db.execSQL(CREATE_TABLE_LESSONS);
-
-        db.execSQL(CREATE_TABLE_STUDENT_LESSON);
-
-
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_MODULE_NAME, "Introduction");
-        initialValues.put(KEY_MODULE_OPEN, 1);
-        db.insert(TABLE_MODULE, null, initialValues);
-
-
-        ContentValues second = new ContentValues();
-        second.put(KEY_MODULE_NAME, "Solar Module");
-        second.put(KEY_MODULE_OPEN, 1);
-        db.insert(TABLE_MODULE, null, second);
-
-
-        ContentValues third = new ContentValues();
-        third.put(KEY_LESSON_NUMBER, 1);
-        third.put(KEY_MODULE_ID, 1);
-        third.put(KEY_LESSON_INSTUCTIONS, "Move the character right to catch the goblin.");
-        db.insert(TABLE_LESSON, null, third);
-
-
-        ContentValues fourth = new ContentValues();
-        fourth.put(KEY_LESSON_NUMBER, 2);
-        fourth.put(KEY_MODULE_ID, 1);
-        fourth.put(KEY_LESSON_INSTUCTIONS, "If Statements");
-        db.insert(TABLE_LESSON, null, fourth);
-
 
 
     }
@@ -139,10 +159,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MODULE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LESSON);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_LESSONS);
+        db.execSQL("DROP TABLE IF EXISTS " + "Students");
+        db.execSQL("DROP TABLE IF EXISTS " + "Modules");
+        db.execSQL("DROP TABLE IF EXISTS " + "Lessons");
+        db.execSQL("DROP TABLE IF EXISTS " + "Students_Lessons");
         // create new tables
         onCreate(db);
     }
@@ -150,10 +170,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long createStudent(Student student){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_FNAME, student.first_name);
-        values.put(KEY_LNAME, student.last_name);
-        values.put(KEY_AVATAR, student.avatar);
-        long student_id = db.insert(TABLE_STUDENTS, null, values);
+        values.put("first_name", student.first_name);
+        values.put("last_name", student.last_name);
+        values.put("avatar", student.avatar);
+        long student_id = db.insert("Students", null, values);
 
         return student_id;
     }
@@ -162,8 +182,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ArrayList<Student> studentList = new ArrayList<Student>();
 
-        String selectQuery = "SELECT * FROM " + TABLE_STUDENTS
-                + " ORDER BY " + KEY_STUDENT_ID + " DESC";
+        String selectQuery = "SELECT * FROM " + "Students"
+                + " ORDER BY " + "student_id" + " DESC";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
