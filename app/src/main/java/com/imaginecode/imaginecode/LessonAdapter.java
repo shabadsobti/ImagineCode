@@ -2,6 +2,8 @@ package com.imaginecode.imaginecode;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,49 +46,24 @@ public class LessonAdapter extends BaseAdapter {
     }
 
 
-
-
-
-
-
-
-
     // 5
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final LessonClass lesson = lessons.get(position);
 
-
-
-
         if (convertView == null) {
-            final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+            LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.cell_lesson, null);
         }
 
-        final TextView lesson_num = (TextView)convertView.findViewById(R.id.lesson_num);
-        final ImageView star1 = (ImageView)convertView.findViewById(R.id.imageview_1);
-        final ImageView star2 = (ImageView)convertView.findViewById(R.id.imageview_2);
-        final ImageView star3 = (ImageView)convertView.findViewById(R.id.imageview_3);
+        RatingBar stars = convertView.findViewById(R.id.stars);
+        stars.setRating(lesson.getStars());
 
+
+        TextView lesson_num = convertView.findViewById(R.id.lesson_num);
         lesson_num.setText(((lesson.getNumber().toString())));
 
-        if(lesson.getStars() == 1){
-            star1.setImageResource(R.drawable.star_lvlcomp);
-        }
-        else if(lesson.getStars() == 2){
-            star1.setImageResource(R.drawable.star_lvlcomp);
-            star2.setImageResource(R.drawable.star_lvlcomp);
-        }
-        else if(lesson.getStars() == 3){
-            star1.setImageResource(R.drawable.star_lvlcomp);
-            star2.setImageResource(R.drawable.star_lvlcomp);
-            star3.setImageResource(R.drawable.star_lvlcomp);
-        }
-//        if (!lesson.getUnlocked()){
-//            convertView.setAlpha(0.5f);
-//            convertView.setClickable(false);
-//        }
+
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,16 +79,6 @@ public class LessonAdapter extends BaseAdapter {
 
         return convertView;
     }
-
-
-    private View.OnClickListener mMyButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int position = (Integer) v.getTag();
-            Toast.makeText(v.getContext(), "Row " + position + " was clicked!", Toast.LENGTH_SHORT).show();
-        }
-    };
-
 
 
 }

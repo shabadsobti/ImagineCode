@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -43,16 +44,25 @@ public class IntroModActivity extends AppCompatActivity {
         task.execute(student_id, module_id);
     }
 
-    private class showGridTask extends AsyncTask<Integer, Void, LessonAdapter>{
+    private class showGridTask extends AsyncTask<Integer, Integer, LessonAdapter>{
 
         @Override
         protected LessonAdapter doInBackground(Integer... params) {
             ArrayList<LessonClass> lessons = db.getLessons(params[0], params[1]);
+            publishProgress(1);
             return new LessonAdapter(getApplicationContext(), lessons, params[0]);
         }
 
         @Override
+        protected void onProgressUpdate(Integer... values){
+            Log.d("LOADING","loading");
+
+        }
+
+        @Override
         protected void onPostExecute(LessonAdapter result) {
+            ProgressBar loader = findViewById(R.id.loader);
+            loader.setVisibility(View.INVISIBLE);
             GridView gridView = findViewById(R.id.gridview);
             gridView.setAdapter(result);
             Log.d("FINAL","success");

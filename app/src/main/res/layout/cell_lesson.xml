@@ -81,26 +81,19 @@
         android:background="@drawable/button"
         >
 
-        <ImageView
-            android:id="@+id/imageview_1"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_gravity="bottom|start"
-            android:src="@drawable/star_lvl" />
-
-        <ImageView
-            android:id="@+id/imageview_2"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_gravity="bottom|center"
-            android:src="@drawable/star_lvl" />
-
-        <ImageView
-            android:id="@+id/imageview_3"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/star_lvl" />
+        <RatingBar
+            android:id="@+id/stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:theme="@style/RatingBar"
+            android:layout_gravity="center"
+            android:numStars="3"
+            android:stepSize="0.1"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:isIndicator="true"
+            />
 
     </FrameLayout>
 

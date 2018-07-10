@@ -32,5 +32,12 @@
 
     </style>
 
+    <style name="RatingBar" parent="ThemeOverlay.AppCompat">
+        <item name="colorControlNormal">@color/headbar</item>
+        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorAccent">@color/yellow</item>
+
+    </style>
+
 
 </resources>
