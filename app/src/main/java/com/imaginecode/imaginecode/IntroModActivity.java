@@ -61,8 +61,6 @@ public class IntroModActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(LessonAdapter result) {
-            ProgressBar loader = findViewById(R.id.loader);
-            loader.setVisibility(View.INVISIBLE);
             GridView gridView = findViewById(R.id.gridview);
             gridView.setAdapter(result);
             Log.d("FINAL","success");

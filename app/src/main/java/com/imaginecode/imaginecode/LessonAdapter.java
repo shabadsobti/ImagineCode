@@ -69,6 +69,7 @@ public class LessonAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), BlocklyLessonActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("Student_ID", student_id);
                 intent.putExtra("Lesson_ID", lesson.lesson_id);
                 intent.putExtra("Lesson_Number", lesson.getNumber());
