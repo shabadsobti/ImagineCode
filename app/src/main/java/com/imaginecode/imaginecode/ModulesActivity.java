@@ -59,19 +59,13 @@ public class ModulesActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         Log.d("DV", db.getModules().get(0).getName());
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv);
+        RecyclerView recyclerView = findViewById(R.id.rv);
         ModuleAdapter recyclerAdapter = new ModuleAdapter(this, db.getModules(), student_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(recyclerAdapter);
 
-
     }
 
-
-
-
-
-
-
+    
 
 }
