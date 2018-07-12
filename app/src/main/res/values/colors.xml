@@ -7,4 +7,6 @@
     <color name="headbar">#2c3e50</color>
     <color name="yellow">#f1c40f</color>
     <color name="orange">#e67e22</color>
+    <!--<color name="purple">#2c5fb2</color>-->
+    <color name="marineBlue">#7fa7e8</color>
 </resources>

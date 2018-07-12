@@ -57,7 +57,7 @@ public class AddStudent extends AppCompatActivity {
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Add User");
+        toolbar_title.setText(R.string.title_activity_add_student);
 
         final EditText fname = findViewById(R.id.first_name);
         final EditText lname = findViewById(R.id.last_name);

@@ -81,8 +81,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //database does't exist yet.
         }
         return checkDB != null;
-
     }
+
 
 
     /**
@@ -90,6 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * system folder, from where it can be accessed and handled.
      * This is done by transfering bytestream.
      * */
+
     private void copyDataBase() throws IOException{
 
         //Open your local db as the input stream
@@ -118,29 +119,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public void openDataBase() throws SQLiteException{
-
         //Open the database
         String myPath = DB_PATH + DATABASE_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
     }
 
     @Override
     public synchronized void close() {
-
         if(myDataBase != null)
             myDataBase.close();
-
         super.close();
-
     }
-
-
-
-
-
-
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -204,7 +193,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Module> getModules(){
 
         ArrayList<Module> moduleList = new ArrayList<Module>();
-        String selectQuery = "SELECT module_id, module_name FROM Modules";
+        String selectQuery = "SELECT module_id, "+  myContext.getResources().getString(R.string.module_name_column) +" FROM Modules";
 
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -228,11 +217,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<LessonClass> getLessons(int student_id, int module_id){
 
+
+        Log.d("LOCALE", myContext.getResources().getConfiguration().locale.toLanguageTag());
         ArrayList<LessonClass> lessonList = new ArrayList<LessonClass>();
 
-        String selectQuery = "SELECT lesson_id, lesson_number, lesson_instructions FROM Lessons WHERE module_id = " + module_id + " ORDER BY lesson_number ASC";
+        String selectQuery = "SELECT lesson_id, lesson_number, " + myContext.getResources().getString(R.string.lesson_instruction_column) + " FROM Lessons WHERE module_id = " + module_id + " ORDER BY lesson_number ASC";
 
-
+        Log.d("SEX", myContext.getResources().getString(R.string.lesson_instruction_column));
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -336,8 +327,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public String getLessonInstructions(Integer lesson_id){
-        String query = "SELECT lesson_instructions FROM Lessons WHERE lesson_id = " + lesson_id ;
+        String query = "SELECT " + myContext.getResources().getString(R.string.lesson_instruction_column) +" FROM Lessons WHERE lesson_id = " + lesson_id ;
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.d("TSR", query);
 
         String instructions = "";
 

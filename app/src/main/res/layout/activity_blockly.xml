@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="Instructions"
+            android:text="@string/title_lesson_instructions"
             android:textAlignment="center"
             android:textColor="#202a3a"
             android:textSize="18sp" />

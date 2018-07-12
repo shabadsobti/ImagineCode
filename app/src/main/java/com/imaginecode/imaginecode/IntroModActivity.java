@@ -23,7 +23,7 @@ public class IntroModActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db =  new DatabaseHelper(getApplicationContext());
+        db =  new DatabaseHelper(this);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -34,7 +34,7 @@ public class IntroModActivity extends AppCompatActivity {
         myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Levels");
+        toolbar_title.setText(R.string.title_activity_levels);
 
 
         Intent intent = getIntent();

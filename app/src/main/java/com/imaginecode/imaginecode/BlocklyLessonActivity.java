@@ -16,6 +16,7 @@
 package com.imaginecode.imaginecode;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.http.SslError;
@@ -124,7 +125,10 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Lesson " + lesson_number.toString());
+        Resources res = getResources();
+        String text = res.getString(R.string.title_activity_blockly, lesson_number.toString());
+        Log.d("HOT", res.getString(R.string.title_activity_blockly, lesson_number.toString()));
+        toolbar_title.setText(text);
 
         mHandler = new Handler();
         initWebView(lesson_id, student_id, lesson_number, lesson_instructions);
@@ -141,10 +145,6 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         return root;
     }
 
-//    @Override
-////    protected int getActionBarMenuResId() {
-////        return R.menu.split_actionbar;
-////    }
 
     @NonNull
     @Override
@@ -227,7 +227,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
     private void initWebView(Integer lesson_id, Integer student_id, Integer lesson_number, String lesson_instructions){
 
-        webView = (WebView)findViewById(R.id.webview);
+        webView = findViewById(R.id.webview);
         //Tell the WebView to enable javascript execution.
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setBackgroundColor(Color.parseColor("#808080"));

@@ -9,25 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:windowSoftInputMode="stateHidden|adjustPan">
-
-
         <activity
             android:name=".LaunchScreenActivity"
             android:label="ImagineCode"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <intent-filter>
-
-        <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-
-
-
         <activity
             android:name=".CheckIn"
             android:label="@string/title_activity_check_in"
@@ -35,7 +26,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
         </activity>
         <activity
@@ -45,21 +36,21 @@
         <activity
             android:name=".ModulesActivity"
             android:label="@string/title_activity_modules"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".AddStudent"
             android:label="@string/title_activity_add_student"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".BlocklyLessonActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"></activity>
+
+
+
+        <activity android:name=".LanguageSelection" android:theme="@style/AppTheme.NoActionBar">
 
 
         </activity>
-
     </application>
 
 </manifest>

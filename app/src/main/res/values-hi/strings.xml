@@ -1,0 +1,25 @@
+<resources>
+
+    <string name="app_name">ImagineCode</string>
+
+    <string name="title_activity_modules">Modules लॉगिन</string>
+
+    <string name="title_activity_levels">Lessons लॉगिन</string>
+
+    <string name="title_activity_check_in">लॉगिन</string>
+
+    <string name="title_activity_add_student">New User</string>
+
+    <string name="title_activity_blockly" formatted="true">लॉगिन %1$s</string>
+
+    <string name="toast_student_added">New Student Added</string>
+
+    <string name="title_lesson_instructions">Instructions</string>
+
+    <string name="module_name_column">module_name_hi</string>
+
+    <string name="lesson_instruction_column">lesson_instruction_hi</string>
+
+
+
+</resources>

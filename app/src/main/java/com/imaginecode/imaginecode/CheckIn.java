@@ -1,8 +1,11 @@
 package com.imaginecode.imaginecode;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,11 +17,18 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CheckIn extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+
 
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
 
@@ -35,13 +45,13 @@ public class CheckIn extends AppCompatActivity {
 
         setContentView(R.layout.activity_check_in);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
+        Toolbar myToolbar = findViewById(R.id.top_toolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 
 
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Imagine Code");
+        toolbar_title.setText(R.string.title_activity_check_in);
 
 
 
@@ -55,7 +65,7 @@ public class CheckIn extends AppCompatActivity {
             }
         });
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        GridView gridview = findViewById(R.id.gridview);
 
         ArrayAdapter<Student> adapter = new AdapterStudent(this, 0, students);
 
@@ -71,7 +81,7 @@ public class CheckIn extends AppCompatActivity {
 
         ArrayList<Student> students = db.getAllStudents();
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        GridView gridview = findViewById(R.id.gridview);
 
         ArrayAdapter<Student> adapter = new AdapterStudent(this, 0, students);
 
@@ -86,15 +96,13 @@ public class CheckIn extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is IntentId
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Student Added", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.toast_student_added, Toast.LENGTH_LONG).show();
             }
-
-            if (resultCode == RESULT_CANCELED)
-
-                //When result is cancelled display toast
-                Toast.makeText(this, "Activity cancelled.", Toast.LENGTH_SHORT).show();
 
         }
     }
+
+
+
 
 }

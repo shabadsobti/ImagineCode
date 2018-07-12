@@ -25,7 +25,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            intent = new Intent(getApplicationContext(), CheckIn.class);
+            intent = new Intent(getApplicationContext(), LanguageSelection.class);
         }
 
         @Override
@@ -36,11 +36,13 @@ public class LaunchScreenActivity extends AppCompatActivity {
             try {
 
                 DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                if(!db.checkDataBase()){
-                    db.createDataBase();
-                }
 
-                Thread.sleep(1000);
+                    db.createDataBase();
+                    Thread.sleep(4000);
+
+
+
+
 
             } catch (Exception e) {
 
