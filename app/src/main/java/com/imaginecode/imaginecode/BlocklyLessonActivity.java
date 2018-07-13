@@ -50,6 +50,9 @@ import java.util.List;
  * and an arbitrary other view or fragment.
  */
 public class BlocklyLessonActivity extends AbstractBlocklyActivity {
+    private static final int INTRO_MODULE_ID = 1;
+    private static final int ARDUINO_MODULE_ID = 2;
+
     private static final String TAG = "SplitActivity";
     private WebView webView;
     private JsHandler _jsHandler;
@@ -74,6 +77,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
     private Handler mHandler;
 
     private String mNoCodeText;
+
+    private Integer module_id = 1;
 
 
     CodeGenerationRequest.CodeGeneratorCallback mCodeGeneratorCallback =
@@ -110,6 +115,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
         Intent intent = getIntent();
         Integer lesson_id = intent.getIntExtra("Lesson_ID", 1);
+
         Integer lesson_number = intent.getIntExtra("Lesson_Number", 1);
         String lesson_instructions = intent.getStringExtra("Lesson_Instructions");
         Integer student_id = intent.getIntExtra("Student_ID", 1);
@@ -127,16 +133,29 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         TextView toolbar_title = findViewById(R.id.toolbar_title);
         Resources res = getResources();
         String text = res.getString(R.string.title_activity_blockly, lesson_number.toString());
-        Log.d("HOT", res.getString(R.string.title_activity_blockly, lesson_number.toString()));
+
         toolbar_title.setText(text);
 
         mHandler = new Handler();
-        initWebView(lesson_id, student_id, lesson_number, lesson_instructions);
+        if(module_id == INTRO_MODULE_ID) {
+            initWebView(lesson_id, student_id, lesson_number, lesson_instructions);
+        }
     }
 
     @Override
     protected View onCreateContentView(int parentId) {
-        View root = getLayoutInflater().inflate(R.layout.activity_blockly, null);
+        Intent intent = getIntent();
+        module_id = intent.getIntExtra("Module_ID", 1);
+
+        View root;
+        if(module_id == ARDUINO_MODULE_ID){
+            root = getLayoutInflater().inflate(R.layout.activity_blockly_arduino, null);
+        }
+        else{
+            root = getLayoutInflater().inflate(R.layout.activity_blockly, null);
+        }
+
+
         //mGeneratedTextView = (TextView) root.findViewById(R.id.generated_code);
         //updateTextMinWidth();
 

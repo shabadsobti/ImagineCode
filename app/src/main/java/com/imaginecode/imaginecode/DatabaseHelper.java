@@ -217,13 +217,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<LessonClass> getLessons(int student_id, int module_id){
 
-
-        Log.d("LOCALE", myContext.getResources().getConfiguration().locale.toLanguageTag());
         ArrayList<LessonClass> lessonList = new ArrayList<LessonClass>();
 
         String selectQuery = "SELECT lesson_id, lesson_number, " + myContext.getResources().getString(R.string.lesson_instruction_column) + " FROM Lessons WHERE module_id = " + module_id + " ORDER BY lesson_number ASC";
 
-        Log.d("SEX", myContext.getResources().getString(R.string.lesson_instruction_column));
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 

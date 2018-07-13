@@ -22,11 +22,13 @@ public class LessonAdapter extends BaseAdapter {
     private final Context mContext;
     private final ArrayList<LessonClass>  lessons;
     private final Integer student_id;
+    private final Integer module_id;
 
-    public LessonAdapter(Context context, ArrayList<LessonClass> lessons, Integer student_id) {
+    public LessonAdapter(Context context, ArrayList<LessonClass> lessons, Integer student_id, Integer module_id) {
         this.mContext = context;
         this.lessons = lessons;
         this.student_id = student_id;
+        this.module_id = module_id;
     }
 
     @Override
@@ -57,6 +59,9 @@ public class LessonAdapter extends BaseAdapter {
         }
 
         RatingBar stars = convertView.findViewById(R.id.stars);
+        if (module_id == 2){
+            stars.setNumStars(1);
+        }
         stars.setRating(lesson.getStars());
 
 
@@ -72,6 +77,7 @@ public class LessonAdapter extends BaseAdapter {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("Student_ID", student_id);
                 intent.putExtra("Lesson_ID", lesson.lesson_id);
+                intent.putExtra("Module_ID", module_id);
                 intent.putExtra("Lesson_Number", lesson.getNumber());
                 intent.putExtra("Lesson_Instructions", lesson.getInstructions());
                 view.getContext().startActivity(intent);

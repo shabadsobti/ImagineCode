@@ -19,6 +19,9 @@ import java.util.ArrayList;
 public class IntroModActivity extends AppCompatActivity {
 
     DatabaseHelper db;
+    Integer module_id;
+    Integer student_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +41,22 @@ public class IntroModActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        Integer module_id = intent.getIntExtra("Module_ID", 1);
-        Integer student_id = intent.getIntExtra("student_ID", 1);
+        module_id = intent.getIntExtra("Module_ID", 1);
+        student_id = intent.getIntExtra("student_ID", 1);
 
         showGridTask task = new showGridTask();
         task.execute(student_id, module_id);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        showGridTask task = new showGridTask();
+        task.execute(student_id, module_id);
+
+
+
     }
 
     private class showGridTask extends AsyncTask<Integer, Integer, LessonAdapter>{
@@ -51,7 +65,7 @@ public class IntroModActivity extends AppCompatActivity {
         protected LessonAdapter doInBackground(Integer... params) {
             ArrayList<LessonClass> lessons = db.getLessons(params[0], params[1]);
             publishProgress(1);
-            return new LessonAdapter(getApplicationContext(), lessons, params[0]);
+            return new LessonAdapter(getApplicationContext(), lessons, params[0], params[1]);
         }
 
         @Override
