@@ -23,7 +23,10 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +37,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.blockly.android.AbstractBlocklyActivity;
@@ -49,12 +53,13 @@ import java.util.List;
  * Demo activity that programmatically adds a view to split the screen between the Blockly workspace
  * and an arbitrary other view or fragment.
  */
-public class BlocklyLessonActivity extends AbstractBlocklyActivity {
+public class BlocklyLessonActivity extends AbstractBlocklyActivity implements ViewPager.OnPageChangeListener {
     private static final int INTRO_MODULE_ID = 1;
     private static final int ARDUINO_MODULE_ID = 2;
 
     private static final String TAG = "SplitActivity";
     private WebView webView;
+    private ViewPager viewPager;
     private JsHandler _jsHandler;
     private static final String SAVE_FILENAME = "split_workspace.xml";
     private static final String AUTOSAVE_FILENAME = "split_workspace_temp.xml";
@@ -79,6 +84,14 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
     private String mNoCodeText;
 
     private Integer module_id = 1;
+
+    String[] instruction;
+    int[] project_image;
+
+    ViewPagerAdapter adapter;
+
+    TextView instructions;
+
 
 
     CodeGenerationRequest.CodeGeneratorCallback mCodeGeneratorCallback =
@@ -123,8 +136,34 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
 
 
-        TextView instructions = findViewById(R.id.instructions);
+//        project_image =  new int[] { R.drawable.blockly_trash, R.drawable.blockly_trash_open,
+////                R.drawable.star_lvl };
+
+        DatabaseHelper db = new DatabaseHelper(this);
+        project_image = db.getGraphics(lesson_id);
+
+        Log.d("YOLO", project_image.toString());
+
+
+
+
+    instructions = findViewById(R.id.instructions);
+
+    if(module_id == INTRO_MODULE_ID){
         instructions.setText(lesson_instructions);
+    }
+
+    else {
+        instruction = lesson_instructions.split(",");
+        instructions.setText(instruction[0]);
+    }
+
+
+
+
+
+
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
@@ -139,6 +178,9 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         mHandler = new Handler();
         if(module_id == INTRO_MODULE_ID) {
             initWebView(lesson_id, student_id, lesson_number, lesson_instructions);
+        }
+        if(module_id == ARDUINO_MODULE_ID){
+            initViewPager();
         }
     }
 
@@ -305,5 +347,49 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         webView.loadUrl("file:///android_asset/game/index.html");
 
     }
+
+    private void initViewPager(){
+
+
+
+
+
+
+        viewPager = findViewById(R.id.viewPager);
+
+        viewPager.addOnPageChangeListener(this);
+
+        adapter = new ViewPagerAdapter(this, instruction, project_image);
+        // Binds the Adapter to the ViewPager
+        viewPager.setAdapter(adapter);
+
+
+
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int position) {
+
+
+
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+
+    }
+
+
+    @Override
+    public void onPageSelected(int position) {
+        instructions.setText(instruction[position]);
+
+
+    }
+
+
 
 }

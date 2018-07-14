@@ -347,5 +347,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public int[] getGraphics(Integer lesson_id){
+
+        String query = "SELECT graphic FROM Lessons WHERE lesson_id = " + lesson_id ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String graphics = "";
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                graphics = cursor.getString(0);
+            }
+        }
+        catch (Exception e){
+
+        }
+
+        String[] listGraphics = graphics.replaceAll("\\s","").split(",");
+
+
+
+
+        int[] drawables = new int[listGraphics.length];
+
+        int i = 0;
+
+        for (String img: listGraphics)
+        {
+            Log.d("DETAILS", img);
+            drawables[i] = myContext.getResources().getIdentifier(img, "drawable", myContext.getPackageName());
+            i++;
+        }
+
+        return drawables;
+
+    }
+
+
 
 }

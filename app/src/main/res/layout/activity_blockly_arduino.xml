@@ -29,8 +29,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="350dp"
         android:layout_height="250dp"
         android:focusable="true"/>
