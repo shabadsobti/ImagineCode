@@ -15,14 +15,21 @@
 
 package com.imaginecode.imaginecode;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.VoiceInteractor;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.http.SslError;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -39,14 +46,39 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.blockly.android.AbstractBlocklyActivity;
 import com.google.blockly.android.codegen.CodeGenerationRequest;
 import com.google.blockly.model.DefaultBlocks;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import com.physicaloid.lib.Boards;
+import com.physicaloid.lib.Physicaloid;
+import com.physicaloid.lib.Physicaloid.UploadCallBack;
+import com.physicaloid.lib.fpga.PhysicaloidFpga;
+import com.physicaloid.lib.programmer.avr.UploadErrors;
+import com.physicaloid.lib.usb.driver.uart.ReadLisener;
+
+
 
 
 /**
@@ -92,6 +124,20 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
     TextView instructions;
 
+    Physicaloid mPhysicaloid;
+    PhysicaloidFpga mPhysicaloidFpga;
+    Boards mSelectedBoard;
+
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+
+
+
 
 
     CodeGenerationRequest.CodeGeneratorCallback mCodeGeneratorCallback =
@@ -104,7 +150,55 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
                             //mGeneratedTextView.setText(generatedCode);
                             //updateTextMinWidth();
                             Log.e("Generated code", generatedCode);
-                            _jsHandler.javaFnCall(generatedCode);
+                            if (module_id == 1){
+                                _jsHandler.javaFnCall(generatedCode);
+
+                            }
+                            else{
+
+
+                                RequestQueue MyRequestQueue = Volley.newRequestQueue(getApplicationContext());
+                                String url = "http://178.128.14.91/upload.php";
+
+                                StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Toast.makeText(BlocklyLessonActivity.this, response, Toast.LENGTH_SHORT).show();
+                                        new DownloadFileFromURL().execute(response);
+
+
+
+
+
+                                    }
+                                }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        //This code is executed if there is an error.
+                                    }
+                                }) {
+                                    protected Map<String, String> getParams() {
+                                        Map<String, String> MyData = new HashMap<String, String>();
+                                        MyData.put("ino_code", "void setup() {\n" +
+                                                "  \n" +
+                                                "  pinMode(13, OUTPUT);\n" +
+                                                "}\n" +
+                                                "\n" +
+                                                "void loop() {\n" +
+                                                "  digitalWrite(13, HIGH);               \n" +
+                                                "}\n" +
+                                                "\n"); //Add the data you'd like to send to the server.
+                                        MyData.put("student_id", "15"); //Add the data you'd like to send to the server.
+                                        MyData.put("lesson_id", "23"); //Add the data you'd like to send to the server.
+                                        return MyData;
+                                    }
+                                };
+
+
+                                MyRequestQueue.add(MyStringRequest);
+
+                            }
+
                         }
                     });
                 }
@@ -114,6 +208,133 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+
+        @Override
+        protected String doInBackground(String... f_url) {
+
+
+
+
+            int count;
+            try {
+                URL url = new URL(f_url[0]);
+                URLConnection conection = url.openConnection();
+                conection.connect();
+                // getting file length
+                int lenghtOfFile = conection.getContentLength();
+
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+                // Output stream to write file
+                OutputStream output = new FileOutputStream(getFilesDir()  + "/work.hex");
+
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    // After this onProgressUpdate will be called
+                    publishProgress(""+(int)((total*100)/lenghtOfFile));
+
+                    // writing data to file
+
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            final String UPLOAD_FILE_UNO = getFilesDir()  + "/work.hex";
+            mPhysicaloid = new Physicaloid(getApplicationContext());
+            mPhysicaloid.upload(Boards.ARDUINO_UNO, UPLOAD_FILE_UNO, mUploadCallback);
+
+            return null;
+
+
+        }
+
+        /**
+         * Updating progress bar
+         * */
+        protected void onProgressUpdate(String... progress) {
+            // setting progress percentage
+            Log.d("PROGRESS: ", progress[0]);
+        }
+
+
+
+        @Override
+        protected void onPostExecute(String file_url) {
+            Log.d("FILE URL", "DONE");
+
+
+
+
+
+
+        }
+
+    }
+
+
+    UploadCallBack mUploadCallback = new UploadCallBack() {
+
+        @Override
+        public void onUploading(int value) {
+            Log.d("ERROR", "ERROR");
+
+        }
+
+        @Override
+        public void onPreUpload() {
+
+        }
+
+        @Override
+        public void onPostUpload(boolean success) {
+            if(success) {
+
+            } else {
+
+            }
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+
+        @Override
+        public void onError(UploadErrors err) {
+
+        }
+    };
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,14 +357,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
 
 
-//        project_image =  new int[] { R.drawable.blockly_trash, R.drawable.blockly_trash_open,
-////                R.drawable.star_lvl };
-
-        DatabaseHelper db = new DatabaseHelper(this);
-        project_image = db.getGraphics(lesson_id);
-
-        Log.d("YOLO", project_image.toString());
-
+        verifyStoragePermissions(this);
 
 
 
@@ -154,6 +368,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     }
 
     else {
+        DatabaseHelper db = new DatabaseHelper(this);
+        project_image = db.getGraphics(lesson_id);
         instruction = lesson_instructions.split(",");
         instructions.setText(instruction[0]);
     }
@@ -388,6 +604,21 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         instructions.setText(instruction[position]);
 
 
+    }
+
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
     }
 
 

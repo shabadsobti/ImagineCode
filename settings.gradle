@@ -1,1 +1,2 @@
-include ':app', ':blocklylib-core-debug', ':blocklylib-vertical-debug', ':blocklylib-vertical-debug-custom'
+include ':app', ':blocklylib-core-debug', ':blocklylib-vertical-debug', ':blocklylib-vertical-debug-custom', ':PhysicaloidLibrary'
+project(':PhysicaloidLibrary').projectDir = new File('subProject/PhysicaloidLibrary')
