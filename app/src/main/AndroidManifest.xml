@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.imaginecode.imaginecode">
 
+    <uses-feature android:name="android.hardware.usb.host" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:windowSoftInputMode="stateHidden|adjustPan">
+
+
+
+
         <activity
             android:name=".LaunchScreenActivity"
             android:label="ImagineCode"
@@ -32,31 +38,51 @@
         <activity
             android:name=".IntroModActivity"
             android:label="@string/title_activity_levels"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />-->
+            <!--</intent-filter>-->
+
+
+            <!--<meta-data  android:name=-->
+                <!--"android.hardware.usb.action.USB_DEVICE_ATTACHED"-->
+                <!--android:resource="@xml/device_filter" />-->
+
+        </activity>
+
         <activity
             android:name=".ModulesActivity"
             android:label="@string/title_activity_modules"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
         <activity
             android:name=".AddStudent"
             android:label="@string/title_activity_add_student"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BlocklyLessonActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
 
 
 
-        <activity android:name=".LanguageSelection" android:theme="@style/AppTheme.NoActionBar">
 
 
         </activity>
+
+        <activity android:name=".LanguageSelection" android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
     </application>
 
     <!-- Permission: Allow Connect to Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Permission: Writing to SDCard -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
 
 </manifest>

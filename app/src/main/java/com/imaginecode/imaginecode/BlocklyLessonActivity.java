@@ -17,12 +17,18 @@ package com.imaginecode.imaginecode;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.app.VoiceInteractor;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.hardware.usb.UsbDevice;
+import android.hardware.usb.UsbManager;
 import android.net.http.SslError;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -61,6 +67,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -125,8 +132,53 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     TextView instructions;
 
     Physicaloid mPhysicaloid;
-    PhysicaloidFpga mPhysicaloidFpga;
-    Boards mSelectedBoard;
+
+
+    private static final String ACTION_USB_PERMISSION  = "android.imaginecode.USB_PERMISSION";
+
+
+    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ACTION_USB_PERMISSION.equals(action)) {
+                synchronized (this) {
+                    UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                        Toast.makeText(getApplicationContext(), "GRANTED", Toast.LENGTH_LONG);
+
+                    } else {
+
+                    }
+                }
+            }
+        }
+    };
+
+
+    void checkUSB(){
+        UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        // Get the list of attached devices
+        HashMap<String, UsbDevice> devices = manager.getDeviceList();
+        // Iterate over all devices
+        Iterator<String> it = devices.keySet().iterator();
+        while (it.hasNext()) {
+            String deviceName = it.next();
+            UsbDevice device = devices.get(deviceName);
+            String VID = Integer.toHexString(device.getVendorId()).toUpperCase();
+            String PID = Integer.toHexString(device.getProductId()).toUpperCase();
+            if (!manager.hasPermission(device)) {
+
+                PendingIntent mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
+                manager.requestPermission(device, mPermissionIntent);
+                return;
+            } else {
+
+            }
+        }
+    }
+
+
+
 
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -134,6 +186,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
 
 
 
@@ -180,14 +233,13 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
                                     protected Map<String, String> getParams() {
                                         Map<String, String> MyData = new HashMap<String, String>();
                                         MyData.put("ino_code", "void setup() {\n" +
-                                                "  \n" +
+                                                " \n" +
                                                 "  pinMode(13, OUTPUT);\n" +
                                                 "}\n" +
                                                 "\n" +
                                                 "void loop() {\n" +
-                                                "  digitalWrite(13, HIGH);               \n" +
-                                                "}\n" +
-                                                "\n"); //Add the data you'd like to send to the server.
+                                                "  digitalWrite(13, HIGH);\n" +
+                                                "}\n"); //Add the data you'd like to send to the server.
                                         MyData.put("student_id", "15"); //Add the data you'd like to send to the server.
                                         MyData.put("lesson_id", "23"); //Add the data you'd like to send to the server.
                                         return MyData;
@@ -208,6 +260,10 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
@@ -341,7 +397,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
+//Remove notification bara
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
@@ -359,9 +415,19 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
         verifyStoragePermissions(this);
 
+        if(module_id == 2){
+            checkUSB();
+        }
 
 
-    instructions = findViewById(R.id.instructions);
+
+
+
+
+
+
+
+        instructions = findViewById(R.id.instructions);
 
     if(module_id == INTRO_MODULE_ID){
         instructions.setText(lesson_instructions);
@@ -401,6 +467,14 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        if(module_id == 2){
+            checkUSB();
+        }
+    }
+
+    @Override
     protected View onCreateContentView(int parentId) {
         Intent intent = getIntent();
         module_id = intent.getIntExtra("Module_ID", 1);
@@ -421,6 +495,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
         return root;
     }
+
 
 
     @NonNull
@@ -620,6 +695,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
             );
         }
     }
+
+
 
 
 
