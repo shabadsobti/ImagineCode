@@ -19,4 +19,6 @@
         android:textSize="20sp"
         android:layout_marginEnd="?attr/actionBarSize"/>
 
+    
+
 </android.support.v7.widget.Toolbar>

@@ -135,49 +135,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
 
     private static final String ACTION_USB_PERMISSION  = "android.imaginecode.USB_PERMISSION";
-
-
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ACTION_USB_PERMISSION.equals(action)) {
-                synchronized (this) {
-                    UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        Toast.makeText(getApplicationContext(), "GRANTED", Toast.LENGTH_LONG);
-
-                    } else {
-
-                    }
-                }
-            }
-        }
-    };
-
-
-    void checkUSB(){
-        UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        // Get the list of attached devices
-        HashMap<String, UsbDevice> devices = manager.getDeviceList();
-        // Iterate over all devices
-        Iterator<String> it = devices.keySet().iterator();
-        while (it.hasNext()) {
-            String deviceName = it.next();
-            UsbDevice device = devices.get(deviceName);
-            String VID = Integer.toHexString(device.getVendorId()).toUpperCase();
-            String PID = Integer.toHexString(device.getProductId()).toUpperCase();
-            if (!manager.hasPermission(device)) {
-
-                PendingIntent mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
-                manager.requestPermission(device, mPermissionIntent);
-                return;
-            } else {
-
-            }
-        }
-    }
-
-
+    private static final String ACTION_USB_ATTACHED  = "android.hardware.usb.action.USB_DEVICE_ATTACHED";
+    private static final String ACTION_USB_DETACHED  = "android.hardware.usb.action.USB_DEVICE_DETACHED";
 
 
 
@@ -187,6 +146,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
+    
 
 
 
@@ -238,7 +198,11 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
                                                 "}\n" +
                                                 "\n" +
                                                 "void loop() {\n" +
+                                                "\n" +
                                                 "  digitalWrite(13, HIGH);\n" +
+                                                "  delay(1000);\n" +
+                                                "  digitalWrite(13, LOW);\n" +
+                                                "  delay(1000);\n" +
                                                 "}\n"); //Add the data you'd like to send to the server.
                                         MyData.put("student_id", "15"); //Add the data you'd like to send to the server.
                                         MyData.put("lesson_id", "23"); //Add the data you'd like to send to the server.
@@ -415,13 +379,6 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
         verifyStoragePermissions(this);
 
-        if(module_id == 2){
-            checkUSB();
-        }
-
-
-
-
 
 
 
@@ -458,6 +415,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         toolbar_title.setText(text);
 
         mHandler = new Handler();
+        mHandler = new Handler();
         if(module_id == INTRO_MODULE_ID) {
             initWebView(lesson_id, student_id, lesson_number, lesson_instructions);
         }
@@ -469,9 +427,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     @Override
     public void onResume(){
         super.onResume();
-        if(module_id == 2){
-            checkUSB();
-        }
+
+
     }
 
     @Override
