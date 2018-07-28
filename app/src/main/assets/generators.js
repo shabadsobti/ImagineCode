@@ -107,11 +107,6 @@ Blockly.JavaScript['turtle_colour'] = function(block) {
       block.id + '\');\n';
 };
 
-Blockly.JavaScript['right'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = 'moveRight();\n';
-  return code;
-};
 
 Blockly.JavaScript['move_right'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
@@ -136,6 +131,7 @@ Blockly.JavaScript['move_down'] = function(block) {
   var code = 'moveDown();\n';
   return code;
 };
+
 
 Blockly.JavaScript['turtle_repeat_internal'] = Blockly.JavaScript['controls_repeat'];
 

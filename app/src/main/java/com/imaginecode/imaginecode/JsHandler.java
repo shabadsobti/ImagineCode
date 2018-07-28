@@ -71,7 +71,30 @@ public class JsHandler {
         TextView text = (TextView) dialog.findViewById(R.id.text);
         TextView starText = (TextView) dialog.findViewById(R.id.starText);
         starText.setText("" + stars);
-        text.setText("Well Done, lets try again!!");
+        text.setText("Well Done!");
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        // if button is clicked, close the custom dialog
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    @JavascriptInterface
+    public void failedLessonModal() {
+
+        final Dialog dialog = new Dialog(webView.getContext());
+        dialog.setContentView(R.layout.blockly_repeat_modal);
+
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText("You cashed. Try changing your code and running it again.");
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
@@ -97,7 +120,7 @@ public class JsHandler {
         TextView text = (TextView) dialog.findViewById(R.id.text);
         TextView starText = (TextView) dialog.findViewById(R.id.starText);
         starText.setText("" + stars);
-        text.setText("Well Done, lets try again!!");
+        text.setText("Well Done!");
         Button next = (Button) dialog.findViewById(R.id.nextLesson);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         final DatabaseHelper db = new DatabaseHelper(webView.getContext());

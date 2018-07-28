@@ -1,8 +1,8 @@
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.width = 350;
-canvas.height = 350;
+canvas.width = 360;
+canvas.height = 338;
 document.body.appendChild(canvas);
 
 
@@ -38,7 +38,7 @@ var monsterImage = new Image();
 monsterImage.onload = function () {
 	monsterReady = true;
 };
-monsterImage.src = "images/monster.png";
+monsterImage.src = "images/chest.png";
 
 // Background-bottom image
 var bgBottomReady = false;
@@ -61,27 +61,38 @@ var monster = {
 	y: 0
 };
 var monstersCaught = 0;
-
+var reset_num = 0;
 
 
 // Reset the game when the player catches a monster
 var reset = function () {
-	hero.x = canvas.width / 2;
-	hero.y = canvas.height / 2;
+	hero.x = 100;
+	hero.y = 250;
 
-	monster.x = 296;
-	monster.y = 240;
+    if (reset_num == 0){
+        monster.x = 250;
+        monster.y = 100;
+    }
+
+    else if (reset_num == 1){
+                 monster.x = 50;
+                 monster.y = 100
+                          }
+    else if (reset_num == 2){
+                     monster.x = 150;
+                     monster.y = 200;
+    }
 };
 
 function moveRight(){
-	hero.x += 30;
+	hero.x += 25;
 }
 
 
 
 var moveDown = function(){
 
-	hero.y += 30;
+	hero.y += 25;
 
 }
 
@@ -101,12 +112,12 @@ function showNextLessonModal(stars) {
 
 var moveUp = function(){
 
-	hero.y -= 30;
+	hero.y -= 25;
 
 }
 
 var moveLeft = function(){
-		hero.x -= 30;
+		hero.x -= 25;
 }
 
 
@@ -125,10 +136,9 @@ var update = function () {
 // 	alert("You died")
 // }
 //
-if (hero.x >= monster.x){
+if (hero.x == monster.x && hero.y == monster.y){
 		++monstersCaught;
-
-
+        ++reset_num;
 		reset();
 		giveStars(monstersCaught);
 
@@ -141,13 +151,7 @@ if (hero.x >= monster.x){
 		}
 }
 	// Are they touching?
-	if (
-		hero.x <= (monster.x + 32)
-		&& monster.x <= (hero.x + 32)
-		&& hero.y <= (monster.y + 32)
-		&& monster.y <= (hero.y + 32)
-	) {
-		++monstersCaught;
+if (hero.x != 100 && hero.y != 250) {
 		reset();
 	}
 };
@@ -155,6 +159,8 @@ if (hero.x >= monster.x){
 
 
 // Draw everything
+
+
 var render = function () {
 
 	if (bgReady) {
@@ -179,7 +185,7 @@ var render = function () {
 	}
 
 	if (monsterReady) {
-		ctx.drawImage(monsterImage, 295, canvas.height / 2 - 20);
+		ctx.drawImage(monsterImage, monster.x, monster.y);
 	}
 
 	// Score
@@ -187,7 +193,10 @@ var render = function () {
 	ctx.font = "15px Helvetica";
 	ctx.textAlign = "left";
 	ctx.textBaseline = "top";
-	ctx.fillText("Goblins caught: " + monstersCaught, 32, 32);
+	ctx.fillText("char position x: " + hero.x, 32, 32);
+	ctx.fillText("char pos y: " + hero.y, 32, 45);
+	ctx.fillText("monster pos x: " + monster.x, 102, 62);
+	ctx.fillText("monster pos y: " + monster.y, 102, 75);
 };
 
 // The main game loop

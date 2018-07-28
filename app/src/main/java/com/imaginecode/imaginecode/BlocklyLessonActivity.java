@@ -164,6 +164,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
                             //updateTextMinWidth();
                             Log.e("Generated code", generatedCode);
                             if (module_id == 1){
+                                webView.requestFocus(View.FOCUS_DOWN);
                                 _jsHandler.javaFnCall(generatedCode);
 
                             }
@@ -592,7 +593,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.requestFocus(View.FOCUS_DOWN);
         // load the main.html file that kept in assets folder
-        webView.loadUrl("file:///android_asset/game/index.html");
+        webView.loadUrl("file:///android_asset/ImagineCode-Game/index.html");
 
     }
 

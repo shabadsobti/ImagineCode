@@ -28,22 +28,23 @@
     android:layout_width="350dp"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <WebView
-        android:id = "@+id/webview"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
-        android:focusable="true"/>
+        android:id="@+id/webview"
+        android:layout_width="360dp"
+        android:layout_height="338dp"
+        android:focusable="true" />
 
     <LinearLayout
         android:layout_width="320dp"
         android:layout_height="200dp"
-        android:elevation="6dp"
-        android:padding="6dp"
-        android:orientation="vertical"
-        android:background="@drawable/instructions"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
         android:layout_marginRight="3dp"
-        android:layout_gravity="center">
+        android:layout_marginTop="15dp"
+        android:background="@drawable/instructions"
+        android:elevation="6dp"
+        android:orientation="vertical"
+        android:padding="6dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -57,8 +58,8 @@
             android:id="@+id/instructions"
             android:layout_width="match_parent"
 
-            android:layout_margin="10dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:textAlignment="center"
             android:textColor="#202a3a"
             android:textSize="15sp" />
