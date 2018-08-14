@@ -73,13 +73,20 @@ public class LessonAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), BlocklyLessonActivity.class);
+                Intent intent;
+                if(module_id == 2){
+                    intent = new Intent(view.getContext(), InstructionsBlockly.class);
+                }
+                else{
+                    intent = new Intent(view.getContext(), BlocklyLessonActivity.class);
+                }
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("Student_ID", student_id);
                 intent.putExtra("Lesson_ID", lesson.lesson_id);
                 intent.putExtra("Module_ID", module_id);
                 intent.putExtra("Lesson_Number", lesson.getNumber());
                 intent.putExtra("Lesson_Instructions", lesson.getInstructions());
+                intent.putExtra("Lesson_Code", lesson.getCorrectCode());
                 view.getContext().startActivity(intent);
             }
         });

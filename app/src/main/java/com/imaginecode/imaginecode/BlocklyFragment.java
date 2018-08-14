@@ -32,6 +32,8 @@ public class BlocklyFragment extends AbstractBlocklyFragment {
     private Handler mHandler;
     private TextView mGeneratedTextView;
 
+
+
     CodeGenerationRequest.CodeGeneratorCallback mCodeGeneratorCallback = new CodeGenerationRequest.CodeGeneratorCallback() {
         @Override
         public void onFinishCodeGeneration(final String generatedCode) {

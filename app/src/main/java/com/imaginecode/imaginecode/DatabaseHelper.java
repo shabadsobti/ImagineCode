@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -219,7 +220,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ArrayList<LessonClass> lessonList = new ArrayList<LessonClass>();
 
-        String selectQuery = "SELECT lesson_id, lesson_number, " + myContext.getResources().getString(R.string.lesson_instruction_column) + " FROM Lessons WHERE module_id = " + module_id + " ORDER BY lesson_number ASC";
+        String selectQuery = "SELECT lesson_id, lesson_number, " + myContext.getResources().getString(R.string.lesson_instruction_column) + ", code" + " FROM Lessons WHERE module_id = " + module_id + " ORDER BY lesson_number ASC";
 
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -231,7 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //Loop through the table rows
             do {
                 // public LessonClass(int lesson_id, int number, int stars, String instructions){
-                LessonClass lesson = new LessonClass(cursor.getInt(0), cursor.getInt(1), 0, cursor.getString(2));
+                LessonClass lesson = new LessonClass(cursor.getInt(0), cursor.getInt(1), 0, cursor.getString(2), cursor.getString(3));
 
                 lessonList.add(lesson);
             } while (cursor.moveToNext());
@@ -383,6 +384,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return drawables;
 
+    }
+
+
+    public ArrayList<InstructionsPage> getInstructionPages(int lesson_id){
+        ArrayList<InstructionsPage> pages = new ArrayList<>();
+        String query = "SELECT intro_instructions, circuit_instructions, learning_instructions, type FROM Lessons WHERE lesson_id = " + lesson_id ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+
+        //if TABLE has rows
+        if (cursor.moveToFirst()) {
+            //Loop through the table rows
+            do {
+                String type = cursor.getString(3);
+                if (type == "learning"){
+                    pages.add(new InstructionsPage(cursor.getString(2), "learning_instructions", 1));
+                }
+                else{
+                    pages.add(new InstructionsPage(cursor.getString(0), "intro_instructions", 1));
+                    pages.add(new InstructionsPage(cursor.getString(1), "circuit_instructions"));
+                }
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+
+
+
+        return  pages;
     }
 
 

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.usb.host" />
+
     <uses-permission android:name="android.permission.USB_PERMISSION" />
 
     <application
@@ -18,12 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:windowSoftInputMode="stateHidden|adjustPan">
-
-
-
-
-
-
         <activity
             android:name=".LaunchScreenActivity"
             android:label="ImagineCode"
@@ -49,17 +44,13 @@
             android:label="@string/title_activity_levels"
             android:theme="@style/AppTheme.NoActionBar">
 
-
-
         </activity>
-
         <activity
             android:name=".ModulesActivity"
             android:label="@string/title_activity_modules"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-
         <activity
             android:name=".AddStudent"
             android:label="@string/title_activity_add_student"
@@ -68,20 +59,19 @@
             android:name=".BlocklyLessonActivity"
             android:theme="@style/AppTheme">
 
+        </activity>
+        <activity
+            android:name=".LanguageSelection"
+            android:theme="@style/AppTheme.NoActionBar">
 
-
+        </activity>
+        <activity android:name=".InstructionsBlockly"
+         android:label="@string/title_lesson_instructions"
+         android:theme="@style/AppTheme.NoActionBar"
+            >
 
 
         </activity>
-
-        <activity android:name=".LanguageSelection" android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
     </application>
-
-
-
-
 
 </manifest>

@@ -56,6 +56,16 @@
             android:padding="2dp"
             android:src="@drawable/ic_baseline_play_arrow_large"/>
 
+        <ImageButton android:id="@+id/blockly_show_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/translucent"
+            android:padding="2dp"
+            android:src="@drawable/ic_baseline_play_arrow_large"/>
+
+
+
         <ImageButton android:id="@+id/blockly_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

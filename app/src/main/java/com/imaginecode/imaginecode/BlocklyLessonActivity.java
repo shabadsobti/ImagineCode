@@ -31,6 +31,7 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -41,8 +42,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
@@ -51,6 +55,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,6 +93,7 @@ import com.physicaloid.lib.Physicaloid.UploadCallBack;
 import com.physicaloid.lib.fpga.PhysicaloidFpga;
 import com.physicaloid.lib.programmer.avr.UploadErrors;
 import com.physicaloid.lib.usb.driver.uart.ReadLisener;
+import android.view.ViewGroup.LayoutParams;
 
 
 
@@ -92,16 +102,22 @@ import com.physicaloid.lib.usb.driver.uart.ReadLisener;
  * Demo activity that programmatically adds a view to split the screen between the Blockly workspace
  * and an arbitrary other view or fragment.
  */
-public class BlocklyLessonActivity extends AbstractBlocklyActivity implements ViewPager.OnPageChangeListener {
+public class BlocklyLessonActivity extends AbstractBlocklyActivity {
     private static final int INTRO_MODULE_ID = 1;
     private static final int ARDUINO_MODULE_ID = 2;
 
     private static final String TAG = "SplitActivity";
     private WebView webView;
     private ViewPager viewPager;
+
+    private PopupWindow mPopupWindow;
+
+
+
+
     private JsHandler _jsHandler;
-    private static final String SAVE_FILENAME = "split_workspace.xml";
-    private static final String AUTOSAVE_FILENAME = "split_workspace_temp.xml";
+    private static final String SAVE_FILENAME = "workspacse.xml";
+    private static final String AUTOSAVE_FILENAME = "workspacse.xml";
     private static final List<String> BLOCK_DEFINITIONS = DefaultBlocks.getAllBlockDefinitions();
     private static final List<String> JAVASCRIPT_GENERATORS = Arrays.asList(
             // Custom block generators go here. Default blocks are already included.
@@ -114,7 +130,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
             DefaultBlocks.MATH_BLOCKS_PATH,
             DefaultBlocks.TEXT_BLOCKS_PATH,
             DefaultBlocks.VARIABLE_BLOCKS_PATH,
-            "turtle_blocks.json"
+            "turtle_blocks.json",
+            "arduino_blocks.json"
     );
 
     private TextView mGeneratedTextView;
@@ -122,7 +139,12 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
     private String mNoCodeText;
 
+    public Integer lesson_number;
+    public Integer lesson_id;
+    public String correct_code;
+
     private Integer module_id = 1;
+    public Integer student_id;
 
     String[] instruction;
     int[] project_image;
@@ -146,12 +168,6 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    
-
-
-
-
-
 
     CodeGenerationRequest.CodeGeneratorCallback mCodeGeneratorCallback =
             new CodeGenerationRequest.CodeGeneratorCallback() {
@@ -169,50 +185,10 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
                             }
                             else{
+                                Toast.makeText(getApplicationContext(), generatedCode.toString(), Toast.LENGTH_LONG).show();
+                                new verifyCode().execute(generatedCode);
 
 
-                                RequestQueue MyRequestQueue = Volley.newRequestQueue(getApplicationContext());
-                                String url = "http://178.128.14.91/upload.php";
-
-                                StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        Toast.makeText(BlocklyLessonActivity.this, response, Toast.LENGTH_SHORT).show();
-                                        new DownloadFileFromURL().execute(response);
-
-
-
-
-
-                                    }
-                                }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        //This code is executed if there is an error.
-                                    }
-                                }) {
-                                    protected Map<String, String> getParams() {
-                                        Map<String, String> MyData = new HashMap<String, String>();
-                                        MyData.put("ino_code", "void setup() {\n" +
-                                                " \n" +
-                                                "  pinMode(13, OUTPUT);\n" +
-                                                "}\n" +
-                                                "\n" +
-                                                "void loop() {\n" +
-                                                "\n" +
-                                                "  digitalWrite(13, HIGH);\n" +
-                                                "  delay(1000);\n" +
-                                                "  digitalWrite(13, LOW);\n" +
-                                                "  delay(1000);\n" +
-                                                "}\n"); //Add the data you'd like to send to the server.
-                                        MyData.put("student_id", "15"); //Add the data you'd like to send to the server.
-                                        MyData.put("lesson_id", "23"); //Add the data you'd like to send to the server.
-                                        return MyData;
-                                    }
-                                };
-
-
-                                MyRequestQueue.add(MyStringRequest);
 
                             }
 
@@ -228,9 +204,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
 
 
-
-
-    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+    class verifyCode extends AsyncTask<String, String, String> {
+        boolean codeIsCorrect;
 
         @Override
         protected void onPreExecute() {
@@ -241,59 +216,31 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
 
 
         @Override
-        protected String doInBackground(String... f_url) {
+        protected String doInBackground(String... code) {
 
 
 
-
-            int count;
             try {
-                URL url = new URL(f_url[0]);
-                URLConnection conection = url.openConnection();
-                conection.connect();
-                // getting file length
-                int lenghtOfFile = conection.getContentLength();
-
-                // input stream to read file - with 8k buffer
-                InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-                // Output stream to write file
-                OutputStream output = new FileOutputStream(getFilesDir()  + "/work.hex");
+              String hexFileName = "module-" + module_id.toString() + "/" + "lesson-"+lesson_number.toString() + "/sketch.hex";
+//              String correctSol = "moveRight();";
+              Log.d("HEXFILENAME", hexFileName);
 
 
-                byte data[] = new byte[1024];
+                if(code[0].replaceAll("\\s+","").equalsIgnoreCase(correct_code.replaceAll("\\s+",""))) {
+                    Log.d("CODE_CORRECT", "YES");
+                    codeIsCorrect = true;
+                    DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                    db.giveStars(student_id, lesson_id, 1);
 
-                long total = 0;
 
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    // After this onProgressUpdate will be called
-                    publishProgress(""+(int)((total*100)/lenghtOfFile));
-
-                    // writing data to file
-
-                    output.write(data, 0, count);
+//                    mPhysicaloid = new Physicaloid(getApplicationContext());
+//                    mPhysicaloid.upload(Boards.ARDUINO_UNO, getResources().getAssets().open(hexFileName), mUploadCallback);
                 }
-
-                // flushing output
-                output.flush();
-
-                // closing streams
-                output.close();
-                input.close();
 
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
             }
-
-            final String UPLOAD_FILE_UNO = getFilesDir()  + "/work.hex";
-            mPhysicaloid = new Physicaloid(getApplicationContext());
-            mPhysicaloid.upload(Boards.ARDUINO_UNO, UPLOAD_FILE_UNO, mUploadCallback);
-
             return null;
-
-
         }
 
         /**
@@ -302,6 +249,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
             Log.d("PROGRESS: ", progress[0]);
+
         }
 
 
@@ -309,11 +257,9 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         @Override
         protected void onPostExecute(String file_url) {
             Log.d("FILE URL", "DONE");
-
-
-
-
-
+            if(codeIsCorrect){
+                Toast.makeText(getApplicationContext(), "WellDone", Toast.LENGTH_LONG).show();
+            }
 
         }
 
@@ -362,26 +308,26 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bara
+//Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-        Integer lesson_id = intent.getIntExtra("Lesson_ID", 1);
 
-        Integer lesson_number = intent.getIntExtra("Lesson_Number", 1);
+
+        Intent intent = getIntent();
+        lesson_id = intent.getIntExtra("Lesson_ID", 1);
+
+        lesson_number = intent.getIntExtra("Lesson_Number", 1);
         String lesson_instructions = intent.getStringExtra("Lesson_Instructions");
-        Integer student_id = intent.getIntExtra("Student_ID", 1);
+        correct_code = intent.getStringExtra("Lesson_Code");
+        student_id = intent.getIntExtra("Student_ID", 1);
         Log.d("Student_ID: ", student_id.toString());
 
-
+        Log.d("LESSON_ID", lesson_id.toString());
 
         verifyStoragePermissions(this);
-
-
-
 
 
 
@@ -391,16 +337,11 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         instructions.setText(lesson_instructions);
     }
 
-    else {
-        DatabaseHelper db = new DatabaseHelper(this);
-        project_image = db.getGraphics(lesson_id);
-        instruction = lesson_instructions.split(",");
-        instructions.setText(instruction[0]);
-    }
 
 
 
 
+        onLoadWorkspaceFile("module-"+ module_id + "/lesson-" + lesson_number +"/workspace.xml");
 
 
 
@@ -421,13 +362,22 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
             initWebView(lesson_id, student_id, lesson_number, lesson_instructions);
         }
         if(module_id == ARDUINO_MODULE_ID){
-            initViewPager();
+//            initViewPager();
         }
+
+        ImageView a = findViewById(R.id.blockly_show_instructions);
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInstructions(lesson_id);
+            }
+        });
     }
 
     @Override
     public void onResume(){
         super.onResume();
+
 
 
     }
@@ -440,6 +390,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         View root;
         if(module_id == ARDUINO_MODULE_ID){
             root = getLayoutInflater().inflate(R.layout.activity_blockly_arduino, null);
+
         }
         else{
             root = getLayoutInflater().inflate(R.layout.activity_blockly, null);
@@ -452,6 +403,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         //mNoCodeText = mGeneratedTextView.getText().toString(); // Capture initial value.
 
         return root;
+
     }
 
 
@@ -465,8 +417,9 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     @NonNull
     @Override
     protected String getToolboxContentsXmlPath() {
-        return "toolbox_advanced.xml";
+        return "module-2/lesson-1/toolbox.xml";
     }
+
 
     @NonNull
     @Override
@@ -486,32 +439,12 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
     @Override
     public void onClearWorkspace() {
         super.onClearWorkspace();
+
         //mGeneratedTextView.setText(mNoCodeText);
         //updateTextMinWidth();
     }
 
-    /**
-     * Estimate the pixel size of the longest line of text, and set that to the TextView's minimum
-     * width.
-     */
-//    private void updateTextMinWidth() {
-//        String text = mGeneratedTextView.getText().toString();
-//        int maxline = 0;
-//        int start = 0;
-//        int index = text.indexOf('\n', start);
-//        while (index > 0) {
-//            maxline = Math.max(maxline, index - start);
-//            start = index + 1;
-//            index = text.indexOf('\n', start);
-//        }
-//        int remainder = text.length() - start;
-//        if (remainder > 0) {
-//            maxline = Math.max(maxline, remainder);
-//        }
-//
-//        float density = getResources().getDisplayMetrics().density;
-//        mGeneratedTextView.setMinWidth((int) (maxline * 13 * density));
-//    }
+
 
     /**
      * Optional override of the save path, since this demo Activity has multiple Blockly
@@ -583,7 +516,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
                                            SslErrorHandler handler, SslError error) {
                 // TODO Auto-generated method stub
                 super.onReceivedSslError(view, handler, error);
-                //Toast.makeText(TableContentsWithDisplay.this, "error "+error, Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -594,50 +527,9 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
         webView.requestFocus(View.FOCUS_DOWN);
         // load the main.html file that kept in assets folder
         webView.loadUrl("file:///android_asset/ImagineCode-Game/index.html");
-
-    }
-
-    private void initViewPager(){
-
-
-
-
-
-
-        viewPager = findViewById(R.id.viewPager);
-
-        viewPager.addOnPageChangeListener(this);
-
-        adapter = new ViewPagerAdapter(this, instruction, project_image);
-        // Binds the Adapter to the ViewPager
-        viewPager.setAdapter(adapter);
-
-
-
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int position) {
-
-
-
-
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
     }
 
 
-    @Override
-    public void onPageSelected(int position) {
-        instructions.setText(instruction[position]);
-
-
-    }
 
 
     public static void verifyStoragePermissions(Activity activity) {
@@ -652,6 +544,42 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity implements Vi
                     REQUEST_EXTERNAL_STORAGE
             );
         }
+    }
+
+
+    public void showInstructions(int lesson_id){
+
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        // Inflate the custom layout/view
+        View customView = inflater.inflate(R.layout.blockly_instructions_modal,null);
+        mPopupWindow = new PopupWindow(
+                customView,
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT
+        );
+
+
+        // Set an elevation value for popup window
+        // Call requires API level 21
+        if(Build.VERSION.SDK_INT>=21){
+            mPopupWindow.setElevation(5.0f);
+        }
+
+        // Get a reference for the custom view close button
+        ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+
+        // Set a click listener for the popup window close button
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the popup window
+                mPopupWindow.dismiss();
+            }
+        });
+
+        mPopupWindow.showAtLocation(this.findViewById(R.id.blockly_rl), Gravity.CENTER,0,0);
     }
 
 

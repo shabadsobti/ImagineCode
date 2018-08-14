@@ -153,3 +153,40 @@ Blockly.JavaScript.workspaceToCode = function(workspace) {
   code = goog.string.trimRight(code.replace(/(,\s*)?'block_id_[^']+'\)/g, ')'))
   return code;
 };
+
+
+
+
+
+
+
+
+
+//////////////// ARDUINO GENERATORS//////////
+
+Blockly.JavaScript['setup'] = function(block) {
+  var statements_name = Blockly.JavaScript.statementToCode(block, 'setup');
+  // TODO: Assemble JavaScript into code variable.
+
+ var code = 'void loop() {'+block.code+'}\n';
+  return code;
+};
+
+Blockly.JavaScript['loop'] = function(block) {
+  var statements_loop = Blockly.JavaScript.statementToCode(block, 'loop');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'void loop() {}\n';
+  return code;
+};
+
+Blockly.JavaScript['pinmodeoutput13'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'pinMode(13, OUTPUT);\n';
+  return code;
+};
+
+Blockly.JavaScript['led_13_on'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'ledON();\n';
+  return code;
+};
