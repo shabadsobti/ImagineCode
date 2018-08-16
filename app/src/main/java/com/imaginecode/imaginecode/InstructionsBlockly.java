@@ -39,6 +39,8 @@ public class InstructionsBlockly extends AppCompatActivity {
 
         Intent oldintent = getIntent();
         Integer lesson_number = oldintent.getIntExtra("Lesson_Number", 1);
+        final Integer lesson_id = oldintent.getIntExtra("Lesson_ID", 1);
+        final Integer student_id = oldintent.getIntExtra("Student_ID", 1);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        intent.putExtra("Student_ID", student_id);
 //        intent.putExtra("Lesson_ID", lesson.lesson_id);
@@ -51,23 +53,46 @@ public class InstructionsBlockly extends AppCompatActivity {
         Bundle oldIntentExtras = oldintent.getExtras();
         final Intent intent = new Intent(this, BlocklyLessonActivity.class);
         intent.putExtras(oldIntentExtras);
-
-        Button lesson = findViewById(R.id.openLesson);
-        lesson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intent);
-
-            }
-        });
+        final DatabaseHelper db = new DatabaseHelper(this);
 
 
+//if lesson id is type learning - then button on clock listener same as back button simple
 
-        DatabaseHelper db;
-        db = new DatabaseHelper(this);
+        if(db.getLessonType(lesson_id).equals("learning")){
+            Button lesson = findViewById(R.id.openLesson);
+            lesson.setText("DONE");
+            lesson.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                    db.giveStars(student_id, lesson_id, 1);
+
+                }
+            });
+
+        }
+        else{
+            Button lesson = findViewById(R.id.openLesson);
+            lesson.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(intent);
+
+                }
+            });
+        }
+
+
+
+
+
+
+
+
         ViewPager viewPager = findViewById(R.id.viewpager1);
-        Log.d("INSTRUCTIONs", db.getInstructionPages(7).get(0).getInstructions());
-        viewPager.setAdapter(new InstructionsAdapter(this, db.getInstructionPages(7), lesson_number));
+        Log.d("MOLO", db.getInstructionPages(9).get(0).getInstructions());
+
+        viewPager.setAdapter(new InstructionsAdapter(this, db.getInstructionPages(lesson_id), lesson_number));
 
 
     }

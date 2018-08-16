@@ -399,7 +399,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //Loop through the table rows
             do {
                 String type = cursor.getString(3);
-                if (type == "learning"){
+                if (type.equals("learning")){
                     pages.add(new InstructionsPage(cursor.getString(2), "learning_instructions", 1));
                 }
                 else{
@@ -416,6 +416,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         return  pages;
+    }
+
+
+
+    public String getLessonType(int lesson_id){
+
+        String query = "SELECT type FROM Lessons WHERE lesson_id = " + lesson_id ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String type = "";
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                type = cursor.getString(0);
+            }
+        }
+        catch (Exception e){
+
+        }
+
+
+        return type;
     }
 
 

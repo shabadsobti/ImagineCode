@@ -1,0 +1,7 @@
+
+<toolbox>
+    <block type="set_color_red"></block>
+    <block type="set_color_green"></block>
+    <block type="set_color_blue"></block>
+    <block type="delay_1000"></block>
+</toolbox>

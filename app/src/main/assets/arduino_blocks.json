@@ -39,20 +39,255 @@
     "helpUrl": ""
   },
   {
-    "type": "led_13_on",
-    "lastDummyAlign0": "CENTRE",
-    "message0": "%1 LED ON",
+    "type": "led_on",
+    "message0": "LED on",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 10,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "delay_1000",
+    "message0": "Set 1 sec delay",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 260,
+    "tooltip": "lesson 2",
+    "helpUrl": ""
+  },
+  {
+    "type": "led_off",
+    "message0": "LED off",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 330,
+    "tooltip": "lesson 2",
+    "helpUrl": ""
+  },
+  {
+    "type": "attach_led",
+    "message0": "Attach LED",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 180,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+  "type": "attach_button",
+  "message0": "Attach Button ",
+  "inputsInline": false,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 225,
+  "tooltip": "lesson 4",
+  "helpUrl": ""
+  },
+  {
+    "type": "if_button_pressed",
+    "message0": "If button pressed: %1 Else: %2",
     "args0": [
       {
-        "type": "field_image",
-        "width": 25,
-        "height": 25,
-        "alt": "*"
+        "type": "input_statement",
+        "name": "ACTION"
+      },
+      {
+        "type": "input_statement",
+        "name": "ELSE ACTION"
+      }
+    ],
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 330,
+    "tooltip": "lesson 4",
+    "helpUrl": ""
+  },
+  {
+    "type": "delay_200",
+    "message0": "Set 0.2 sec delay",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 30,
+    "tooltip": "lesson 2",
+    "helpUrl": ""
+  },
+
+  {
+    "type": "for_pin_2to5",
+    "message0": "For pin 2 to pin 5 %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "pinACTION"
+      }
+    ],
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 120,
+    "tooltip": "lesson 5",
+    "helpUrl": ""
+  },
+  {
+    "type": "attach_pot",
+    "message0": "Attach Potentiometer",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 225,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "write_to_led",
+    "message0": "Write to LED",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 75,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "read_pot",
+    "message0": "Read Potentiometer value",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 200,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "if_water_val",
+    "message0": "Water Sensor Loop %1 If sensor val > 0: %2 Else: %3",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "if"
+      },
+      {
+        "type": "input_statement",
+        "name": "else"
       }
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 0,
-    "tooltip": "",
+    "colour": 330,
+    "tooltip": "lesson 8",
     "helpUrl": ""
-  }]
+  },
+  {
+    "type": "buzzer_on",
+    "message0": "Buzzer on",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 255,
+    "tooltip": "lesson 8",
+    "helpUrl": ""
+  },
+  {
+    "type": "buzzer_off",
+    "message0": "Buzzer off",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 195,
+    "tooltip": "lesson 8",
+    "helpUrl": ""
+  },
+  {
+    "type": "set_color_red",
+    "message0": "Set color to RED",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 335,
+    "tooltip": "lesson 9",
+    "helpUrl": ""
+  },
+  {
+    "type": "set_color_blue",
+    "message0": "Set color to BLUE",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 225,
+    "tooltip": "lesson 9",
+    "helpUrl": ""
+  },
+  {
+    "type": "set_color_green",
+    "message0": "Set color to GREEN",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 120,
+    "tooltip": "lesson 9",
+    "helpUrl": ""
+  },
+  {
+    "type": "if_potentiameter_threshhold",
+    "message0": "If potentiometer val > : %1 %2 %3 Else: %4",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "Pot_val",
+        "value": 400,
+        "min": 0,
+        "max": 10000
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "if"
+      },
+      {
+        "type": "input_statement",
+        "name": "else"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 230,
+    "tooltip": "lesson 10",
+    "helpUrl": ""
+  },
+  {
+    "type": "attach_servo",
+    "message0": "Attach SERVO",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 345,
+    "tooltip": "lesson 11",
+    "helpUrl": ""
+  },
+  {
+    "type": "write_servo",
+    "message0": "Write to SERVO",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 195,
+    "tooltip": "lesson 11",
+    "helpUrl": ""
+  },
+  {
+    "type": "read_joys",
+    "message0": "Read from Joystick",
+    "inputsInline": false,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 135,
+    "tooltip": "lesson 11",
+    "helpUrl": ""
+  }
+]

@@ -1,0 +1,8 @@
+
+<toolbox>
+    <block type="led_on"></block>
+    <block type="led_off"></block>
+    <block type="delay_200"></block>
+    <block type="for_pin_2to5"></block>
+    <block type="attach_led"></block>
+</toolbox>

@@ -1,0 +1,7 @@
+
+<toolbox>
+    <block type="attach_pot"></block>
+    <block type="write_to_led"></block>
+    <block type="attach_led"></block>
+    <block type="read_pot"></block>
+</toolbox>

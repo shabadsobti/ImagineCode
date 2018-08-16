@@ -165,28 +165,156 @@ Blockly.JavaScript.workspaceToCode = function(workspace) {
 //////////////// ARDUINO GENERATORS//////////
 
 Blockly.JavaScript['setup'] = function(block) {
-  var statements_name = Blockly.JavaScript.statementToCode(block, 'setup');
-  // TODO: Assemble JavaScript into code variable.
-
- var code = 'void loop() {'+block.code+'}\n';
+  var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+  var code = '1' + statements_name;
   return code;
 };
 
 Blockly.JavaScript['loop'] = function(block) {
   var statements_loop = Blockly.JavaScript.statementToCode(block, 'loop');
   // TODO: Assemble JavaScript into code variable.
-  var code = 'void loop() {}\n';
+  var code = '2' + statements_loop;
   return code;
 };
 
 Blockly.JavaScript['pinmodeoutput13'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'pinMode(13, OUTPUT);\n';
+  var code = '3';
   return code;
 };
 
-Blockly.JavaScript['led_13_on'] = function(block) {
+Blockly.JavaScript['led_on'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'ledON();\n';
+  var code = '4';
+  return code;
+};
+
+Blockly.JavaScript['led_off'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '5';
+  return code;
+};
+
+Blockly.JavaScript['delay_1000'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '6';
+  return code;
+};
+
+Blockly.JavaScript['attach_button'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '7';
+  return code;
+};
+
+Blockly.JavaScript['attach_led'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '8';
+  return code;
+};
+
+Blockly.JavaScript['if_button_pressed'] = function(block) {
+  var statements_action = Blockly.JavaScript.statementToCode(block, 'ACTION');
+  var statements_else_action = Blockly.JavaScript.statementToCode(block, 'ELSE ACTION');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '9' + statements_action + statements_else_action;
+  return code;
+};
+
+Blockly.JavaScript['delay_200'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'a';
+  return code;
+};
+
+Blockly.JavaScript['for_pin_2to5'] = function(block) {
+  var statements_pinaction = Blockly.JavaScript.statementToCode(block, 'pinACTION');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'b' + statements_pinaction;
+  return code;
+};
+
+Blockly.JavaScript['attach_pot'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'c';
+  return code;
+};
+
+Blockly.JavaScript['write_to_led'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'd';
+  return code;
+};
+
+Blockly.JavaScript['read_pot'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'e';
+  return code;
+};
+
+Blockly.JavaScript['if_water_val'] = function(block) {
+  var statements_if = Blockly.JavaScript.statementToCode(block, 'if');
+  var statements_else = Blockly.JavaScript.statementToCode(block, 'else');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'f' + statements_if + statements_else;
+  return code;
+};
+
+Blockly.JavaScript['buzzer_on'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'g';
+  return code;
+};
+
+Blockly.JavaScript['buzzer_off'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'h';
+  return code;
+};
+
+Blockly.JavaScript['set_color_red'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'i';
+  return code;
+};
+
+Blockly.JavaScript['set_color_green'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'j';
+  return code;
+};
+
+Blockly.JavaScript['set_color_blue'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'k';
+  return code;
+};
+
+Blockly.JavaScript['if_potentiameter_threshhold'] = function(block) {
+  var number_pot_val = block.getFieldValue('Pot_val');
+  if(number_pot_val != 400){
+    return "";}
+  var statements_if = Blockly.JavaScript.statementToCode(block, 'if');
+  var statements_else = Blockly.JavaScript.statementToCode(block, 'else');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'l' + statements_if + statements_else;
+  return code;
+};
+
+Blockly.JavaScript['attach_servo'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'm';
+  return code;
+};
+
+Blockly.JavaScript['write_servo'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'n';
+  return code;
+};
+
+Blockly.JavaScript['read_joys'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'o';
   return code;
 };

@@ -139,8 +139,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
     private String mNoCodeText;
 
-    public Integer lesson_number;
-    public Integer lesson_id;
+    public Integer lesson_number = 2;
+    public Integer lesson_id = 1;
     public String correct_code;
 
     private Integer module_id = 1;
@@ -152,6 +152,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
     ViewPagerAdapter adapter;
 
     TextView instructions;
+    Intent intent;
 
     Physicaloid mPhysicaloid;
 
@@ -308,6 +309,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+
 //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -316,7 +318,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
 
 
-        Intent intent = getIntent();
+        intent = getIntent();
         lesson_id = intent.getIntExtra("Lesson_ID", 1);
 
         lesson_number = intent.getIntExtra("Lesson_Number", 1);
@@ -372,6 +374,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
                 showInstructions(lesson_id);
             }
         });
+
+        reloadToolbox();
     }
 
     @Override
@@ -417,8 +421,12 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
     @NonNull
     @Override
     protected String getToolboxContentsXmlPath() {
-        return "module-2/lesson-1/toolbox.xml";
-    }
+
+            return "module-" + module_id + "/lesson-" + lesson_number + "/toolbox.xml";
+        }
+
+
+
 
 
     @NonNull
@@ -526,7 +534,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.requestFocus(View.FOCUS_DOWN);
         // load the main.html file that kept in assets folder
-        webView.loadUrl("file:///android_asset/ImagineCode-Game/index.html");
+        webView.loadUrl("file:///android_asset/IntroGame/index" + lesson_number +".html");
     }
 
 
@@ -549,11 +557,14 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
     public void showInstructions(int lesson_id){
 
+        DatabaseHelper db = new DatabaseHelper(this);
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
         // Inflate the custom layout/view
         View customView = inflater.inflate(R.layout.blockly_instructions_modal,null);
+        TextView instructions =  customView.findViewById(R.id.tv);
+        instructions.setText(db.getLessonInstructions(lesson_id));
         mPopupWindow = new PopupWindow(
                 customView,
                 LayoutParams.WRAP_CONTENT,

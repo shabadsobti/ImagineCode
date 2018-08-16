@@ -51,21 +51,13 @@ public class InstructionsAdapter extends PagerAdapter {
         try {
             final ImageView image = view.findViewById(R.id.image);
             Drawable drawable = mContext.getResources().getDrawable(mContext.getResources()
-                    .getIdentifier("circuit_"+lesson_num, "drawable", mContext.getPackageName()));
+                    .getIdentifier("arduino_"+lesson_num, "drawable", mContext.getPackageName()));
             image.setImageDrawable(drawable);
         }
         catch (Exception e){
 
         }
 
-//        Button button = view.findViewById(R.id.button);
-////        button.setText(mListData.get(position));
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                textView.setText(mListData.get(position));
-//        }
-//        });
 
         container.addView(view);
         return view;

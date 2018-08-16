@@ -1,0 +1,8 @@
+
+<toolbox>
+    <block type="led_on"></block>
+    <block type="led_off"></block>
+    <block type="attach_led"></block>
+    <block type="attach_button"></block>
+    <block type="if_button_pressed"></block>
+</toolbox>
