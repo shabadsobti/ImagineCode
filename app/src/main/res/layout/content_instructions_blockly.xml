@@ -8,6 +8,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
+    <Button
+        android:id="@+id/openLesson"
+        android:gravity="center"
+        android:layout_marginTop="30sp"
+        android:padding="12sp"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:text="Go To Lesson"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager1"
@@ -21,17 +33,6 @@
     </android.support.v4.view.ViewPager>
 
 
-    <Button
-        android:id="@+id/openLesson"
-        android:gravity="center"
-        android:layout_marginTop="30sp"
-        android:padding="12sp"
-        android:textColor="@color/white"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/viewpager1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:text="Go To Lesson"/>
+
 
 </RelativeLayout>

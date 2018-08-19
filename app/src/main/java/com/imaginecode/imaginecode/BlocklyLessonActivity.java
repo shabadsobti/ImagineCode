@@ -223,7 +223,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
             try {
               String hexFileName = "module-" + module_id.toString() + "/" + "lesson-"+lesson_number.toString() + "/sketch.hex";
-//              String correctSol = "moveRight();";
+
               Log.d("HEXFILENAME", hexFileName);
 
 
@@ -234,8 +234,8 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
                     db.giveStars(student_id, lesson_id, 1);
 
 
-//                    mPhysicaloid = new Physicaloid(getApplicationContext());
-//                    mPhysicaloid.upload(Boards.ARDUINO_UNO, getResources().getAssets().open(hexFileName), mUploadCallback);
+                    mPhysicaloid = new Physicaloid(getApplicationContext());
+                    mPhysicaloid.upload(Boards.ARDUINO_UNO, getResources().getAssets().open(hexFileName), mUploadCallback);
                 }
 
             } catch (Exception e) {
