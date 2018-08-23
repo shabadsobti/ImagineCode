@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    style="@style/TextMain"
     android:layout_height="match_parent"
     tools:context=".LanguageSelection"
     android:background = "@drawable/checkin">
@@ -16,15 +17,17 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
+
         android:text="कृपया अपनी भाषा का चयन करें"
+        style="@style/TextMain"
+
         android:textColor="@android:color/holo_orange_light"
-        android:textSize="50sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintVertical_bias="0.238" />
 
     <ImageButton
         android:id="@+id/hindi"
@@ -94,10 +97,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
-        android:fontFamily="cursive"
+        style="@style/TextMain"
         android:text="Please select your language"
         android:textColor="@android:color/holo_orange_light"
-        android:textSize="50sp"
+
+
+
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

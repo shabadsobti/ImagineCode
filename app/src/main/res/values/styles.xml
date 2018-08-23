@@ -33,10 +33,15 @@
     </style>
 
     <style name="RatingBar" parent="ThemeOverlay.AppCompat">
-        <item name="colorControlNormal">@color/headbar</item>
-        <item name="colorControlActivated">@color/orange</item>
-        <item name="colorAccent">@color/orange</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">#ffb018</item>
+        <item name="colorAccent">#ffb018</item>
 
+    </style>
+
+    <style name="TextMain">
+        <item name="android:fontFamily">@font/museosans</item>
+        
     </style>
 
 

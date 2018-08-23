@@ -46,6 +46,14 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleAdapter.MyRecycler
     @Override
     public void onBindViewHolder(MyRecyclerHolder holder, final int position) {
         holder.name.setText(list.get(position).getName());
+        ImageView icon = holder.itemView.findViewById(R.id.ic);
+
+        if(list.get(position).module_id == 1){
+            icon.setImageDrawable(holder.itemView.getContext().getResources().getDrawable(R.drawable.ic_intro));
+        }
+        else{
+            icon.setImageDrawable(holder.itemView.getContext().getResources().getDrawable(R.drawable.ic_project));
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

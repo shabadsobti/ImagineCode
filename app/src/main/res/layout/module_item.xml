@@ -3,80 +3,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="230dp"
-    android:layout_height="150dp"
+    android:layout_height="270dp"
+    style="@style/TextMain"
     android:layout_margin="20dp"
     android:orientation="vertical">
 
 
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:layout_marginTop="-10dp"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_one_login"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
 
-        android:elevation="4dp"
-        app:cardBackgroundColor="#f1c40f"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="10dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true"
-        >
-
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-
-            <TextView
-                android:id="@+id/mod_name"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_one_login"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:fontFamily="@font/museosans"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:layout_centerHorizontal="true"
+
+                android:elevation="4dp"
+                app:cardBackgroundColor="#ed686b"
+
+                app:cardElevation="10dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textAlignment="center">
+
+                    <ImageView
+                        android:id="@+id/ic"
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:src="@drawable/ic_intro" />
 
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/mod_name"
+                        android:layout_width="match_parent"
 
-    </android.support.v7.widget.CardView>
+
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ic"
+                        android:layout_alignParentStart="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        style="@style/TextMain"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="#0e283f"
+                        android:textSize="20dp" />
+
+                </RelativeLayout>
 
 
+            </android.support.v7.widget.CardView>
 
-</RelativeLayout>
 
-    <Button
-        android:id="@+id/module_play"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cv_one_login"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="-30dp"
-        android:background="@drawable/button"
-        android:elevation="6dp"
-        android:drawableLeft="@drawable/ic_baseline_play_arrow"
-        android:paddingLeft="16dp"
-        android:paddingRight="1dp"
-        android:text="PLAY"
-        android:textSize="11sp"
-        android:textColor="@color/white"/>
-</LinearLayout>
+        </RelativeLayout>
+
+        <!--<Button-->
+        <!--android:id="@+id/module_play"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/cv_one_login"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="-30dp"-->
+        <!--android:background="@drawable/button"-->
+        <!--android:elevation="6dp"-->
+        <!--android:drawableLeft="@drawable/ic_baseline_play_arrow"-->
+        <!--android:paddingLeft="16dp"-->
+        <!--android:paddingRight="1dp"-->
+        <!--android:text="PLAY"-->
+        <!--android:textSize="11sp"-->
+        <!--android:textColor="@color/white"/>-->
+    </LinearLayout>
 </RelativeLayout>

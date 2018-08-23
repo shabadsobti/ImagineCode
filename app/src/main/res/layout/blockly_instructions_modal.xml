@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-
+        style="@style/TextMain"
         android:layout_centerInParent="true"
         android:textColor="@color/headbar"
         android:paddingLeft="35sp"

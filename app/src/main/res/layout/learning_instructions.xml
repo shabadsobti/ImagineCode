@@ -28,7 +28,7 @@
         android:layout_marginLeft="10sp"
         android:gravity="center"
         android:textAlignment="textStart"
-        android:fontFamily="@font/museosans"
+        style="@style/TextMain"
         android:paddingBottom="15dp"
         android:layout_marginTop="16dp"
         android:textSize="20sp"

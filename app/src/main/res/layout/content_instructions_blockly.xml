@@ -48,6 +48,7 @@
         <Button
             android:id="@+id/openLesson"
             android:gravity="center"
+            style="@style/TextMain"
 
             android:padding="12sp"
             android:textColor="@color/white"

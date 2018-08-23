@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/modules"
+    android:background="@drawable/bg"
     tools:context="com.imaginecode.imaginecode.CheckIn">
 
     <include layout="@layout/toolbar"/>

@@ -38,7 +38,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
                 DatabaseHelper db = new DatabaseHelper(getApplicationContext());
 
                     db.createDataBase();
-                    Thread.sleep(4000);
+                    Thread.sleep(1000);
 
 
 

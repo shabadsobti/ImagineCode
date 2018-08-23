@@ -37,7 +37,7 @@
                 android:id="@+id/instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/museosans"
+                style="@style/TextMain"
 
                 android:layout_marginTop="16dp"
                 android:textColor="@android:color/black"
