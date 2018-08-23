@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     android:layout_width="400sp"
     android:layout_height="200sp"
 
-
+    android:layout_gravity="center"
+    android:padding="30sp"
     android:gravity="center"
-    android:background="@color/orange"
+    android:background="#dd4f59"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <TextView
-        android:id="@+id/instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
 
 
-        android:textColor="@android:color/white"/>
-</RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/instructions"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/museosans"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+
+
+            android:textColor="@android:color/white"/>
+
+
+
+
+</ScrollView>

@@ -49,6 +49,13 @@ public class CheckIn extends AppCompatActivity {
         myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
         TextView toolbar_title = findViewById(R.id.toolbar_title);
         toolbar_title.setText(R.string.title_activity_check_in);

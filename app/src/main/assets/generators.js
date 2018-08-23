@@ -132,6 +132,18 @@ Blockly.JavaScript['move_down'] = function(block) {
   return code;
 };
 
+Blockly.JavaScript['pickup'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'pickUpCoin();\n';
+  return code;
+};
+
+Blockly.JavaScript['dummy_while'] = function(block) {
+  var statements_movements = Blockly.JavaScript.statementToCode(block, 'movements');
+  // TODO: Assemble JavaScript into code variable.
+  return statements_movements;
+};
+
 
 Blockly.JavaScript['turtle_repeat_internal'] = Blockly.JavaScript['controls_repeat'];
 

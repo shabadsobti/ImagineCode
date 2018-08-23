@@ -12,6 +12,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+import com.merhold.extensiblepageindicator.ExtensiblePageIndicator;
+
+
 public class InstructionsBlockly extends AppCompatActivity {
 
     @Override
@@ -23,19 +27,19 @@ public class InstructionsBlockly extends AppCompatActivity {
 
         setContentView(R.layout.activity_instructions_blockly);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
-        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+//        Toolbar myToolbar = (Toolbar) findViewById(R.id.top_toolbar);
+//        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
 
-        TextView toolbar_title = findViewById(R.id.toolbar_title);
-        toolbar_title.setText(R.string.title_lesson_instructions);
-        myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
-
-        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        TextView toolbar_title = findViewById(R.id.toolbar_title);
+//        toolbar_title.setText(R.string.title_lesson_instructions);
+//        myToolbar.setBackgroundColor(getResources().getColor(R.color.headbar));
+//
+//        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onBackPressed();
+//            }
+//        });
 
         Intent oldintent = getIntent();
         Integer lesson_number = oldintent.getIntExtra("Lesson_Number", 1);
@@ -82,18 +86,28 @@ public class InstructionsBlockly extends AppCompatActivity {
             });
         }
 
+        //https://github.com/rubensousa/ViewPagerCards/
 
 
-
-
-
+        ExtensiblePageIndicator extensiblePageIndicator = (ExtensiblePageIndicator) findViewById(R.id.flexibleIndicator);
 
 
         ViewPager viewPager = findViewById(R.id.viewpager1);
-        Log.d("MOLO", db.getInstructionPages(9).get(0).getInstructions());
+
+
+
+
+        viewPager.setClipToPadding(false);
+        viewPager.setPadding(60, 0, 60, 0);
+        viewPager.setPageMargin(85);
+
+        viewPager.setOffscreenPageLimit(new InstructionsAdapter(this, db.getInstructionPages(lesson_id), lesson_number).getCount());
+
+
 
         viewPager.setAdapter(new InstructionsAdapter(this, db.getInstructionPages(lesson_id), lesson_number));
-
+        extensiblePageIndicator.initViewPager(viewPager);
+        viewPager.setPageTransformer(true, new RotateUpTransformer());
 
     }
 }

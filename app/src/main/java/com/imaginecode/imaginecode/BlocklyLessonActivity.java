@@ -54,6 +54,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -333,17 +334,15 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
 
 
-        instructions = findViewById(R.id.instructions);
 
-    if(module_id == INTRO_MODULE_ID){
-        instructions.setText(lesson_instructions);
-    }
+
 
 
 
 
 
         onLoadWorkspaceFile("module-"+ module_id + "/lesson-" + lesson_number +"/workspace.xml");
+
 
 
 
@@ -357,6 +356,15 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         String text = res.getString(R.string.title_activity_blockly, lesson_number.toString());
 
         toolbar_title.setText(text);
+
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
 
         mHandler = new Handler();
         mHandler = new Handler();
@@ -446,7 +454,9 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
     @Override
     public void onClearWorkspace() {
-        super.onClearWorkspace();
+//        super.onClearWorkspace();
+        onLoadWorkspaceFile("module-"+ module_id + "/lesson-" + lesson_number +"/workspace.xml");
+
 
         //mGeneratedTextView.setText(mNoCodeText);
         //updateTextMinWidth();
@@ -579,7 +589,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         }
 
         // Get a reference for the custom view close button
-        ImageButton closeButton = (ImageButton) customView.findViewById(R.id.ib_close);
+        Button closeButton =  customView.findViewById(R.id.ib_close);
 
         // Set a click listener for the popup window close button
         closeButton.setOnClickListener(new View.OnClickListener() {

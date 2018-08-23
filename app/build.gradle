@@ -34,4 +34,8 @@ dependencies {
     implementation project(path: ':PhysicaloidLibrary')
     implementation project(path: ':blocklylib-core')
     implementation project(path: ':blocklylib-vertical')
+    implementation project(':extensiblepageindicator-1.0.1')
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+
+
 }

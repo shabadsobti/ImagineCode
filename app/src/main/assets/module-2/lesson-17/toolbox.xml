@@ -1,7 +1,7 @@
 
 <toolbox>
-    <block type="if_potentiameter_threshhold"></block>
-    <block type="attach_led"></block>
-    <block type="led_on"></block>
-    <block type="led_off"></block>
+    <block type="attach_servo"></block>
+    <block type="read_pot"></block>
+    <block type="write_servo"></block>
+    <block type="delay_200"></block>
 </toolbox>

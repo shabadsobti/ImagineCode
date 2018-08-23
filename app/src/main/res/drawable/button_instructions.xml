@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:state_pressed="true" >
+        <shape android:shape="rectangle"  >
+
+            <stroke android:width="1dip" android:color="@color/headbar" />
+            <gradient android:angle="-90" android:startColor="@color/headbar" android:endColor="@color/headbar"  />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle"  >
+            <item android:drawable="@drawable/star_lvl" android:state_focused="false" android:state_pressed="true"/>
+
+            <stroke android:width="1dip" android:color="@color/headbar" />
+            <solid android:color="@color/headbar"/>
+        </shape>
+
+
+    </item>
+    <item >
+        <shape android:shape="rectangle"  >
+
+            <stroke android:width="1dip" android:color="@color/headbar" />
+            <gradient android:angle="-90" android:startColor="@color/headbar" android:endColor="@color/headbar" />
+        </shape>
+    </item>
+</selector>

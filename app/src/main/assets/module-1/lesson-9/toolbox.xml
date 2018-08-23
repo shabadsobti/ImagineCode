@@ -3,4 +3,5 @@
         <block type="move_left"></block>
         <block type="move_up"></block>
         <block type="move_down"></block>
+        <block type="pickup"></block>
 </toolbox>

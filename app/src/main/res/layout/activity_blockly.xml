@@ -2,12 +2,12 @@
 
 <!-- Demonstrates an alternative content area in SplitActivity. -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    android:id="@+id/blockly_rl"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/modules">
+    android:background="@drawable/blockly">
 
     <include layout="@layout/toolbar"/>
 
@@ -23,52 +23,23 @@
         android:layout_weight="1"
         >
 
-        <include layout="@layout/simple_workspace" />
+        <include layout="@layout/simple_workspace_game" />
     </FrameLayout>
 
-<LinearLayout
-    android:layout_width="350dp"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<!--<LinearLayout-->
+    <!--android:layout_width="350dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="360dp"
-        android:layout_height="338dp"
-        android:focusable="true" />
+    <!--<WebView-->
+        <!--android:id="@+id/webview"-->
+        <!--android:layout_width="360dp"-->
+        <!--android:layout_height="338dp"-->
+        <!--android:focusable="true" />-->
 
-    <LinearLayout
-        android:layout_width="320dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/instructions"
-        android:elevation="6dp"
-        android:orientation="vertical"
-        android:padding="6dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="@string/title_lesson_instructions"
-            android:textAlignment="center"
-            android:textColor="#202a3a"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/instructions"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
-            android:textColor="#202a3a"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
-</LinearLayout>
+<!--</LinearLayout>-->
 
 
 </LinearLayout>

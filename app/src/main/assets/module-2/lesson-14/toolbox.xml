@@ -1,6 +1,7 @@
 
 <toolbox>
-    <block type="if_water_val"></block>
-    <block type="buzzer_on"></block>
-    <block type="buzzer_off"></block>
+    <block type="set_color_red"></block>
+    <block type="set_color_green"></block>
+    <block type="set_color_blue"></block>
+    <block type="delay_1000"></block>
 </toolbox>

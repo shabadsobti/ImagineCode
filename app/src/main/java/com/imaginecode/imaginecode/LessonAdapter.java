@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,6 +25,12 @@ public class LessonAdapter extends BaseAdapter {
     private final ArrayList<LessonClass>  lessons;
     private final Integer student_id;
     private final Integer module_id;
+
+    private ViewPager mViewPager;
+
+
+
+
 
     public LessonAdapter(Context context, ArrayList<LessonClass> lessons, Integer student_id, Integer module_id) {
         this.mContext = context;
@@ -93,6 +101,11 @@ public class LessonAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+
+
+
+
 
 
 }

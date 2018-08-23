@@ -1,24 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginTop="100sp"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".IntroModActivity"
     android:orientation="horizontal"
     tools:showIn="@layout/activity_intro">
 
-    <GridView
-        android:id="@+id/gridview"
-        android:layout_width="match_parent"
+    <LinearLayout
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:columnWidth="150dp"
-        android:horizontalSpacing="10dp"
-        android:numColumns="5"
-        android:stretchMode="spacingWidthUniform"
-        android:verticalSpacing="10dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:id="@+id/ll"
+        android:textAlignment="center">
 
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_project"
+
+
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+
+
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_below="@+id/ll"
+        android:layout_marginTop="30sp"
+
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_gravity="center"
+
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="30dp"
+        android:paddingEnd="60dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:paddingStart="60dp" />
+
+
+</RelativeLayout>

@@ -1,7 +1,6 @@
 
 <toolbox>
-    <block type="attach_servo"></block>
-    <block type="read_pot"></block>
+    <block type="read_joys"></block>
     <block type="write_servo"></block>
-    <block type="delay_200"></block>
+    <block type="attach_servo"></block>
 </toolbox>

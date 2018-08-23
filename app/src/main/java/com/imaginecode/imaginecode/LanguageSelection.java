@@ -3,6 +3,7 @@ package com.imaginecode.imaginecode;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-
+import android.widget.ImageButton;
 import java.util.Locale;
 
 public class LanguageSelection extends AppCompatActivity implements View.OnClickListener {
@@ -33,10 +34,10 @@ public class LanguageSelection extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_language_selection);
 
         //Create your buttons and set their onClickListener to "this"
-        Button buttonHindi = (Button) findViewById(R.id.hindi);
+        ImageButton buttonHindi = (ImageButton) findViewById(R.id.hindi);
         buttonHindi.setOnClickListener(this);
 
-        Button buttonEnglish = (Button) findViewById(R.id.english);
+        ImageButton buttonEnglish = (ImageButton) findViewById(R.id.english);
         buttonEnglish.setOnClickListener(this);
 
 

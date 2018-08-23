@@ -15,6 +15,7 @@
         android:id="@+id/toolbar_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/museosans"
         android:gravity="center"
         android:textSize="20sp"
         android:layout_marginEnd="?attr/actionBarSize"/>
