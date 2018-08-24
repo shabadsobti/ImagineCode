@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextobjectid="8">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextobjectid="9">
  <tileset firstgid="1" source="2.5d.tsx"/>
  <layer name="Tile Layer 1" width="10" height="10">
   <data encoding="base64">
@@ -21,6 +21,14 @@
    <properties>
     <property name="framewidth" value="32"/>
     <property name="image" value="gripe_run_right"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Coins">
+  <object id="8" name="CoinEntity" x="160" y="191" width="32" height="32">
+   <properties>
+    <property name="framewidth" value="32"/>
+    <property name="image" value="spinning_coin_gold"/>
    </properties>
   </object>
  </objectgroup>

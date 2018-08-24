@@ -26,7 +26,8 @@ game.CoinEntity = me.CollectableEntity.extend({
     game.data.score += 1;
     // remove it
     me.game.world.removeChild(this);
-
+    JsHandler.successModal(3);
+    JsHandler.giveStars(3);
     return false
   }
 });

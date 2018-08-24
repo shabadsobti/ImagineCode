@@ -217,6 +217,10 @@ game.PlayerEntity = me.Entity.extend({
                 me.game.world.removeChild(pickUp);
                 pickUp = null
                 pickUpReady = false;
+                if (game.data.score == 6){
+                                    JsHandler.successModal(3);
+                                    JsHandler.giveStars(3);
+                                }
             }
             else{
                 pickUpReady = false;

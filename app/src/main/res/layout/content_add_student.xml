@@ -22,11 +22,12 @@
 
         <EditText
             android:id="@+id/first_name"
+            style="@style/TextMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoText="false"
             android:ems="10"
             android:hint="First Name"
-            style="@style/TextMain"
             android:singleLine="true"
             android:theme="@style/EditTextTheme"
             app:layout_constraintStart_toStartOf="parent"

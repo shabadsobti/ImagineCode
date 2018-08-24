@@ -1,0 +1,31 @@
+<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
+  <variables></variables>
+  <block type="controls_repeat_ext" id="WRA]T2mRgDk?yLsJJ,2@" x="87" y="38">
+    <value name="TIMES">
+      <shadow type="math_number">
+        <field name="NUM">2</field>
+      </shadow>
+    </value>
+    <value name="DO">
+      <block type="controls_repeat_ext" id="5lm-S=/VlC@t5pHmH~[~">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="controls_repeat_ext" id="5lm-S=/VlC@t5pHmH~[~">
+            <value name="TIMES">
+              <shadow type="math_number">
+                <field name="NUM">3</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="pickup" id="5lm-S=/VlC@t5pHmH~[~"></block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </value>
+  </block>
+</xml>

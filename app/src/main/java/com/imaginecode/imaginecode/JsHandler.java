@@ -118,8 +118,6 @@ public class JsHandler {
         dialog.setContentView(R.layout.blockly_success_modal);
 
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        TextView starText = (TextView) dialog.findViewById(R.id.starText);
-        starText.setText("" + stars);
         text.setText("Well Done!");
         Button next = (Button) dialog.findViewById(R.id.nextLesson);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

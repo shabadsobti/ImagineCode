@@ -14,13 +14,6 @@
         android:layout_centerHorizontal="true"
         >
 
-        <TextView
-            android:id="@+id/starText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:textSize="24sp" />
-
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -30,34 +23,32 @@
     </LinearLayout>
 
 
-
-
-
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/starBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
 
         android:text="Hello"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/cardview_light_background"
         android:textSize="21sp" />
 
     <Button
         android:id="@+id/nextLesson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_below="@+id/text"
 
         android:layout_centerHorizontal="true"
 
-        android:layout_below="@+id/text"
+        android:layout_marginTop="15dp"
 
         android:background="@drawable/button"
 
-        android:text=" Next Lesson " />
+        android:text=" Next Lesson "
+        android:textColor="@color/cardview_light_background" />
 
 
 

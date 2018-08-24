@@ -194,6 +194,10 @@ game.PlayerEntity = me.Entity.extend({
                 pickUp = null
                 pickUpReady = false;
                 score += 1;
+                if (score == 8){
+                                    JsHandler.successModal(3);
+                                    JsHandler.giveStars(3);
+                                }
             }
             else{
                 pickUpReady = false;

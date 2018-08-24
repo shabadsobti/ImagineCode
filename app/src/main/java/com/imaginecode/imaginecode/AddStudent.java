@@ -116,6 +116,12 @@ public class AddStudent extends AppCompatActivity {
                     thumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.ic_person_black_24dp);
                 }
 
+                if (first_name == null || first_name.equals("")) {
+                    first_name = "I";
+                }
+                if (last_name == null || last_name.equals("")) {
+                    last_name = "C";
+                }
 
                 Random rand = new Random();
 
