@@ -360,7 +360,10 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(BlocklyLessonActivity.this, IntroModActivity.class);
+                intent.putExtra("Module_ID", module_id);
+                intent.putExtra("student_ID", student_id);
+                startActivity(intent);
             }
         });
 

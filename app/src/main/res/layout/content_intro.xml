@@ -26,7 +26,6 @@
             android:layout_width="100sp"
             android:layout_height="100sp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_project"
 
 
             android:textAlignment="center" />
