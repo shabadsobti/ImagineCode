@@ -20,7 +20,11 @@
 
     <string name="lesson_instruction_column">lesson_instructions</string>
 
+    <string name="learning_instruction_column">learning_instructions</string>
 
+    <string name="intro_instruction_column">intro_instructions</string>
+
+    <string name="circuit_instruction_column">circuit_instructions</string>
 
 
         <string name="title_1">Cool card</string>

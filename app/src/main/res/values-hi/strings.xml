@@ -21,5 +21,13 @@
     <string name="lesson_instruction_column">lesson_instruction_hi</string>
 
 
+    <string name="learning_instruction_column">learning_instructions_hi</string>
+
+    <string name="intro_instruction_column">intro_instructions_hi</string>
+
+    <string name="circuit_instruction_column">circuit_instructions_hi</string>
+
+
+
 
 </resources>

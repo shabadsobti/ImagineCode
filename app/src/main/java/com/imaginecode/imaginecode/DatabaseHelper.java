@@ -389,7 +389,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<InstructionsPage> getInstructionPages(int lesson_id){
         ArrayList<InstructionsPage> pages = new ArrayList<>();
-        String query = "SELECT intro_instructions, circuit_instructions, learning_instructions, type FROM Lessons WHERE lesson_id = " + lesson_id ;
+        String query = "SELECT " + myContext.getResources().getString(R.string.intro_instruction_column) + ", "+myContext.getResources().getString(R.string.circuit_instruction_column)+", " + myContext.getResources().getString(R.string.learning_instruction_column) + ", type FROM Lessons WHERE lesson_id = " + lesson_id ;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
