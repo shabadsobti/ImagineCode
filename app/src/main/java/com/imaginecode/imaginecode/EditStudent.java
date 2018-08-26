@@ -52,6 +52,14 @@ public class EditStudent extends AppCompatActivity {
         TextView toolbar_title = findViewById(R.id.toolbar_title);
         toolbar_title.setText(R.string.title_activity_add_student);
 
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditStudent.this, CheckIn.class);
+                startActivity(intent);
+            }
+        });
+
         final EditText fname = findViewById(R.id.first_name);
         final EditText lname = findViewById(R.id.last_name);
 

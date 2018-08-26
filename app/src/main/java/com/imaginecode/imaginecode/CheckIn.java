@@ -52,7 +52,8 @@ public class CheckIn extends AppCompatActivity {
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(CheckIn.this, LanguageSelection.class);
+                startActivity(intent);
             }
         });
 

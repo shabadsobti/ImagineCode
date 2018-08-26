@@ -101,7 +101,7 @@
   },
   {
     "type": "dummy_while",
-    "message0": "While Loop %1 %2",
+    "message0": "While coins remaining %1 %2",
     "args0": [
       {
         "type": "input_dummy"

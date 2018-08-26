@@ -106,7 +106,9 @@ public class IntroModActivity extends AppCompatActivity implements View.OnClickL
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(IntroModActivity.this, ModulesActivity.class);
+                intent.putExtra("student_ID", student_id);
+                startActivity(intent);
             }
         });
 
