@@ -20,6 +20,11 @@
 
     <string name="delete_student_button">DELETE</string>
 
+    <string name="first_name">First Name</string>
+
+    <string name="last_name">Last Name</string>
+
+
     <string name="lesson">Lesson</string>
 
     <string name="redo">REDO</string>

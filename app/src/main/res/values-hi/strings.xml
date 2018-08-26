@@ -20,6 +20,10 @@
 
     <string name="delete_student_button">छात्र हटाएं</string>
 
+    <string name="first_name">पहला नाम</string>
+
+    <string name="last_name">अंतिम नाम</string>
+
     <string name="lesson">स्तर</string>
 
     <string name="redo">फिर से करें</string>
