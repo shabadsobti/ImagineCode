@@ -8,6 +8,12 @@
     android:elevation="6dp"
     android:background="#6dc6c6"
     >
+<android.support.v4.widget.NestedScrollView
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="200sp"
+    android:fillViewport="true"
+    >
 
     <TextView
         android:id="@+id/tv"
@@ -19,8 +25,13 @@
         android:textColor="@color/headbar"
         android:paddingLeft="35sp"
         android:paddingRight="35sp"
-        android:paddingBottom="45sp"
+        android:paddingTop="20sp"
+        android:paddingBottom="20sp"
         />
+
+
+</android.support.v4.widget.NestedScrollView>
+
 
     <Button
         android:id="@+id/ib_close"
@@ -31,7 +42,7 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="15sp"
-        android:layout_below="@id/tv"
+        android:layout_below="@id/scroll"
         android:drawableTop="@drawable/ic_check"
         android:background="@drawable/button_instructions"
         />
