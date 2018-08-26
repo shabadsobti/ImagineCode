@@ -72,6 +72,7 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -225,19 +226,24 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
             try {
               String hexFileName = "module-" + module_id.toString() + "/" + "lesson-"+lesson_number.toString() + "/sketch.hex";
 
+              String[] code_variations = code[0].split(",");
+              for(String codeItem : code_variations){
+                  if(codeItem.replaceAll("\\s+","").equalsIgnoreCase(correct_code.replaceAll("\\s+",""))) {
+                      Log.d("CODE_CORRECT", "YES");
+                      
+                      codeIsCorrect = true;
+                      DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                      db.giveStars(student_id, lesson_id, 1);
+                      mPhysicaloid = new Physicaloid(getApplicationContext());
+                      mPhysicaloid.upload(Boards.ARDUINO_UNO, getResources().getAssets().open(hexFileName), mUploadCallback);
+                  }
+
+              }
 
 
 
-                if(code[0].replaceAll("\\s+","").equalsIgnoreCase(correct_code.replaceAll("\\s+",""))) {
-                    Log.d("CODE_CORRECT", "YES");
-                    codeIsCorrect = true;
-                    DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                    db.giveStars(student_id, lesson_id, 1);
 
 
-                    mPhysicaloid = new Physicaloid(getApplicationContext());
-                    mPhysicaloid.upload(Boards.ARDUINO_UNO, getResources().getAssets().open(hexFileName), mUploadCallback);
-                }
 
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
