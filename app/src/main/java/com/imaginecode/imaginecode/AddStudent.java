@@ -34,8 +34,7 @@ import java.util.Random;
 
 public class AddStudent extends AppCompatActivity {
 
-    private ImageView mImage;
-    private static final int CAMERA_PIC_REQUEST = 1111;
+
     DatabaseHelper myDb;
 
     @Override
@@ -64,40 +63,6 @@ public class AddStudent extends AppCompatActivity {
 
         Button add_user = findViewById(R.id.add_user);
 
-        Button img = findViewById(R.id.updateImg);
-
-        Context context = getApplicationContext();
-
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                Toast.makeText(context, "CAMERA ERROR", Toast.LENGTH_SHORT).show();
-                //Show permission dialog
-            } else {
-
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1111);
-            }
-        }
-
-        mImage = (ImageView) findViewById(R.id.avatarImg);
-
-
-
-
-
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, CAMERA_PIC_REQUEST);
-
-            }
-        });
-
-
-
-
-
 
 
         add_user.setOnClickListener(new View.OnClickListener() {
@@ -105,16 +70,8 @@ public class AddStudent extends AppCompatActivity {
             public void onClick(View view) {
                 String first_name = fname.getText().toString();
                 String last_name = lname.getText().toString();
-                ImageView avatar =  findViewById(R.id.avatarImg);
-                Bitmap thumbnail;
 
-                try{
-                     thumbnail = ((BitmapDrawable) avatar.getDrawable()).getBitmap();
 
-                }
-                catch (Exception e){
-                    thumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.ic_person_black_24dp);
-                }
 
                 if (first_name == null || first_name.equals("")) {
                     first_name = "I";
@@ -123,18 +80,11 @@ public class AddStudent extends AppCompatActivity {
                     last_name = "C";
                 }
 
-                Random rand = new Random();
 
-                // Generate random integers in range 0 to 999
-                int rand_int = rand.nextInt(1000);
-                String unique_string = first_name + last_name + rand_int;
-
-                String avatarString = "avatar_" + unique_string +".jpg";
-                saveToInternalStorage(thumbnail, unique_string);
 
                 myDb = new DatabaseHelper(getApplicationContext());
 
-                Student a = new Student(first_name, last_name, avatarString);
+                Student a = new Student(first_name, last_name, "");
                 myDb.createStudent(a);
                 myDb.close();
                 Intent intent = new Intent();
@@ -145,42 +95,7 @@ public class AddStudent extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
-
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            mImage.setImageBitmap(thumbnail);
-        }
-
-    }
-
-    private String saveToInternalStorage(Bitmap bitmapImage, String unique_string){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath = new File(directory,"avatar_" + unique_string +".jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
 }
 
