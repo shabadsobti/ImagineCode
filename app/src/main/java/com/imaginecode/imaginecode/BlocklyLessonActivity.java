@@ -226,11 +226,12 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
             try {
               String hexFileName = "module-" + module_id.toString() + "/" + "lesson-"+lesson_number.toString() + "/sketch.hex";
 
-              String[] code_variations = code[0].split(",");
+              String[] code_variations = correct_code.split(",");
               for(String codeItem : code_variations){
-                  if(codeItem.replaceAll("\\s+","").equalsIgnoreCase(correct_code.replaceAll("\\s+",""))) {
+                  if(code[0].replaceAll("\\s+","").equalsIgnoreCase(codeItem.replaceAll("\\s+",""))) {
                       Log.d("CODE_CORRECT", "YES");
-                      
+                      Log.d("CODE_CORRECT_YES", codeItem);
+
                       codeIsCorrect = true;
                       DatabaseHelper db = new DatabaseHelper(getApplicationContext());
                       db.giveStars(student_id, lesson_id, 1);
