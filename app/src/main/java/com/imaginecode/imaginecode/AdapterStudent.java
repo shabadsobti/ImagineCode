@@ -57,7 +57,7 @@ public class AdapterStudent extends ArrayAdapter<Student> {
         Character last_name = (student.last_name.charAt(0));
         String student_initials = first_name + "" + last_name;
         Button student_button = view.findViewById(R.id.student_button);
-
+        Button edit_button = view.findViewById(R.id.edit_button);
         student_button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -65,6 +65,24 @@ public class AdapterStudent extends ArrayAdapter<Student> {
                 intent.putExtra("student_ID", student.id);
                 mContext.startActivity(intent);
 
+            }
+        });
+
+        edit_button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EditStudent.class);
+                intent.putExtra("student_ID", student.id);
+                mContext.startActivity(intent);
+            }
+        });
+
+        student_button.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(getContext(), EditStudent.class);
+                intent.putExtra("student_ID", student.id);
+                mContext.startActivity(intent);
+                return false;
             }
         });
 

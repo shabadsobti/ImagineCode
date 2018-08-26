@@ -160,6 +160,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return student_id;
     }
 
+    public void editStudent(int student_id, String fname, String lname){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strSQL = "UPDATE Students SET first_name = '" + fname + "', last_name = '" + lname + "' WHERE student_id = "+ student_id;
+
+        db.execSQL(strSQL);
+    }
+
+    public boolean deleteStudent(int student_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("Students",  "student_id = " + student_id, null) > 0;
+    }
+
     public ArrayList<Student> getAllStudents(){
 
         ArrayList<Student> studentList = new ArrayList<Student>();
@@ -300,6 +312,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
         return module_id;
+    }
+
+    public String[] getName(Integer student_id){
+        String query = "SELECT first_name, last_name FROM Students WHERE student_id = " + student_id;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String fname = "";
+        String lname = "";
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                fname = cursor.getString(0);
+                lname = cursor.getString(1);
+            }
+        }
+        catch (Exception e){
+
+        }
+        String[] A = {fname, lname};
+        return A;
     }
 
 
