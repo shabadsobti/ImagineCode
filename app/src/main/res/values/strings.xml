@@ -22,15 +22,19 @@
 
     <string name="lesson">Lesson</string>
 
-    <string name="redo">Lesson</string>
+    <string name="redo">REDO</string>
 
-    <string name="play">Lesson</string>
+    <string name="play">PLAY</string>
 
-    <string name="locked">Lesson</string>
+    <string name="locked">LOCKED</string>
 
     <string name="done">DONE</string>
 
     <string name="go_to_lesson">GO TO LESSON</string>
+
+    <string name="well_done">Well Done</string>
+
+    <string name="next_lesson">NEXT LESSON</string>
 
     <string name="title_lesson_instructions">Instructions</string>
 

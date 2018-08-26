@@ -30,8 +30,6 @@
         android:layout_below="@+id/starBox"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-
-        android:text="Hello"
         android:textColor="@color/cardview_light_background"
         android:textSize="21sp" />
 
@@ -47,7 +45,7 @@
 
         android:background="@drawable/button"
 
-        android:text=" Next Lesson "
+        android:text="@string/next_lesson"
         android:textColor="@color/cardview_light_background" />
 
 

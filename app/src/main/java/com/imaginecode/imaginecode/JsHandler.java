@@ -126,7 +126,7 @@ public class JsHandler {
             // Inflate the custom layout/view
             View customView = inflater.inflate(R.layout.blockly_success_modal,null);
             TextView instructions =  customView.findViewById(R.id.text);
-            instructions.setText("Well Done");
+            instructions.setText(activity.getResources().getText(R.string.well_done));
             mPopupWindow = new PopupWindow(
                     customView,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -142,53 +142,27 @@ public class JsHandler {
 
 //             Get a reference for the custom view close button
             Button closeButton =  customView.findViewById(R.id.nextLesson);
+            final DatabaseHelper db = new DatabaseHelper(activity);
 
             // Set a click listener for the popup window close button
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, IntroModActivity.class);
-                    intent.putExtra("Module_ID", 1);
-                    intent.putExtra("student_ID", student_id);
-                    activity.startActivity(intent);
+                    mPopupWindow.dismiss();
+                    Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
+                intent.putExtra("Student_ID", student_id);
+                Integer module_id = db.getModuleID(lesson_id);
+
+                Integer nextLessonID = db.getLessonID(module_id, lesson_number+1);
+                intent.putExtra("Lesson_ID", nextLessonID);
+                intent.putExtra("Lesson_Number", lesson_number + 1);
+                intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
+                webView.getContext().startActivity(intent);
                 }
             });
 
             mPopupWindow.showAtLocation(activity.findViewById(R.id.blockly_rl), Gravity.CENTER,0,0);
 
-
-
-
-
-//        final Dialog dialog = new Dialog(webView.getContext());
-//        dialog.setContentView(R.layout.blockly_success_modal);
-//
-//        TextView text = (TextView) dialog.findViewById(R.id.text);
-//        text.setText("Well Done!");
-//        Button next = (Button) dialog.findViewById(R.id.nextLesson);
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//        final DatabaseHelper db = new DatabaseHelper(webView.getContext());
-//
-//        // if button is clicked, close the custom dialog
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
-//                intent.putExtra("Student_ID", student_id);
-//                Integer module_id = db.getModuleID(lesson_id);
-//
-//                Integer nextLessonID = db.getLessonID(module_id, lesson_number+1);
-//                intent.putExtra("Lesson_ID", nextLessonID);
-//                intent.putExtra("Lesson_Number", lesson_number + 1);
-//                intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
-//                webView.getContext().startActivity(intent);
-//
-//            }
-//        });
-//
-//
-//
-//        dialog.show();
 
     }
 
