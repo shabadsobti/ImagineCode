@@ -6,17 +6,23 @@ package com.imaginecode.imaginecode;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +37,7 @@ public class JsHandler {
     Integer student_id;
     Integer lesson_number;
     WebView webView;
+    private PopupWindow mPopupWindow;
 
 
 
@@ -114,35 +121,74 @@ public class JsHandler {
     @JavascriptInterface
     public void successModal(final int stars) {
 
-        final Dialog dialog = new Dialog(webView.getContext());
-        dialog.setContentView(R.layout.blockly_success_modal);
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Well Done!");
-        Button next = (Button) dialog.findViewById(R.id.nextLesson);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        final DatabaseHelper db = new DatabaseHelper(webView.getContext());
+            // Inflate the custom layout/view
+            View customView = inflater.inflate(R.layout.blockly_success_modal,null);
+            TextView instructions =  customView.findViewById(R.id.text);
+            instructions.setText("Well Done");
+            mPopupWindow = new PopupWindow(
+                    customView,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
 
-        // if button is clicked, close the custom dialog
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
-                intent.putExtra("Student_ID", student_id);
-                Integer module_id = db.getModuleID(lesson_id);
 
-                Integer nextLessonID = db.getLessonID(module_id, lesson_number+1);
-                intent.putExtra("Lesson_ID", nextLessonID);
-                intent.putExtra("Lesson_Number", lesson_number + 1);
-                intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
-                webView.getContext().startActivity(intent);
-
+            // Set an elevation value for popup window
+            // Call requires API level 21
+            if(Build.VERSION.SDK_INT>=21){
+                mPopupWindow.setElevation(5.0f);
             }
-        });
+
+//             Get a reference for the custom view close button
+            Button closeButton =  customView.findViewById(R.id.nextLesson);
+
+            // Set a click listener for the popup window close button
+            closeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, IntroModActivity.class);
+                    intent.putExtra("Module_ID", 1);
+                    intent.putExtra("student_ID", student_id);
+                    activity.startActivity(intent);
+                }
+            });
+
+            mPopupWindow.showAtLocation(activity.findViewById(R.id.blockly_rl), Gravity.CENTER,0,0);
 
 
 
-        dialog.show();
+
+
+//        final Dialog dialog = new Dialog(webView.getContext());
+//        dialog.setContentView(R.layout.blockly_success_modal);
+//
+//        TextView text = (TextView) dialog.findViewById(R.id.text);
+//        text.setText("Well Done!");
+//        Button next = (Button) dialog.findViewById(R.id.nextLesson);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        final DatabaseHelper db = new DatabaseHelper(webView.getContext());
+//
+//        // if button is clicked, close the custom dialog
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
+//                intent.putExtra("Student_ID", student_id);
+//                Integer module_id = db.getModuleID(lesson_id);
+//
+//                Integer nextLessonID = db.getLessonID(module_id, lesson_number+1);
+//                intent.putExtra("Lesson_ID", nextLessonID);
+//                intent.putExtra("Lesson_Number", lesson_number + 1);
+//                intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
+//                webView.getContext().startActivity(intent);
+//
+//            }
+//        });
+//
+//
+//
+//        dialog.show();
 
     }
 

@@ -187,7 +187,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
 
                             }
                             else{
-                                Toast.makeText(getApplicationContext(), generatedCode.toString(), Toast.LENGTH_LONG).show();
+
                                 new verifyCode().execute(generatedCode);
 
 
@@ -225,7 +225,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
             try {
               String hexFileName = "module-" + module_id.toString() + "/" + "lesson-"+lesson_number.toString() + "/sketch.hex";
 
-              Log.d("HEXFILENAME", hexFileName);
+
 
 
                 if(code[0].replaceAll("\\s+","").equalsIgnoreCase(correct_code.replaceAll("\\s+",""))) {
@@ -260,7 +260,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         protected void onPostExecute(String file_url) {
             Log.d("FILE URL", "DONE");
             if(codeIsCorrect){
-                Toast.makeText(getApplicationContext(), "WellDone", Toast.LENGTH_LONG).show();
+               showSuccess();
             }
 
         }
@@ -606,7 +606,42 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
         mPopupWindow.showAtLocation(this.findViewById(R.id.blockly_rl), Gravity.CENTER,0,0);
     }
 
+    public void showSuccess(){
 
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        // Inflate the custom layout/view
+        View customView = inflater.inflate(R.layout.blockly_instructions_modal,null);
+        TextView instructions =  customView.findViewById(R.id.tv);
+        instructions.setText(getResources().getText(R.string.project_success_modal));
+        mPopupWindow = new PopupWindow(
+                customView,
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT
+        );
+
+
+        // Set an elevation value for popup window
+        // Call requires API level 21
+        if(Build.VERSION.SDK_INT>=21){
+            mPopupWindow.setElevation(5.0f);
+        }
+
+        // Get a reference for the custom view close button
+        Button closeButton =  customView.findViewById(R.id.ib_close);
+
+        // Set a click listener for the popup window close button
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the popup window
+                mPopupWindow.dismiss();
+            }
+        });
+
+        mPopupWindow.showAtLocation(this.findViewById(R.id.blockly_rl), Gravity.CENTER,0,0);
+    }
 
 
 

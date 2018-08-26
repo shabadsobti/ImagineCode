@@ -54,16 +54,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
-            android:padding="2dp"
-            android:src="@drawable/ic_baseline_play_arrow_large"/>
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_play"/>
 
         <ImageButton android:id="@+id/blockly_show_instructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
-            android:padding="2dp"
-            android:src="@drawable/ic_baseline_play_arrow_large"/>
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_info"/>
 
 
 
@@ -72,9 +74,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
-            android:padding="2dp"
+            android:padding="3dp"
+            android:layout_margin="3dp"
 
-            android:src="@drawable/ic_baseline_clear_large"/>
+            android:src="@drawable/ic_delete"/>
 
         <ImageButton android:id="@+id/blockly_save"
             android:layout_width="wrap_content"

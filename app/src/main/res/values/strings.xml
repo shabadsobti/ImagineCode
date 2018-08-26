@@ -26,6 +26,8 @@
 
     <string name="circuit_instruction_column">circuit_instructions</string>
 
+    <string name="project_success_modal">Well done! Your code is correct! The code is now uploaded to the ImagineCode Board</string>
+
 
         <string name="title_1">Cool card</string>
         <string name="title_2">Ok card</string>

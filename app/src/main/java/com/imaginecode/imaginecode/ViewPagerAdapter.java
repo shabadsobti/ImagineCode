@@ -39,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        TextView txt_instructions;
+
         ImageView project_image;
 
         inflater = (LayoutInflater) context

@@ -151,7 +151,7 @@ public class IntroModActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-        mCardAdapter = new CardPagerAdapter(student_id, module_id);
+        mCardAdapter = new CardPagerAdapter(student_id, module_id, getApplicationContext());
 
         for(LessonClass i : a){
             mCardAdapter.addCardItem(i);
@@ -192,7 +192,7 @@ public class IntroModActivity extends AppCompatActivity implements View.OnClickL
         super.onResume();
         int pstn = mViewPager.getCurrentItem();
 
-        mCardAdapter = new CardPagerAdapter(student_id, module_id);
+        mCardAdapter = new CardPagerAdapter(student_id, module_id, getApplicationContext());
         ArrayList<LessonClass> a = db.getLessons(student_id, module_id);
         for(LessonClass i : a){
             mCardAdapter.addCardItem(i);

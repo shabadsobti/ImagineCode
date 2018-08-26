@@ -443,5 +443,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Integer lessonGetStars(int student_id, int lesson_id){
+
+
+        String query = "SELECT stars FROM Students_Lessons WHERE student_id = " + student_id + " AND lesson_id = " + lesson_id;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int stars = 0;
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor != null)
+            {
+                cursor.moveToFirst();
+                stars = cursor.getInt(0);
+            }
+        }
+        catch (Exception e){
+
+        }
+        return stars;
+
+
+    }
+
+
+
 
 }

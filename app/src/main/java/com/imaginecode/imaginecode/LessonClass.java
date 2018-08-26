@@ -9,6 +9,7 @@ public class LessonClass {
     private int stars;
     private String instructions;
     private String correct_code;
+    public boolean isLocked;
 
 
     public LessonClass(int lesson_id, int number, int stars, String instructions, String correctCode){

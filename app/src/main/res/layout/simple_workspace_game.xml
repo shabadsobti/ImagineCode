@@ -47,8 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/blockly_toolbox_ui"
-        android:layout_toRightOf="@id/blockly_toolbox_ui"
         blockly:scrollOrientation="vertical"
         blockly:closeable="true"
         tools:ignore="MissingPrefix"/>
@@ -63,7 +61,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="52dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="2dp"
             android:padding="2dp"
             blockly:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="0dp">
@@ -72,6 +71,7 @@
                 android:id="@+id/webview"
                 android:layout_width="360dp"
                 android:layout_height="338dp"
+
                 android:layout_marginBottom="84dp"
                 android:focusable="true"
                 blockly:layout_constraintBottom_toBottomOf="parent"
@@ -98,17 +98,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
-            android:padding="2dp"
-            android:src="@drawable/ic_baseline_play_arrow_large" />
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_play" />
 
         <ImageButton
             android:id="@+id/blockly_show_instructions"
             android:layout_width="wrap_content"
+            android:layout_margin="3dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
-            android:padding="2dp"
-            android:src="@drawable/ic_baseline_play_arrow_large" />
+            android:padding="3dp"
+            android:src="@drawable/ic_info" />
 
 
         <ImageButton
@@ -116,10 +118,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_margin="3dp"
             android:background="@color/translucent"
-            android:padding="2dp"
+            android:padding="3dp"
 
-            android:src="@drawable/ic_baseline_clear_large" />
+            android:src="@drawable/ic_delete" />
 
         <ImageButton
             android:id="@+id/blockly_save"
@@ -127,7 +130,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/translucent"
-            android:padding="2dp"
+            android:padding="3dp"
             android:src="@drawable/zoom_in"
             android:visibility="invisible" />
 

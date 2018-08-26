@@ -27,7 +27,7 @@
 
     <string name="circuit_instruction_column">circuit_instructions_hi</string>
 
-
+    <string name="project_success_modal">Well done! Your code is correct! The code is now uploaded to the ImagineCode Board</string>
 
 
 </resources>

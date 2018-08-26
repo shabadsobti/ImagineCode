@@ -1,6 +1,7 @@
 package com.imaginecode.imaginecode;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
@@ -21,15 +22,17 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     private List<CardView> mViews;
     private Integer module_id;
+    private Context mContext;
     private Integer student_id;
     private List<LessonClass> mData;
     private float mBaseElevation;
 
-    public CardPagerAdapter(Integer student_id, Integer module_id) {
+    public CardPagerAdapter(Integer student_id, Integer module_id, Context context) {
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
         this.student_id = student_id;
         this.module_id = module_id;
+        this.mContext = context;
 
     }
 
@@ -84,7 +87,6 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         Button play = view.findViewById(R.id.play);
         ImageView done = view.findViewById(R.id.done);
-
         if(item.getStars()>0){
             play.setText("REDO");
         }
@@ -93,6 +95,22 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
             done.setVisibility(View.INVISIBLE);
 
         }
+
+        DatabaseHelper db = new DatabaseHelper(mContext);
+        int lesson_id_previous;
+
+        if(item.getNumber() > 1){
+            lesson_id_previous = db.getLessonID(module_id, item.getNumber()-1);
+            if (db.lessonGetStars(student_id, lesson_id_previous) == 0){
+                play.setEnabled(false);
+                play.setText("LOCKED");
+
+
+            }
+        }
+
+
+
 
         final int lesson_id = item.lesson_id;
         final int lesson_number = item.getNumber();
