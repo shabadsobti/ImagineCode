@@ -65,6 +65,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:screenOrientation="landscape"
+            android:name=".EditStudent"
+            android:label="@string/title_activity_add_student"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:screenOrientation="landscape"
             android:name=".BlocklyLessonActivity"
             android:theme="@style/AppTheme">
 
@@ -78,10 +83,7 @@
         <activity android:name=".InstructionsBlockly"
             android:screenOrientation="landscape"
          android:label="@string/title_lesson_instructions"
-         android:theme="@style/AppTheme.NoActionBar"
-            >
-
-
+         android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

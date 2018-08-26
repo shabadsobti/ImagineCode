@@ -45,6 +45,12 @@
         android:textColor="#f1c40f"
         android:textSize="50sp" />
 
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mutator_icon_24dp" />
+
 </LinearLayout>
 
 
