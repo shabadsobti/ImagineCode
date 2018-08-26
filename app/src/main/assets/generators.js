@@ -330,3 +330,27 @@ Blockly.JavaScript['read_joys'] = function(block) {
   var code = 'o';
   return code;
 };
+
+Blockly.JavaScript['calc_temp_pin'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'p';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['for_temp_pin'] = function(block) {
+  var value_temp = Blockly.JavaScript.valueToCode(block, 'TEMP', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_do = Blockly.JavaScript.statementToCode(block, 'DO');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'q' + value_temp + statements_do;
+  return code;
+};
+
+Blockly.JavaScript['for_pin_2to6'] = function(block) {
+  var statements_pinaction = Blockly.JavaScript.statementToCode(block, 'pinACTION');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'r' + statements_pinaction;
+  return code;
+};
+
+

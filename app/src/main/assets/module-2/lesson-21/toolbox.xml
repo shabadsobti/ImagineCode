@@ -1,6 +1,8 @@
 
 <toolbox>
-    <block type="read_joys"></block>
-    <block type="write_servo"></block>
-    <block type="attach_servo"></block>
+    <block type="calc_temp_pin"></block>
+    <block type="for_temp_pin"></block>
+    <block type="for_pin_2to6"></block>
+    <block type="led_on"></block>
+    <block type="attach_led"></block>
 </toolbox>
