@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:background="@drawable/button"
-            android:text="UPDATE"
+            android:text="@string/update_student_button"
             android:textColor="@color/white" />
 
 
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15sp"
             android:background="#ce0000"
-            android:text="DELETE"
+            android:text="@string/delete_student_button"
             android:textColor="@color/white" />
 
 

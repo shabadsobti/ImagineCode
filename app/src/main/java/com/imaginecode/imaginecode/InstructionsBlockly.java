@@ -64,7 +64,7 @@ public class InstructionsBlockly extends AppCompatActivity {
 
         if(db.getLessonType(lesson_id).equals("learning")){
             Button lesson = findViewById(R.id.openLesson);
-            lesson.setText("DONE");
+            lesson.setText(getResources().getText(R.string.done));
             lesson.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

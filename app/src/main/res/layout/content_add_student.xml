@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40sp"
         android:background="@drawable/button"
-        android:text="Add"
+        android:text="@string/add_student_button"
         android:textColor="@color/white" />
 
     </LinearLayout>

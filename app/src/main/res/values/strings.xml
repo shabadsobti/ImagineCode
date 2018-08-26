@@ -14,6 +14,24 @@
 
     <string name="toast_student_added">New Student Added</string>
 
+    <string name="add_student_button">ADD</string>
+
+    <string name="update_student_button">UPDATE</string>
+
+    <string name="delete_student_button">DELETE</string>
+
+    <string name="lesson">Lesson</string>
+
+    <string name="redo">Lesson</string>
+
+    <string name="play">Lesson</string>
+
+    <string name="locked">Lesson</string>
+
+    <string name="done">DONE</string>
+
+    <string name="go_to_lesson">GO TO LESSON</string>
+
     <string name="title_lesson_instructions">Instructions</string>
 
     <string name="module_name_column">module_name</string>

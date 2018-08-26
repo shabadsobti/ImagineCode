@@ -88,10 +88,10 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         Button play = view.findViewById(R.id.play);
         ImageView done = view.findViewById(R.id.done);
         if(item.getStars()>0){
-            play.setText("REDO");
+            play.setText(view.getResources().getText(R.string.redo));
         }
         else{
-            play.setText("PLAY");
+            play.setText(view.getResources().getText(R.string.play));
             done.setVisibility(View.INVISIBLE);
 
         }
@@ -103,7 +103,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
             lesson_id_previous = db.getLessonID(module_id, item.getNumber()-1);
             if (db.lessonGetStars(student_id, lesson_id_previous) == 0){
                 play.setEnabled(false);
-                play.setText("LOCKED");
+                play.setText(view.getResources().getText(R.string.locked));
 
 
             }
@@ -138,7 +138,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
             }
         });
 
-        titleTextView.setText("Lesson " + item.getNumber().toString() + "/" + mData.size());
+        titleTextView.setText(view.getResources().getText(R.string.lesson) + " " + item.getNumber().toString() + "/" + mData.size());
         RatingBar stars = view.findViewById(R.id.stars);
         if (module_id == 2){
             stars.setNumStars(1);

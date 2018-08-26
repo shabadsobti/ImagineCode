@@ -2,19 +2,38 @@
 
     <string name="app_name">ImagineCode</string>
 
-    <string name="title_activity_modules">Modules लॉगिन</string>
+    <string name="title_activity_modules">पड़ाव</string>
 
-    <string name="title_activity_levels">Lessons लॉगिन</string>
+    <string name="title_activity_levels">स्तर</string>
 
-    <string name="title_activity_check_in">लॉगिन</string>
+    <string name="title_activity_check_in">एक छात्र चुनें</string>
 
-    <string name="title_activity_add_student">New User</string>
+    <string name="title_activity_add_student">नया विद्यार्थी</string>
 
-    <string name="title_activity_blockly" formatted="true">लॉगिन %1$s</string>
+    <string name="title_activity_blockly" formatted="true">स्तर %1$s</string>
 
-    <string name="toast_student_added">New Student Added</string>
+    <string name="toast_student_added">नया छात्र जोड़ा गया है</string>
 
-    <string name="title_lesson_instructions">Instructions</string>
+    <string name="add_student_button">छात्र जोड़ें</string>
+
+    <string name="update_student_button">छात्र अपडेट करें</string>
+
+    <string name="delete_student_button">छात्र हटाएं</string>
+
+    <string name="lesson">स्तर</string>
+
+    <string name="redo">फिर से करें</string>
+
+    <string name="play">करे</string>
+
+    <string name="locked">बंद</string>
+
+    <string name="done">हो गया</string>
+
+    <string name="go_to_lesson">पाठ पर जाओ</string>
+
+
+    <string name="title_lesson_instructions">अनुदेश</string>
 
     <string name="module_name_column">module_name_hi</string>
 
@@ -27,7 +46,7 @@
 
     <string name="circuit_instruction_column">circuit_instructions_hi</string>
 
-    <string name="project_success_modal">Well done! Your code is correct! The code is now uploaded to the ImagineCode Board</string>
+    <string name="project_success_modal">बहुत बढ़िया! आपका कोड सही है! कोड अब इमेजिन कोड बोर्ड पर अपलोड किया गया है</string>
 
 
 </resources>
