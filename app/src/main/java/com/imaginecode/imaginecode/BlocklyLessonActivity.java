@@ -190,6 +190,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
                             else{
 
                                 new verifyCode().execute(generatedCode);
+                                Toast.makeText(getApplicationContext(), generatedCode, Toast.LENGTH_LONG).show();
 
 
 

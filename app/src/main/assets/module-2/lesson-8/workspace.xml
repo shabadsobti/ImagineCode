@@ -1,10 +1,18 @@
 <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
   <variables></variables>
   <block type="setup" id="WRA]T2mRgDk?yLsJJ,2@" x="87" y="38">
+    <statement name="NAME">
+      <block type="for_pin_2to5" id="k1{Pyg*T6xRP0,aPqO2e">
+        <statement name="pinAction">
+          <block type="attach_led" id="k1{Pyg*T6xRP0,aPqO2e"></block>
+        </statement>
+      </block>
+    </statement>
     <next>
       <block type="loop" id="5lm*S=/VlC@t5pHmH~[~">
         <statement name="loop">
-                  </statement>
+          <block type="for_pin_2to5" id="k1{Pyg*T6xRP0,aPqO2e"></block>
+        </statement>
       </block>
     </next>
   </block>
