@@ -35,7 +35,8 @@ public class ModulesActivity extends AppCompatActivity {
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(ModulesActivity.this, CheckIn.class);
+                startActivity(intent);
             }
         });
 

@@ -85,6 +85,13 @@ game.PlayerEntity = me.Entity.extend({
 
       }
 
+      if (actionNum == 0 && actionList.length == 0 && started && game.data.score != 1){
+          game.data.score = 0;
+          game.data.bump = 0;
+          started = false;
+          game.onload();
+      }
+
 
 
       if (game.data.score == 10){

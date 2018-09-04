@@ -149,15 +149,24 @@ public class JsHandler {
                 @Override
                 public void onClick(View view) {
                     mPopupWindow.dismiss();
-                    Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
-                intent.putExtra("Student_ID", student_id);
-                Integer module_id = db.getModuleID(lesson_id);
 
-                Integer nextLessonID = db.getLessonID(module_id, lesson_number+1);
-                intent.putExtra("Lesson_ID", nextLessonID);
-                intent.putExtra("Lesson_Number", lesson_number + 1);
-                intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
-                webView.getContext().startActivity(intent);
+                    if(lesson_number != 15) {
+                        Intent intent = new Intent(webView.getContext(), BlocklyLessonActivity.class);
+
+                        intent.putExtra("Student_ID", student_id);
+                        Integer module_id = db.getModuleID(lesson_id);
+                        Integer nextLessonID = db.getLessonID(module_id, lesson_number + 1);
+
+                        intent.putExtra("Lesson_ID", nextLessonID);
+                        intent.putExtra("Lesson_Number", lesson_number + 1);
+                        intent.putExtra("Lesson_Instructions", db.getLessonInstructions(nextLessonID));
+
+                        webView.getContext().startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(webView.getContext(), ModulesActivity.class);
+                        webView.getContext().startActivity(intent);
+                    }
                 }
             });
 

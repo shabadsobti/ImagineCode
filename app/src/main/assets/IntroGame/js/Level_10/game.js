@@ -5,27 +5,33 @@ var frameNumU = 0;
 var frameNumD = 0;
 
 var frameNum = 0;
-/* game namespace */
+
+var started = false;
 
 
 var moveRight = function () {
     actionList.push(2);
+    started = true;
 };
 
 var moveLeft = function () {
     actionList.push(1);
+    started = true;
 };
 
 var moveUp = function () {
     actionList.push(3);
+    started = true;
 };
 
 var moveDown = function () {
     actionList.push(4);
+    started = true;
 };
 
 var pickUpCoin = function () {
-    actionList.push(5)
+    actionList.push(5);
+    started = true;
 };
 
 

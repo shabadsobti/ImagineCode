@@ -117,6 +117,12 @@ game.PlayerEntity = me.Entity.extend({
             game.data.score = 0;
         }
 
+        if (actionNum == 0 && actionList.length == 0 && started && game.data.score != 6){
+             game.data.score = 0;
+             game.data.bump = 0;
+             started = false;
+             game.onload();
+        }
 
         if (actionNum == 1) {
             // flip the sprite on horizontal axis
