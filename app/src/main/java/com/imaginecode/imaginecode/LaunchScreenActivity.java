@@ -15,51 +15,11 @@ public class LaunchScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch_screen);
-        new BackgroundTask().execute();
-    }
 
-    private class BackgroundTask extends AsyncTask {
-        Intent intent;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            intent = new Intent(getApplicationContext(), LanguageSelection.class);
-        }
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-
-
-
-            try {
-
-                DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-
-                    db.createDataBase();
-                    Thread.sleep(1000);
-
-
-
-
-
-            } catch (Exception e) {
-
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-
-            startActivity(intent);
-            finish();
-        }
+        Intent intent = new Intent(getApplicationContext(), LanguageSelection.class);
+        startActivity(intent);
+        finish();
 
 
     }
-
-
 }

@@ -190,7 +190,7 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
                             else{
 
                                 new verifyCode().execute(generatedCode);
-                                Toast.makeText(getApplicationContext(), generatedCode, Toast.LENGTH_LONG).show();
+
 
 
 
@@ -531,13 +531,13 @@ public class BlocklyLessonActivity extends AbstractBlocklyActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 // TODO Auto-generated method stub
                 super.onPageStarted(view, url, favicon);
-                //Toast.makeText(TableContentsWithDisplay.this, "url "+url, Toast.LENGTH_SHORT).show();
+
 
             }
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                //Toast.makeText(TableContentsWithDisplay.this, "Width " + view.getWidth() +" *** " + "Height " + view.getHeight(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
